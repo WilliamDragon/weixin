@@ -22,6 +22,20 @@ public class StatisticController {
 
         List<Statistic> list = statisticService.findStatisticByGroupPxclass(className);
 
+        int[][] ints = new int[20][5];
+
+        for(int i=0;i<ints.length;i++){
+            String questionOrder = String.valueOf((i+1));
+            ints[i][0]=(int)list.stream().filter(x->
+                    (questionOrder.equals(String.valueOf(x.getQuestionId()))&&"a".equals(x.getAnswer()))).count();
+            ints[i][1]=(int)list.stream().filter(x->
+                    (questionOrder.equals(String.valueOf(x.getQuestionId()))&&"b".equals(x.getAnswer()))).count();
+            ints[i][2]=(int)list.stream().filter(x->
+                    (questionOrder.equals(String.valueOf(x.getQuestionId()))&&"c".equals(x.getAnswer()))).count();
+            ints[i][3]=(int)list.stream().filter(x->
+                    (questionOrder.equals(String.valueOf(x.getQuestionId()))&&"d".equals(x.getAnswer()))).count();
+            ints[i][4]=(ints[i][0]*115+ints[i][1]*100+ints[i][3]*80);
+        }
         int question1a=list.stream().filter(x->
                 ("1".equals(String.valueOf(x.getQuestionId()))&&"a".equals(x.getAnswer()))).collect(Collectors.toList()).size();
         int question1b=list.stream().filter(x->
