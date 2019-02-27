@@ -1,0 +1,15 @@
+package com.gjl.weixin.mapper;
+
+import com.gjl.weixin.entity.Student;
+import com.gjl.weixin.entity.User;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+@Mapper
+public interface UserMapper {
+    int insert(User record);
+
+    int insertSelective(User record);
+
+}

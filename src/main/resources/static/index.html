@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>登录</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
+    <script>
+        $(document).ready(function(){
+            $("#login").click(function(){
+                var userName=$('#userName').val();
+                var password=$('#password').val();
+                $.ajax({
+                    type:"POST",
+                    url:"http://127.0.0.1/student/login",
+                    dataType:"json",
+                    data: {
+                        "userName": userName,
+                        "password":password
+                    },
+                    success:function(data){
+                        if(data.code==0){
+                            window.location.href="success.html";
+                        }else{
+                            alert("失败");
+                        }
+                    },
+                    error:function(jqXHR){
+                        console.log("Error: "+jqXHR.status);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="content">
+    <div class="longin-boder">
+        <div class="image"><img src="images/user.png"></div>
+        <input id="userName" class="input" type="text" placeholder="输入用户名"/>
+    </div>
+    <!--End用户名输入框-->
+    <div class="longin-boder">
+        <div class="image"><img src="images/pwd.png"></div>
+        <input id="password" class="input" type="password" placeholder="输入密码"/>
+    </div>
+    <!--End密码输入框-->
+    <div class="button" id="login">登录</div>
+</div>
+
+
+</body>
+</html>
