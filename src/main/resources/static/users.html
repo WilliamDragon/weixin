@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
     <meta charset="utf-8">
     <title>Bootstrap Admin</title>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
@@ -17,6 +17,28 @@
 
     <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
+
+
+    <script>
+        $(document).ready(function(){
+                $.ajax({
+                    type:"GET",
+                    url:"http://127.0.0.1/student/findAll",
+                    dataType:"json",
+                    success:function(data){
+                        if(data.code==0){
+                            res=data.data;
+                            window.location.href="index.html";
+                        }else{
+                            alert("失败");
+                        }
+                    },
+                    error:function(jqXHR){
+                        console.log("Error: "+jqXHR.status);
+                    }
+                });
+        });
+    </script>
 
 </head>
 <body class=" theme-blue">
@@ -188,6 +210,9 @@
       <th>First Name</th>
       <th>Last Name</th>
       <th>Username</th>
+        <th >Username2</th>
+        <th>Username</th>
+        <th>Username2</th>
       <th style="width: 3.5em;"></th>
     </tr>
   </thead>

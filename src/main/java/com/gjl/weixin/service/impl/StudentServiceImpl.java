@@ -1,5 +1,6 @@
 package com.gjl.weixin.service.impl;
 
+import com.gjl.weixin.dto.StudentDto;
 import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.mapper.StudentMapper;
 import com.gjl.weixin.service.StudentService;
@@ -16,6 +17,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> login(String userName, String password) {
         List<Student> list=studentMapper.login(userName,password);
+        return list;
+    }
+
+    @Override
+    public List<StudentDto> findAll() {
+        List<StudentDto> list=studentMapper.findAll();
         return list;
     }
 }

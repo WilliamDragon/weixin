@@ -12,6 +12,19 @@
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="pxclass_id" property="pxclassId" jdbcType="BIGINT" />
   </resultMap>
+
+  <resultMap id="BaseResultMapDto" type="com.gjl.weixin.dto.StudentDto" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR" />
+    <result column="e_name" property="eName" jdbcType="VARCHAR" />
+    <result column="e_sex" property="eSex" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="pxclass_id" property="pxclassId" jdbcType="BIGINT" />
+  </resultMap>
   <insert id="insert" parameterType="com.gjl.weixin.entity.Student" >
     insert into student (id, card_id, department, 
       education, employee_id, e_name, 
@@ -86,5 +99,10 @@
   
   <select id="login" resultMap="BaseResultMap">
     select * from student where e_name = #{userName} and card_id = #{password};
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMapDto">
+    SELECT s.id,s.card_id,s.department,s.education,s.employee_id,s.
+e_name,s.e_sex,s.phone,p.class_name from student s JOIN pxclass p on s.pxclass_id=p.id
   </select>
 </mapper>

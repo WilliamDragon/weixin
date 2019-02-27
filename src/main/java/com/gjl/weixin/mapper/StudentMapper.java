@@ -1,5 +1,6 @@
 package com.gjl.weixin.mapper;
 
+import com.gjl.weixin.dto.StudentDto;
 import com.gjl.weixin.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,4 +14,6 @@ public interface StudentMapper {
     int insertSelective(Student record);
 
     List<Student> login(@Param("userName") String userName, @Param("password")String password);
+
+    List<StudentDto> findAll();
 }
