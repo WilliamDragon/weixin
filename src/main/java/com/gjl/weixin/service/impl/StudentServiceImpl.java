@@ -25,4 +25,14 @@ public class StudentServiceImpl implements StudentService {
         List<StudentDto> list=studentMapper.findAll();
         return list;
     }
+
+    @Override
+    public int save(Integer id) {
+        return studentMapper.save(id);
+    }
+
+    @Override
+    public int deleteById(String id) {
+        return studentMapper.delete(id);
+    }
 }

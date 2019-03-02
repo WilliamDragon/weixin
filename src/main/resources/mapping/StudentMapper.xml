@@ -24,6 +24,7 @@
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="class_name" property="className" jdbcType="VARCHAR" />
     <result column="pxclass_id" property="pxclassId" jdbcType="BIGINT" />
+
   </resultMap>
   <insert id="insert" parameterType="com.gjl.weixin.entity.Student" >
     insert into student (id, card_id, department, 
@@ -105,4 +106,29 @@
     SELECT s.id,s.card_id,s.department,s.education,s.employee_id,s.
 e_name,s.e_sex,s.phone,p.class_name from student s JOIN pxclass p on s.pxclass_id=p.id
   </select>
+
+  <resultMap id="qwarfq" type="com.gjl.weixin.entity.Student" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR" />
+    <result column="e_name" property="eName" jdbcType="VARCHAR" />
+    <result column="e_sex" property="eSex" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="pxclass_id" property="pxclassId" jdbcType="BIGINT" />
+    <association  property="pxclass"  javaType="com.gjl.weixin.entity.Pxclass" select="com.gjl.weixin.mapper.PxclassMapper.findPxclassById" column="pxclass_id">
+    </association >
+  </resultMap>
+
+  <select id="findAll2" resultMap="qwarfq">
+    select * from Student
+  </select>
+
+
+
+  <update id="save">
+
+  </update>
 </mapper>

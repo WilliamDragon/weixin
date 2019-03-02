@@ -9,4 +9,8 @@ public interface StudentService {
     List<Student> login(String userName, String password);
 
     List<StudentDto> findAll();
+
+    int save(Integer id);
+
+    int deleteById(String id);
 }

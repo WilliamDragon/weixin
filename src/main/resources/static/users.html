@@ -20,17 +20,49 @@
 
 
     <script>
+
         $(document).ready(function(){
+            //initStudent();
                 $.ajax({
                     type:"GET",
-                    url:"http://127.0.0.1/student/findAll",
+                    url:"http://127.0.0.1/student/findAll2",
                     dataType:"json",
                     success:function(data){
-                        if(data.code==0){
-                            res=data.data;
-                            window.location.href="index.html";
-                        }else{
-                            alert("失败");
+                        var str="";
+                            var data=data.data;
+                            for (var i=0;i<data.length;i++) {
+                                var pxclass=data[i].pxclass;
+                                str += "<tr>" +
+                                    "<td>"+(i+1)+"</td>"+
+                                    "<td>"+data[i].eName+"</td>"+
+                                    "<td>"+data[i].eSex+"</td>"+
+                                    "<td>"+data[i].cardId+"</td>"+
+                                    "<td>"+data[i].department+"</td>"+
+                                    "<td>"+data[i].education+"</td>"+
+                                    "<td>"+data[i].phone+"</td>"+
+                                    "<td>"+data[i].employeeId+"</td>"+
+                                    "<td>"+pxclass.className+"</td>"+
+                                    "<td>"+
+                                    "<a href=\"user.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>"+
+                                    "<a href=\"javascript:void(0);\"  onclick=\"studentSave("+data[i].id+")\" ><i class=\"fa fa-pencil\"></i></a>" +
+                                    "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"><i class=\"fa fa-trash-o\"></i></a>" +
+                                    "</td>"
+                                "</tr>";
+                            }
+                        document.getElementById("tbodydata").innerHTML=str;
+                    },
+                    complete : function(xhr, status) {
+                        //拦截器实现超时跳转到登录页面
+                        // 通过xhr取得响应头
+                        var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                        //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                        if (REDIRECT == "REDIRECT") {
+                            var win = window;
+                            while (win != win.top) {
+                                win = win.top;
+                            }
+                            //重新跳转到login.html
+                            win.location.href = xhr.getResponseHeader("CONTEXTPATH");
                         }
                     },
                     error:function(jqXHR){
@@ -38,6 +70,8 @@
                     }
                 });
         });
+
+
     </script>
 
 </head>
@@ -150,7 +184,8 @@
 
     <li data-popover="true" data-content="Items in this group require a <strong><a href='http://portnine.com/bootstrap-themes/aircraft' target='blank'>premium license</a><strong>." rel="popover" data-placement="right"><a href="#" data-target=".premium-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-fighter-jet"></i> Premium Features<i class="fa fa-collapse"></i></a></li>
         <li><ul class="premium-menu nav nav-list collapse">
-                <li class="visible-xs visible-sm"><a href="#">- Premium features require a license -</a></span>
+                <li><ul class="visible-xs visible-sm">
+                    <a href="#">- Premium features require a license -</a></span>
             <li ><a href="premium-profile.html"><span class="fa fa-caret-right"></span> Enhanced Profile</a></li>
             <li ><a href="premium-blog.html"><span class="fa fa-caret-right"></span> Blog</a></li>
             <li ><a href="premium-blog-item.html"><span class="fa fa-caret-right"></span> Blog Page</a></li>
@@ -207,76 +242,18 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Username</th>
-        <th >Username2</th>
-        <th>Username</th>
-        <th>Username2</th>
+        <th>姓名</th>
+        <th>性别</th>
+      <th>身份证号</th>
+      <th>工作单位</th>
+      <th>学历</th>
+        <th>电话</th>
+        <th>员工号</th>
+        <th>培训项目名称</th>
       <th style="width: 3.5em;"></th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Tompson</td>
-      <td>the_mark7</td>
-      <td>
-          <a href="user.html"><i class="fa fa-pencil"></i></a>
-          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-      </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Ashley</td>
-      <td>Jacobs</td>
-      <td>ash11927</td>
-      <td>
-          <a href="user.html"><i class="fa fa-pencil"></i></a>
-          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-      </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Audrey</td>
-      <td>Ann</td>
-      <td>audann84</td>
-      <td>
-          <a href="user.html"><i class="fa fa-pencil"></i></a>
-          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-      </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>John</td>
-      <td>Robinson</td>
-      <td>jr5527</td>
-      <td>
-          <a href="user.html"><i class="fa fa-pencil"></i></a>
-          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-      </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Aaron</td>
-      <td>Butler</td>
-      <td>aaron_butler</td>
-      <td>
-          <a href="user.html"><i class="fa fa-pencil"></i></a>
-          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-      </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>Chris</td>
-      <td>Albert</td>
-      <td>cab79</td>
-      <td>
-          <a href="user.html"><i class="fa fa-pencil"></i></a>
-          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-      </td>
-    </tr>
+  <tbody id="tbodydata">
   </tbody>
 </table>
 
@@ -302,7 +279,7 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
-            <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+            <button id="deleteUser" class="btn btn-danger" data-dismiss="modal">Delete</button>
         </div>
       </div>
     </div>

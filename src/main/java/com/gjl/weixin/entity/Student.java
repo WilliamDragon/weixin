@@ -1,5 +1,7 @@
 package com.gjl.weixin.entity;
 
+import java.util.List;
+
 public class Student {
     private Long id;
 
@@ -18,6 +20,16 @@ public class Student {
     private String phone;
 
     private Long pxclassId;
+
+    private Pxclass pxclass;
+
+    public Pxclass getPxclass() {
+        return pxclass;
+    }
+
+    public void setPxclass(Pxclass pxclass) {
+        this.pxclass = pxclass;
+    }
 
     public Long getId() {
         return id;

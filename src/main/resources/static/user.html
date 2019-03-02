@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
     <meta charset="utf-8">
     <title>Bootstrap Admin</title>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
@@ -17,6 +17,70 @@
 
     <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
+    <script>
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+            if(r!=null)return  decodeURIComponent(r[2]); return null;
+        }
+
+        $(document).ready(function(){
+            var userId=GetQueryString("id");
+            $.ajax({
+                type:"GET",
+                url:"http://127.0.0.1/student/findStudentById",
+                dataType:"json",
+                data: {
+                    "id": userId
+                },
+                success:function(data){
+                    var str="";
+                    var data=data.data;
+                    for (var i=0;i<data.length;i++) {
+                        var pxclass=data[i].pxclass
+                        str += "<div class=\"form-group\">" +
+                                    "<label>姓名</label>"+
+                                    "<input type=\"text\" value= "+data[i].eName+" class=\"form-control\">"+
+                               "</div>"+
+                            "<div class=\"form-group\">" +
+                            "<label>性别</label>"+
+                            "<input type=\"text\" value= "+data[i].eSex+" class=\"form-control\">"+
+                            "</div>"+
+                            "<div class=\"form-group\">" +
+                            "<label>身份证号</label>"+
+                            "<input type=\"text\" value= "+data[i].cardId+" class=\"form-control\">"+
+                            "</div>"+
+                            "<div class=\"form-group\">" +
+                            "<label>工作单位</label>"+
+                            "<input type=\"text\" value= "+data[i].department+" class=\"form-control\">"+
+                            "</div>"+
+                            "<div class=\"form-group\">" +
+                            "<label>学历</label>"+
+                            "<input type=\"text\" value= "+data[i].education+" class=\"form-control\">"+
+                            "</div>"+
+                            "<div class=\"form-group\">" +
+                            "<label>电话</label>"+
+                            "<input type=\"text\" value= "+data[i].phone+" class=\"form-control\">"+
+                            "</div>"+
+                            "<div class=\"form-group\">" +
+                            "<label>员工号</label>"+
+                            "<input type=\"text\" value= "+data[i].employeeId+" class=\"form-control\">"+
+                            "</div>"+
+                            "<div class=\"form-group\">" +
+                            "<label>培训项目名称</label>"+
+                            "<input type=\"text\" value= "+pxclass.className+" class=\"form-control\">"+
+                            "</div>";
+                    }
+                    document.getElementById("tab").innerHTML=str;
+                },
+                error:function(jqXHR){
+                    console.log("Error: "+jqXHR.status);
+                }
+            });
+        });
+
+    </script>
 
 </head>
 <body class=" theme-blue">

@@ -117,20 +117,30 @@ public class WeixinServiceImpl implements WeiXinService {
                        }
                        case "12":{
                            //多图文发送
-                           Article article1 = new Article();
+                           /*Article article1 = new Article();
                            article1.setTitle("紧急通知，不要捡这种钱！湛江都已经传疯了！\n");
                            article1.setDescription("");
                            article1.setPicUrl("http://www.sinaimg.cn/dy/slidenews/31_img/2016_38/28380_733695_698372.jpg");
                            article1.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5Njc2OTI4NQ==&mid=2650924309&idx=1&sn=8bb6ae54d6396c1faa9182a96f30b225&chksm=bd117e7f8a66f769dc886d38ca2d4e4e675c55e6a5e01e768b383f5859e09384e485da7bed98&scene=4#wechat_redirect");
+                           */
                            Article article2 = new Article();
-                           article2.setTitle("湛江谁有这种女儿，请给我来一打！");
+                           article2.setTitle("dfzrtsfgjr");
                            article2.setDescription("");
                            article2.setPicUrl("http://www.sinaimg.cn/dy/slidenews/31_img/2016_38/28380_733695_698372.jpg");
                            article2.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5Njc2OTI4NQ==&mid=2650924309&idx=2&sn=d7ffc840c7e6d91b0a1c886b16797ee9&chksm=bd117e7f8a66f7698d094c2771a1114853b97dab9c172897c3f9f982eacb6619fba5e6675ea3&scene=4#wechat_redirect");
-                           articleList.add(article1);
-                           articleList.add(article2);
+                           Article article3 = new Article();
+                           article3.setTitle("湛江谁有这种女儿，请给我来一打！");
+                           article3.setDescription("");
+                           article3.setPicUrl("http://www.sinaimg.cn/dy/slidenews/31_img/2016_38/28380_733695_698372.jpg");
+                           article3.setUrl("http://baidu.com");
+
+                           //articleList.add(article1);
+                           //articleList.add(article2);
+                           articleList.add(article3);
+                           int a=articleList.size();
                            newsMessage.setArticleCount(articleList.size());
                            newsMessage.setArticles(articleList);
+                           System.out.println(newsMessage);
                            respMessage = WeixinMessageUtil.newsMessageToXml(newsMessage);
                            break;
                        }

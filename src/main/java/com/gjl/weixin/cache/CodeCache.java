@@ -1,9 +1,8 @@
 package com.gjl.weixin.cache;
 
-/*import com.gjl.gears.controller.CensusController;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;*/
+import com.google.common.cache.LoadingCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class CodeCache {
 
-   /* private static final Logger logger = LoggerFactory.getLogger(CensusController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CodeCache.class);
 
     LoadingCache<String, Object> cache = CacheBuilder.newBuilder()
             .maximumSize(100)
@@ -52,7 +51,7 @@ public class CodeCache {
 
     public void invalideta(String key) {
         cache.invalidate(key);
-    }*/
+    }
 
 
 }

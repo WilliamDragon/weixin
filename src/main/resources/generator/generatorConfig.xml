@@ -43,7 +43,14 @@
             &lt;!&ndash;<columnRenamingRule searchString="^D_"
                                 replaceString=""/>&ndash;&gt;
         </table>-->
-        <table tableName="statistic" domainObjectName="Statistic"
+        <!--<table tableName="statistic" domainObjectName="Statistic"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            &lt;!&ndash;<columnRenamingRule searchString="^D_"
+                                replaceString=""/>&ndash;&gt;
+        </table>-->
+        <table tableName="questionnaire" domainObjectName="Questionnaire"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
