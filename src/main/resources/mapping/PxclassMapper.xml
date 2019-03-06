@@ -94,4 +94,8 @@
   <select id="findPxclassById" resultMap="BaseResultMap">
     select * from pxclass where id=#{id}
   </select>
+
+  <select id="findPxclassByName" resultMap="BaseResultMap">
+    select * from pxclass where class_name=#{pxclassName}
+  </select>
 </mapper>

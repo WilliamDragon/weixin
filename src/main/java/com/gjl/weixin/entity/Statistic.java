@@ -5,7 +5,7 @@ import java.util.Date;
 public class Statistic {
     private Long id;
 
-    private Date createTime;
+    private String createTime;
 
     private Long studentId;
 
@@ -23,11 +23,11 @@ public class Statistic {
         this.id = id;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -60,18 +60,6 @@ public class Statistic {
     }
 
     public void setAnswer(String answer) {
-        this.answer = answer == null ? null : answer.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "Statistic{" +
-                "id=" + id +
-                ", createTime=" + createTime +
-                ", studentId=" + studentId +
-                ", pxclassId=" + pxclassId +
-                ", questionId=" + questionId +
-                ", answer='" + answer + '\'' +
-                '}';
+        this.answer = answer;
     }
 }

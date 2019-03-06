@@ -15,6 +15,8 @@ public interface StudentMapper {
 
     int insertSelective(Student record);
 
+    int updateSelective(Student record);
+
     List<Student> login(@Param("userName") String userName, @Param("password")String password);
 
     List<StudentDto> findAll();

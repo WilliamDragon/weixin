@@ -23,13 +23,13 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
         //System.out.println("我是拦截器：我证明我进来了");
         HttpSession session=request.getSession();
         Student userInfo = (Student)session.getAttribute("userInfo");
-        /*if(userInfo==null)
+        if(userInfo==null)
         {
             System.out.println("我证明用户没有登录");
             redirect(request,response);
             return false;
-        }*/
-        //System.out.println("我证明用户已经登录");
+        }
+        System.out.println("我证明用户已经登录");
         return  true;
     }
     /**

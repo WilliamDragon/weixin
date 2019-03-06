@@ -21,6 +21,37 @@
 
     <script>
 
+        function deleteUser(obj){
+            $.ajax({
+                type:"GET",
+                url:"http://127.0.0.1/student/delete",
+                dataType:"json",
+                data: {
+                    "id": obj
+                },
+                success:function(data){
+                    window.location.href="/users.html";
+                },
+                complete : function(xhr, status) {
+                    //拦截器实现超时跳转到登录页面
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        var win = window;
+                        while (win != win.top) {
+                            win = win.top;
+                        }
+                        //重新跳转到login.html
+                        win.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                error:function(jqXHR){
+                    console.log("Error: "+jqXHR.status);
+                }
+            })
+        }
+
         $(document).ready(function(){
             //initStudent();
                 $.ajax({
@@ -38,14 +69,17 @@
                                     "<td>"+data[i].eSex+"</td>"+
                                     "<td>"+data[i].cardId+"</td>"+
                                     "<td>"+data[i].department+"</td>"+
+                                    "<input type='hidden' id='pxclassId'"+i+" value='"+data[i].pxclassId+"'></input>"+
+                                    "<input type=\"hidden\" value= "+data[i].eSex+" >"+
                                     "<td>"+data[i].education+"</td>"+
                                     "<td>"+data[i].phone+"</td>"+
                                     "<td>"+data[i].employeeId+"</td>"+
                                     "<td>"+pxclass.className+"</td>"+
                                     "<td>"+
                                     "<a href=\"user.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>"+
-                                    "<a href=\"javascript:void(0);\"  onclick=\"studentSave("+data[i].id+")\" ><i class=\"fa fa-pencil\"></i></a>" +
-                                    "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"><i class=\"fa fa-trash-o\"></i></a>" +
+                                        /*"<input type=\"buttom\" data-toggle=\"modal\" data-target=\"myModal\" onclick="Values">"+*/
+                                    "<a href=\"javascript:void(0);\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-pencil\"></i></a>" +
+                                    "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
                                     "</td>"
                                 "</tr>";
                             }
@@ -233,6 +267,7 @@
             
 <div class="btn-toolbar list-toolbar">
     <button class="btn btn-primary"><i class="fa fa-plus"></i> New User</button>
+    <a href="adduser.html" class="btn btn-primary" ><i class="fa fa-save"></i> New User2</a>
     <button class="btn btn-default">Import</button>
     <button class="btn btn-default">Export</button>
   <div class="btn-group">

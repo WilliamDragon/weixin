@@ -36,6 +36,21 @@
       #{eSex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pxclassId,jdbcType=BIGINT}
       )
   </insert>
+
+  <update id="updateSelective" parameterType="com.gjl.weixin.entity.Student">
+    update student
+    <trim prefix="set" suffixOverrides=",">
+    <if test="cardId != null">card_id=#{cardId},</if>
+      <if test="department != null">department=#{department},</if>
+      <if test="education != null">education=#{education},</if>
+      <if test="employeeId != null">employee_id=#{employeeId},</if>
+      <if test="eName != null">e_name=#{eName},</if>
+      <if test="eSex != null">e_sex=#{eSex},</if>
+      <if test="phone != null">phone=#{phone},</if>
+      <if test="pxclassId != null">pxclass_id=#{pxclassId}</if>
+    </trim>
+    where id=#{id}
+  </update>
   <insert id="insertSelective" parameterType="com.gjl.weixin.entity.Student" >
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides="," >
