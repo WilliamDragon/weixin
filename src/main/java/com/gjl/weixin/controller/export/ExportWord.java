@@ -33,17 +33,17 @@ public class ExportWord {
                 String str3="question"+String.valueOf(i+1)+"c";
                 String str4="question"+String.valueOf(i+1)+"d";
                 String str5="question"+String.valueOf(i+1)+"e";
-                switch (i){
+                switch (j){
                     case 0:
-                        params.put("str1",array[i][j]);break;
+                        params.put(str1,array[i][j]);break;
                     case 1:
-                        params.put("str2",array[i][j]);break;
+                        params.put(str2,array[i][j]);break;
                     case 2:
-                        params.put("str3",array[i][j]);break;
+                        params.put(str3,array[i][j]);break;
                     case 3:
-                        params.put("str4",array[i][j]);break;
+                        params.put(str4,array[i][j]);break;
                     case 4:
-                        params.put("str5",array[i][j]);break;
+                        params.put(str5,array[i][j]);break;
 
                 }
             }
