@@ -1,5 +1,7 @@
 package com.gjl.weixin.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gjl.weixin.dto.QuestionnaireDto;
 import com.gjl.weixin.dto.StudentDto;
 import com.gjl.weixin.entity.Pxclass;
@@ -10,12 +12,13 @@ import com.gjl.weixin.mapper.StatisticMapper;
 import com.gjl.weixin.mapper.StudentMapper;
 import com.gjl.weixin.service.StudentService;
 import com.gjl.weixin.utils.R;
-import org.checkerframework.checker.signature.qual.BinaryNameForNonArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +30,8 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private StudentMapper studentMapper;
     //根据学生userName和card_id登录
     @PostMapping("/login")
     public R login(String userName, String password, HttpSession httpSession){
@@ -36,6 +41,11 @@ public class StudentController {
             return R.ok(list);
         }
         return R.error("用户名或密码错误");
+    }
+    @PostMapping("/findByCardId")
+    public  boolean findByCardId(String cardId){
+        List<Student> list=studentMapper.findByCardId(cardId);
+        return list.size()>0 ? true:false;
     }
 
     @GetMapping("/findAll")
@@ -47,13 +57,25 @@ public class StudentController {
         return R.error("用户名或密码错误");
     }
 
-    @Autowired
-    private StudentMapper studentMapper;
+    //查询所以用户
     @GetMapping("/findAll2")
-    public R findAll2(){
+    public R findAll2(String pageNum, String pageSize, Model model){
+
+        if(pageNum==null){
+            pageNum="1";
+        }
+        if(pageSize==null){
+            pageSize="3";
+        }
+
+        PageHelper.startPage( Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+
         List<Student> list=studentMapper.findAll2();
-        if(list.size()>0){
-            return R.ok(list);
+        PageInfo pageInfo = new PageInfo<Student>(list, 3);
+
+        List<Student> list1 = pageInfo.getList();
+        if(list1.size()>0){
+            return R.ok(list1);
         }
         return R.error("用户名或密码错误");
     }
@@ -68,9 +90,9 @@ public class StudentController {
     }
 
 
+    //更新用户
     @GetMapping("/save")
     public R save(Student student,String className){
-
         List<Pxclass> list = pxclassMapper.findPxclassByName(className);
         Long id=list.get(0).getId();
         student.setPxclassId(id);
@@ -82,6 +104,7 @@ public class StudentController {
         }
         return R.error("保存失败");
     }
+    //根据用户id删除
     @GetMapping("/delete")
     public R delete(String id){
         int list = studentService.deleteById(id);
@@ -91,12 +114,19 @@ public class StudentController {
         return R.error("删除失败");
     }
 
+    //新增用户
     @Autowired
     private PxclassMapper pxclassMapper;
     @GetMapping("/insert")
     public R insert(Student student,String pxclassName){
 
-        List<Pxclass> list = pxclassMapper.findPxclassByName(pxclassName);
+        if(findByCardId(student.getCardId())){
+            return R.error("用户已存在");
+        }
+       List<Pxclass> list = pxclassMapper.findPxclassByName(pxclassName);
+        if(list.size()==0){
+            return R.error("培训班不存在");
+        }
         Long id=list.get(0).getId();
         student.setPxclassId(id);
 
@@ -107,18 +137,23 @@ public class StudentController {
         return R.error("插入失败");
     }
 
+    //批量插入用户调查问卷
     @Autowired
     private StatisticMapper statisticMapper;
     @GetMapping("/questionCount")
     public R questionCount(QuestionnaireDto questionnaireDto, HttpServletRequest request){
         HttpSession session=request.getSession();
+        //查询当前用户信息
         Student userInfo = (Student)session.getAttribute("userInfo");
 
         List<Statistic> list= new ArrayList<Statistic>();
+
         for (int i=0;i<20;i++){
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentDate=sdf.format(date);
             Statistic statistic = new Statistic();
-            statistic.setCreateTime("2019-01-12 12:12:12");
-            statistic.setCreateTime("2019-01-12 12:12:12");
+            statistic.setCreateTime(currentDate);
             statistic.setStudentId(userInfo.getId());
             statistic.setPxclassId(userInfo.getPxclassId());
             Long QuestionId=Long.valueOf((i+1));

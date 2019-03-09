@@ -2,6 +2,7 @@ package com.gjl.weixin.controller;
 
 import com.gjl.weixin.entity.User;
 import com.gjl.weixin.mapper.UserMapper;
+import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +43,7 @@ public class UserController {
         for(String item:list){
             System.out.println(item);
         }
+
 
 
     }

@@ -22,12 +22,38 @@ public class ExportWord {
     private ExportWordUtil exportWordUtil;
 
     @RequestMapping("export")
-    public void export(HttpServletRequest request, HttpServletResponse response){
+    public void export(HttpServletRequest request, HttpServletResponse response,int[][] array){
         Map<String,Object> params = new HashMap<>();
+
+        System.out.println(array.length+"sdfg"+array[3].length);
+        for(int i=0;i< array.length;i++){
+            for(int j=0;j<array[i].length;j++){
+                String str1="question"+String.valueOf(i+1)+"a";
+                String str2="question"+String.valueOf(i+1)+"b";
+                String str3="question"+String.valueOf(i+1)+"c";
+                String str4="question"+String.valueOf(i+1)+"d";
+                String str5="question"+String.valueOf(i+1)+"e";
+                switch (i){
+                    case 0:
+                        params.put("str1",array[i][j]);break;
+                    case 1:
+                        params.put("str2",array[i][j]);break;
+                    case 2:
+                        params.put("str3",array[i][j]);break;
+                    case 3:
+                        params.put("str4",array[i][j]);break;
+                    case 4:
+                        params.put("str5",array[i][j]);break;
+
+                }
+            }
+        }
         params.put("title","这是标题");
-        params.put("name","李四");
         //这里是我说的一行代码
-        exportWordUtil.exportWord("C:/Users/ODAACC/Desktop/guojinlong.docx","C:/Users/ODAACC/Desktop","aaa.docx",params,request,response);
+       // exportWordUtil.exportWord("C:/Users/ODAACC/Desktop/guojinlong.docx","C:/Users/ODAACC/Desktop","aaa.docx",params,request,response);
+
+
+        exportWordUtil.exportWord("word/as.docx","C:/Users/ODAACC/Desktop","aaa.docx",params,request,response);
 
         System.out.println("export成功");
 

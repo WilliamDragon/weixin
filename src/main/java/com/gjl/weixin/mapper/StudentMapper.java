@@ -27,4 +27,7 @@ public interface StudentMapper {
     int delete(@Param("id") String id);
 
     List<Student> findAll2();
+
+    @Select("select * from student where card_id = #{cardId}")
+    List<Student> findByCardId(String cardId);
 }

@@ -18,6 +18,34 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
 
+    <script>
+        $(document).ready(function(){
+            $("#login").click(function(){
+                var userName=$('#userName').val();
+                var password=$('#password').val();
+                $.ajax({
+                    type:"POST",
+                    url:"http://127.0.0.1/user/login",
+                    dataType:"json",
+                    data: {
+                        "userName": userName,
+                        "password":password
+                    },
+                    success:function(data){
+                        if(data.code==0){
+                            window.location.href="success.html";
+                        }else{
+                            alert("失败");
+                        }
+                    },
+                    error:function(jqXHR){
+                        console.log("Error: "+jqXHR.status);
+                    }
+                });
+            });
+        });
+    </script>
+
 </head>
 <body class=" theme-blue">
 
@@ -98,14 +126,19 @@
             <form>
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" class="form-control span12">
+                    <input type="text" id="userName" class="form-control span12">
                 </div>
                 <div class="form-group">
                 <label>Password</label>
+                    <input type="password" id="password" class="form-controlspan12 form-control">
+                </div>
+                <div class="form-group">
+                    <label>Password2</label>
                     <input type="password" class="form-controlspan12 form-control">
                 </div>
+
                 <a href="index.html" class="btn btn-primary pull-right">Sign In</a>
-                <label class="remember-me"><input type="checkbox"> Remember me</label>
+                <!--<label class="remember-me"><input type="checkbox"> Remember me</label>-->
                 <div class="clearfix"></div>
             </form>
         </div>
