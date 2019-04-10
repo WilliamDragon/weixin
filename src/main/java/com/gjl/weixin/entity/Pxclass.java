@@ -1,5 +1,7 @@
 package com.gjl.weixin.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Pxclass {
@@ -10,18 +12,34 @@ public class Pxclass {
     private String className;
 
     private String classPerson;
-
-    private Date endTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+    private String endTime;
 
     private String number;
 
     private String professionPerson;
-
-    private Date startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+    private String startTime;
 
     private String teachePerson;
 
     private String day;
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
 
     public Long getId() {
         return id;
@@ -55,13 +73,6 @@ public class Pxclass {
         this.classPerson = classPerson == null ? null : classPerson.trim();
     }
 
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
 
     public String getNumber() {
         return number;
@@ -79,13 +90,7 @@ public class Pxclass {
         this.professionPerson = professionPerson == null ? null : professionPerson.trim();
     }
 
-    public Date getStartTime() {
-        return startTime;
-    }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
 
     public String getTeachePerson() {
         return teachePerson;

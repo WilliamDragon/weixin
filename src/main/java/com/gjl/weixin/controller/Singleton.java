@@ -1,5 +1,7 @@
 package com.gjl.weixin.controller;
 
+import java.util.ArrayList;
+
 public class Singleton {
 
     private static Singleton instance;
@@ -19,4 +21,6 @@ public class Singleton {
     }
 
     //hashMap和双向链表 可以解决  时间复杂度由o(n)变成o(1);
+
+
 }

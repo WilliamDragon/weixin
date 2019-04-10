@@ -13,5 +13,7 @@ public interface PxclassMapper {
 
     Pxclass findPxclassById(String id);
 
+    List<Pxclass> findAll();
+
     List<Pxclass> findPxclassByName(String pxclassName);
 }

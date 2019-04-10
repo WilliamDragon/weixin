@@ -2,6 +2,7 @@ package com.gjl.weixin.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.gjl.weixin.cache.CodeCache;
 import com.gjl.weixin.dto.QuestionnaireDto;
 import com.gjl.weixin.dto.StudentDto;
 import com.gjl.weixin.entity.Pxclass;
@@ -12,6 +13,8 @@ import com.gjl.weixin.mapper.StatisticMapper;
 import com.gjl.weixin.mapper.StudentMapper;
 import com.gjl.weixin.service.StudentService;
 import com.gjl.weixin.utils.R;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +31,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/student")
 public class StudentController {
 
+    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+
     @Autowired
     private StudentService studentService;
     @Autowired
@@ -36,8 +41,8 @@ public class StudentController {
     @PostMapping("/login")
     public R login(String userName, String password, HttpSession httpSession){
         List<Student> list=studentService.login(userName,password);
-        httpSession.setAttribute("userInfo",list.get(0));
         if(list.size()>0){
+            httpSession.setAttribute("userInfo",list.get(0));
             return R.ok(list);
         }
         return R.error("用户名或密码错误");
@@ -75,7 +80,7 @@ public class StudentController {
 
         List<Student> list1 = pageInfo.getList();
         if(list1.size()>0){
-            return R.ok(list1);
+            return R.ok(pageInfo);
         }
         return R.error("用户名或密码错误");
     }
@@ -142,6 +147,9 @@ public class StudentController {
     private StatisticMapper statisticMapper;
     @GetMapping("/questionCount")
     public R questionCount(QuestionnaireDto questionnaireDto, HttpServletRequest request){
+
+        logger.debug("进入统计方法");
+        System.out.println("进入统计方法");
         HttpSession session=request.getSession();
         //查询当前用户信息
         Student userInfo = (Student)session.getAttribute("userInfo");

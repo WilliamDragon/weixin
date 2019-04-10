@@ -71,7 +71,7 @@
         #{classPerson,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null" >
-        #{endTime,jdbcType=TIMESTAMP},
+        #{endTime,jdbcType=VARCHAR},
       </if>
       <if test="number != null" >
         #{number,jdbcType=VARCHAR},
@@ -80,7 +80,7 @@
         #{professionPerson,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null" >
-        #{startTime,jdbcType=TIMESTAMP},
+        #{startTime,jdbcType=VARCHAR},
       </if>
       <if test="teachePerson != null" >
         #{teachePerson,jdbcType=VARCHAR},
@@ -93,6 +93,10 @@
 
   <select id="findPxclassById" resultMap="BaseResultMap">
     select * from pxclass where id=#{id}
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+     select * from pxclass
   </select>
 
   <select id="findPxclassByName" resultMap="BaseResultMap">
