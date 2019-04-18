@@ -61,4 +61,8 @@
     </trim>
   </insert>
 
+  <select id="login" resultMap="BaseResultMap">
+    select * from user where login_name = #{userName} and password = #{password}
+  </select>
+
 </mapper>
