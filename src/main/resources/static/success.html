@@ -71,7 +71,14 @@
                     "question20": question20,
                 },
                 success:function(data){
-                    window.location.href="/finish.html";
+                    if(data.code == 1){
+                        alert(data.msg);
+                        window.location.href="/success.html";
+                    }else{
+                        window.location.href="/finish.html";
+                    }
+
+
                 },
                 complete : function(xhr, status) {
                     //拦截器实现超时跳转到登录页面
@@ -107,6 +114,7 @@
                         str +=
                             "&nbsp&nbsp&nbsp&nbsp&nbsp<span>"+(i+1)+"."+data[i].detail+"</span>"+
                             "<br/>&nbsp&nbsp&nbsp&nbsp&nbsp"+
+                            /*"<input type=\"radio\" name=\"question"+(i+1)+"\"   value='a'  checked=\"checked\">非常满意"+*/
                             "<input type=\"radio\" name=\"question"+(i+1)+"\"   value='a'  checked=\"checked\">非常满意"+
                             "<input type=\"radio\" name=\"question"+(i+1)+"\"  value='b' >满意"+
                             "<input type=\"radio\" name=\"question"+(i+1)+"\"  value='c' >基本满意"+

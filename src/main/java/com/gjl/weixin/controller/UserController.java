@@ -4,20 +4,14 @@ import com.gjl.weixin.cache.GlobalCache;
 import com.gjl.weixin.entity.User;
 import com.gjl.weixin.mapper.UserMapper;
 import com.gjl.weixin.utils.R;
-import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/user")

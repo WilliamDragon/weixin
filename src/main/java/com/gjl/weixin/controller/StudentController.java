@@ -2,7 +2,8 @@ package com.gjl.weixin.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.gjl.weixin.cache.CodeCache;
+import com.gjl.weixin.cache.GlobalCache;
+import com.gjl.weixin.common.GlobalContext;
 import com.gjl.weixin.dto.QuestionnaireDto;
 import com.gjl.weixin.dto.StudentDto;
 import com.gjl.weixin.entity.Pxclass;
@@ -17,7 +18,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,6 +41,11 @@ public class StudentController {
     private StudentService studentService;
     @Autowired
     private StudentMapper studentMapper;
+    @Autowired
+    private GlobalCache globalCache;
+    @Autowired
+    private GlobalContext globalContext;
+
     //根据学生userName和card_id登录
     @PostMapping("/login")
     public R login(String userName, String password, HttpSession httpSession){
@@ -97,7 +106,7 @@ public class StudentController {
 
     //更新用户
     @GetMapping("/save")
-    public R save(Student student,String className){
+    public R save(Student student, String className){
         List<Pxclass> list = pxclassMapper.findPxclassByName(className);
         Long id=list.get(0).getId();
         student.setPxclassId(id);
@@ -123,7 +132,7 @@ public class StudentController {
     @Autowired
     private PxclassMapper pxclassMapper;
     @GetMapping("/insert")
-    public R insert(Student student,String pxclassName){
+    public R insert(Student student, String pxclassName){
 
         if(findByCardId(student.getCardId())){
             return R.error("用户已存在");
@@ -148,11 +157,20 @@ public class StudentController {
     @GetMapping("/questionCount")
     public R questionCount(QuestionnaireDto questionnaireDto, HttpServletRequest request){
 
-        logger.debug("进入统计方法");
-        System.out.println("进入统计方法");
         HttpSession session=request.getSession();
         //查询当前用户信息
         Student userInfo = (Student)session.getAttribute("userInfo");
+        if(globalCache.get(userInfo.geteName()) == globalContext.CACHE_EXIST){
+            return R.error(globalContext.SUBMIT_MORE_OFF);
+        }
+        R r=checkQuestion(questionnaireDto);
+        if(r.getCode() == 1){
+            return r;
+        }
+        logger.debug("进入统计方法");
+
+        System.out.println("进入统计方法");
+
 
         List<Statistic> list= new ArrayList<Statistic>();
 
@@ -216,9 +234,60 @@ public class StudentController {
 
         int i= statisticMapper.insertByBatch(list);
         if(i>0){
+            globalCache.add(userInfo.geteName(),globalContext.CACHE_EXIST);
             return R.ok(list);
         }
         return R.error("插入失败");
+    }
+
+
+    //验证参数是否为空
+    public R checkQuestion(QuestionnaireDto questionnaireDto){
+        if(questionnaireDto.getQuestion1() == null){
+            return R.error("问题1为空");
+        }else if(questionnaireDto.getQuestion2() == null){
+            return R.error("问题2为空");
+        }else if(questionnaireDto.getQuestion3() == null){
+            return R.error("问题3为空");
+        }else if(questionnaireDto.getQuestion4() == null){
+            return R.error("问题4为空");
+        }else if(questionnaireDto.getQuestion5() == null){
+            return R.error("问题5为空");
+        }else if(questionnaireDto.getQuestion6() == null){
+            return R.error("问题6为空");
+        }else if(questionnaireDto.getQuestion7() == null){
+            return R.error("问题7为空");
+        }else if(questionnaireDto.getQuestion8() == null){
+            return R.error("问题8为空");
+        }else if(questionnaireDto.getQuestion9() == null){
+            return R.error("问题9为空");
+        }else if(questionnaireDto.getQuestion10() == null){
+            return R.error("问题10为空");
+        }else if(questionnaireDto.getQuestion11() == null){
+            return R.error("问题11为空");
+        }else if(questionnaireDto.getQuestion12() == null){
+            return R.error("问题12为空");
+        }else if(questionnaireDto.getQuestion13() == null){
+            return R.error("问题13为空");
+        }else if(questionnaireDto.getQuestion14() == null){
+            return R.error("问题14为空");
+        }else if(questionnaireDto.getQuestion15() == null){
+            return R.error("问题15为空");
+        }else if(questionnaireDto.getQuestion16() == null){
+            return R.error("问题16为空");
+        }else if(questionnaireDto.getQuestion17() == null){
+            return R.error("问题17为空");
+        }else if(questionnaireDto.getQuestion18() == null){
+            return R.error("问题18为空");
+        }else if(questionnaireDto.getQuestion19() == null){
+            return R.error("问题19为空");
+        }else if(questionnaireDto.getQuestion20() == null){
+            return R.error("问题20为空");
+        }else{
+            return R.ok();
+        }
+
+
     }
 
 }
