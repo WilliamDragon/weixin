@@ -87,7 +87,7 @@
                             "<td>"+data[i].employeeId+"</td>"+
                             "<td>"+pxclass.className+"</td>"+
                             "<td>"+
-                            "<a href=\"user.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>"+
+                            "<a href=\"user.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>&nbsp&nbsp;"+
                             "<a href=\"javascript:void(0);\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
                             /* "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +*/
                             "</td>"
@@ -276,8 +276,8 @@
         <li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-fw fa-dashboard"></i> Dashboard<i class="fa fa-collapse"></i></a></li>
         <li><ul class="dashboard-menu nav nav-list collapse in">
             <li><a href="index.html"><span class="fa fa-caret-right"></span> Main</a></li>
-            <li class="active"><a href="users.html"><span class="fa fa-caret-right"></span> User List</a></li>
-            <li ><a href="statistic.html"><span class="fa fa-caret-right"></span> User DAR</a></li>
+            <li class="active"><a href="users.html"><span class="fa fa-caret-right"></span> 学生管理</a></li>
+            <li ><a href="statistic.html"><span class="fa fa-caret-right"></span> 班级管理</a></li>
             <li ><a href="media.html"><span class="fa fa-caret-right"></span> Media</a></li>
             <li ><a href="calendar.html"><span class="fa fa-caret-right"></span> Calendar</a></li>
         </ul></li>
@@ -322,10 +322,10 @@
 <div class="content">
     <div class="header">
 
-        <h1 class="page-title">Users</h1>
+        <h1 class="page-title">学生</h1>
         <ul class="breadcrumb">
             <li><a href="index.html">Home</a> </li>
-            <li class="active">Users</li>
+            <li class="active">学生</li>
         </ul>
 
     </div>
@@ -333,9 +333,9 @@
 
         <div class="btn-toolbar list-toolbar">
             <!--<button class="btn btn-primary"><i class="fa fa-plus"></i> New User</button>-->
-            <a href="adduser.html" class="btn btn-primary" ><i class="fa fa-save"></i> New User</a>
-            <button class="btn btn-default">Import</button>
-            <button class="btn btn-default">Export</button>
+            <a href="adduser.html" class="btn btn-primary" ><i class="fa fa-save"></i> 新增</a>
+           <!-- <button class="btn btn-default">Import</button>
+            <button class="btn btn-default">Export</button>-->
             <div class="btn-group">
             </div>
         </div>
