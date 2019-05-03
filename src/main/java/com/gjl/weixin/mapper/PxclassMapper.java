@@ -1,7 +1,9 @@
 package com.gjl.weixin.mapper;
 
 import com.gjl.weixin.entity.Pxclass;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +18,7 @@ public interface PxclassMapper {
     List<Pxclass> findAll();
 
     List<Pxclass> findPxclassByName(String pxclassName);
+
+    @Delete("delete from pxclass where id = #{id}")
+    int deleteById(@Param("id") String id);
 }

@@ -30,3 +30,6 @@ pagehelper:
 
 thymeleaf:
   cache: false
+
+logging:
+  config: classpath:logback/logback.xml

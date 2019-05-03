@@ -25,16 +25,16 @@
 
     <script>
 
-        function deleteUser(obj){
+        function deleteSys(obj){
             $.ajax({
                 type:"GET",
-                url:"http://127.0.0.1/pxclass/delete",
+                url:"http://127.0.0.1/sysParam/delete",
                 dataType:"json",
                 data: {
                     "id": obj
                 },
                 success:function(data){
-                    window.location.href="/statistic.html";
+                    window.location.href="/system.html";
                 },
                 complete : function(xhr, status) {
                     //拦截器实现超时跳转到登录页面
@@ -60,7 +60,7 @@
             //initStudent();
             $.ajax({
                 type:"GET",
-                url:"http://127.0.0.1/pxclass/findAll",
+                url:"http://127.0.0.1/sysParam/findSysParam",
                 dataType:"json",
                 success:function(res){
                     var str="";
@@ -69,18 +69,15 @@
                     for (var i=0;i<data.length;i++) {
                         str += "<tr>" +
                             "<td>"+(i+1)+"</td>"+
-                            "<td>"+data[i].className+"</td>"+
-                            "<td>"+data[i].startTime+"</td>"+
-                            "<td>"+data[i].endTime+"</td>"+
-                            "<td>"+data[i].category+"</td>"+
-                            "<td>"+data[i].number+"</td>"+
-                            "<td>"+data[i].professionPerson+"</td>"+
-                            "<td>"+data[i].classPerson+"</td>"+
-                            "<td>"+data[i].teachePerson+"</td>"+
-                            "<td>"+data[i].day+"</td>"+
+                            "<td>"+data[i].syscode+"</td>"+
+                            "<td>"+data[i].sysname+"</td>"+
+                            "<td>"+data[i].sysvalue+"</td>"+
+                            "<td>"+data[i].enabled+"</td>"+
+                            "<td>"+data[i].systype+"</td>"+
+                            "<td>"+data[i].sysdetails+"</td>"+
                             "<td>"+
-                            "<a href=\"user.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>&nbsp&nbsp"+
-                            "<a href=\"javascript:void(0);\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
+                            "<a href=\"addSystem.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>&nbsp&nbsp;"+
+                            "<a href=\"javascript:void(0);\"  onclick=\"deleteSys("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
                             /* "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +*/
                             "</td>"
                         "</tr>";
@@ -97,7 +94,7 @@
                         callback:function (api) {//这是一个回调函数
                             $.ajax({
                                 type:"GET",
-                                url:"http://127.0.0.1/pxclass/findAll",
+                                url:"http://127.0.0.1/sysParam/findSysParam",
                                 dataType:"json",
                                 data:{
                                     'pageNum': api.getCurrent()
@@ -109,23 +106,21 @@
                                     for (var i=0;i<data.length;i++) {
                                         str += "<tr>" +
                                             "<td>"+(i+1)+"</td>"+
-                                            "<td>"+data[i].className+"</td>"+
-                                            "<td>"+data[i].startTime+"</td>"+
-                                            "<td>"+data[i].endTime+"</td>"+
-                                            "<td>"+data[i].category+"</td>"+
-                                            "<td>"+data[i].number+"</td>"+
-                                            "<td>"+data[i].professionPerson+"</td>"+
-                                            "<td>"+data[i].classPerson+"</td>"+
-                                            "<td>"+data[i].teachePerson+"</td>"+
-                                            "<td>"+data[i].day+"</td>"+
+                                            "<td>"+data[i].syscode+"</td>"+
+                                            "<td>"+data[i].sysname+"</td>"+
+                                            "<td>"+data[i].sysvalue+"</td>"+
+                                            "<td>"+data[i].enabled+"</td>"+
+                                            "<td>"+data[i].systype+"</td>"+
+                                            "<td>"+data[i].sysdetails+"</td>"+
                                             "<td>"+
-                                            "<a href=\"user.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>"+
-                                            "<a href=\"javascript:void(0);\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
+                                            "<a href=\"system.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>&nbsp&nbsp;"+
+                                            "<a href=\"javascript:void(0);\"  onclick=\"deleteSys("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
                                             /* "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +*/
                                             "</td>"
                                         "</tr>";
                                     }
                                     document.getElementById("tbodydata").innerHTML=str;
+
                                 }
 
                             })
@@ -259,8 +254,9 @@
         <li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-fw fa-dashboard"></i> Dashboard<i class="fa fa-collapse"></i></a></li>
         <li><ul class="dashboard-menu nav nav-list collapse in">
             <li><a href="index.html"><span class="fa fa-caret-right"></span> Main</a></li>
-            <li class="active"><a href="users.html"><span class="fa fa-caret-right"></span> User List</a></li>
-            <li ><a href="statistic.html"><span class="fa fa-caret-right"></span> User DAR</a></li>
+            <li class="active"><a href="users.html"><span class="fa fa-caret-right"></span> 学生管理</a></li>
+            <li ><a href="statistic.html"><span class="fa fa-caret-right"></span> 班级管理</a></li>
+            <li ><a href="system.html"><span class="fa fa-caret-right"></span> 系统管理</a></li>
             <li ><a href="media.html"><span class="fa fa-caret-right"></span> Media</a></li>
             <li ><a href="calendar.html"><span class="fa fa-caret-right"></span> Calendar</a></li>
         </ul></li>
@@ -305,10 +301,10 @@
 <div class="content">
     <div class="header">
 
-        <h1 class="page-title">班级</h1>
+        <h1 class="page-title">系统</h1>
         <ul class="breadcrumb">
             <li><a href="index.html">Home</a> </li>
-            <li class="active">班级</li>
+            <li class="active">系统</li>
         </ul>
 
     </div>
@@ -316,9 +312,9 @@
 
         <div class="btn-toolbar list-toolbar">
             <!--<button class="btn btn-primary"><i class="fa fa-plus"></i> New User</button>-->
-            <a href="addPxclass.html" class="btn btn-primary" ><i class="fa fa-save"></i> 新增</a>
-            <button class="btn btn-default">Import</button>
-            <button class="btn btn-default">Export</button>
+           <!-- <a href="addSysParam.html" class="btn btn-primary" ><i class="fa fa-save"></i> 新增</a>-->
+           <!-- <button class="btn btn-default">Import</button>
+            <button class="btn btn-default">Export</button>-->
             <div class="btn-group">
             </div>
         </div>
@@ -326,15 +322,12 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>培训项目名称</th>
-                <th>培训开始时间</th>
-                <th>培训结束时间</th>
-                <th>类别</th>
-                <th>人数</th>
-                <th>专业负责人</th>
-                <th>班主任</th>
-                <th>授课教师</th>
-                <th>天数</th>
+                <th>参数code</th>
+                <th>参数名字</th>
+                <th>参数值</th>
+                <th>是否可用</th>
+                <th>参数类型</th>
+                <th>参数描述</th>
                 <th style="width: 3.5em;"></th>
             </tr>
             </thead>
@@ -371,7 +364,7 @@
 
             <!-- Purchase a site license to remove this link from the footer: http://www.portnine.com/bootstrap-themes -->
             <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free Bootstrap Theme</a> by <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
-            <p>© 2014 <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
+            <p>© 2019 <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
         </footer>
     </div>
 </div>

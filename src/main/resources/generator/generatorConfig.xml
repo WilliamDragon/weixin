@@ -50,7 +50,7 @@
             &lt;!&ndash;<columnRenamingRule searchString="^D_"
                                 replaceString=""/>&ndash;&gt;
         </table>-->
-        <table tableName="questionnaire" domainObjectName="Questionnaire"
+        <table tableName="sysParam" domainObjectName="SysParam"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

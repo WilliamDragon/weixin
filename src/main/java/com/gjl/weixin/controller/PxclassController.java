@@ -46,4 +46,12 @@ public class PxclassController {
         }
         return R.error("插入失败");
     }
+
+    public R delete(String id){
+        int list = pxclassMapper.deleteById(id);
+        if(list>0){
+            return R.ok(list);
+        }
+        return R.error("删除失败");
+    }
 }

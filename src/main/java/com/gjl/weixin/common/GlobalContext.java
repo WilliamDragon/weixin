@@ -11,4 +11,8 @@ public class GlobalContext {
     /**不允许多次提交*/
     public static final String SUBMIT_MORE_OFF = "不允许多次提交";
 
+    public static final String SYS_ADDACCOUNT_FLAG = "sys.addaccount.flag";
+    public static final String SYS_ADDACCOUNT_ON = "1";
+    public static final String SYS_ADDACCOUNT_OFF = "0";
+
 }
