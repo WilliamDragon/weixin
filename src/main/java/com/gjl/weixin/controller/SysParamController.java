@@ -83,4 +83,14 @@ public class SysParamController {
         }
         return R.ok();
     }
+
+    @PostMapping("/findSysParamById")
+    public R findSysParamById(String id){
+        logger.debug("进入 findSysParamById 方法");
+        List<SysParam> list = sysParamMapper.findSysParamById(id);
+        if(list.size()>0){
+            return R.ok(list);
+        }
+        return R.error(GlobalError.ERROR_SYS_PARAM);
+    }
 }

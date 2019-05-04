@@ -23,4 +23,7 @@ public interface SysParamMapper {
 
     @Update("update sysparam set sysvalue = #{sysvalue} where id = #{id}")
     int save(SysParam record);
+
+    @Select("select * from sysparam where id = #{id}")
+    List<SysParam> findSysParamById(String id);
 }
