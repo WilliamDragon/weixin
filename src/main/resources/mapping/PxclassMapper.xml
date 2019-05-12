@@ -102,4 +102,20 @@
   <select id="findPxclassByName" resultMap="BaseResultMap">
     select * from pxclass where class_name=#{pxclassName}
   </select>
+
+  <update id="save">
+    update pxclass
+    <trim prefix="set" suffixOverrides=",">
+      <if test="category != null">category=#{category},</if>
+      <if test="className != null">class_name=#{className},</if>
+      <if test="classPerson != null">class_person=#{classPerson},</if>
+      <if test="endTime != null">end_time=#{endTime},</if>
+      <if test="number != null">number=#{number},</if>
+      <if test="professionPerson != null">profession_person=#{professionPerson},</if>
+      <if test="startTime != null">start_time=#{startTime},</if>
+      <if test="teachePerson != null">teache_person=#{teachePerson},</if>
+      <if test="day != null">day=#{day}</if>
+    </trim>
+    where id=#{id}
+  </update>
 </mapper>

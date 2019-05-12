@@ -8,10 +8,10 @@ public class Singleton {
 
     private Singleton() {}
 
-    public Singleton getInstance() {
+    public static Singleton getInstance() {
         //多线程线程安全，w,r,r,r,r,r,
         if (instance == null) {
-            synchronized(this){//缓解多次读的时间问题
+            synchronized(Singleton.class){//缓解多次读的时间问题
                 if(instance==null){//多线程线程安全问题
                     instance = new Singleton();
                 }

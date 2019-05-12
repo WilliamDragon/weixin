@@ -4,6 +4,7 @@ import com.gjl.weixin.entity.Pxclass;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -12,8 +13,8 @@ public interface PxclassMapper {
     int insert(Pxclass record);
 
     int insertSelective(Pxclass record);
-
-    Pxclass findPxclassById(String id);
+    //@Select("select * from pxclass where id=#{id}")
+    List<Pxclass> findPxclassById(String id);
 
     List<Pxclass> findAll();
 
@@ -21,4 +22,6 @@ public interface PxclassMapper {
 
     @Delete("delete from pxclass where id = #{id}")
     int deleteById(@Param("id") String id);
+
+    int save(Pxclass pxclass);
 }

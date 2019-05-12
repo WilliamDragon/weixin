@@ -25,7 +25,7 @@
 
     <script>
 
-        function deleteUser(obj){
+        function deletePxclass(obj){
             $.ajax({
                 type:"GET",
                 url:"http://127.0.0.1/pxclass/delete",
@@ -79,8 +79,8 @@
                             "<td>"+data[i].teachePerson+"</td>"+
                             "<td>"+data[i].day+"</td>"+
                             "<td>"+
-                            "<a href=\"user.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>&nbsp&nbsp"+
-                            "<a href=\"javascript:void(0);\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
+                            "<a href=\"statisticsave.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>&nbsp&nbsp"+
+                            "<a href=\"javascript:void(0);\"  onclick=\"deletePxclass("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
                             /* "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +*/
                             "</td>"
                         "</tr>";
@@ -119,8 +119,8 @@
                                             "<td>"+data[i].teachePerson+"</td>"+
                                             "<td>"+data[i].day+"</td>"+
                                             "<td>"+
-                                            "<a href=\"user.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>"+
-                                            "<a href=\"javascript:void(0);\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
+                                            "<a href=\"statisticsave.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>"+
+                                            "<a href=\"javascript:void(0);\"  onclick=\"deletePxclass("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
                                             /* "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +*/
                                             "</td>"
                                         "</tr>";

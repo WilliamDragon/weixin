@@ -6,6 +6,8 @@ import com.gjl.weixin.entity.Pxclass;
 import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.mapper.PxclassMapper;
 import com.gjl.weixin.utils.R;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +20,7 @@ public class PxclassController {
 
     @Autowired
     private PxclassMapper pxclassMapper;
-
+    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
     @RequestMapping("/findAll")
     public R findAll(String pageNum, String pageSize){
         if(pageNum==null){
@@ -37,6 +39,15 @@ public class PxclassController {
         }
         return R.error("没有培训班");
     }
+    @RequestMapping("/findClassById")
+    public R findClassById(String id){
+
+        List<Pxclass> list = pxclassMapper.findPxclassById(id);
+        if(list.size()>0){
+            return R.ok(list.get(0));
+        }
+        return R.error("没有根据此Id培训班");
+    }
     @RequestMapping("/insert")
     public R insert(Pxclass pxclass){
         //Pxclass pxclass = new Pxclass();
@@ -46,12 +57,25 @@ public class PxclassController {
         }
         return R.error("插入失败");
     }
-
+    @RequestMapping("/delete")
     public R delete(String id){
+        logger.debug("进入 delete 方法");
         int list = pxclassMapper.deleteById(id);
         if(list>0){
             return R.ok(list);
         }
         return R.error("删除失败");
     }
+
+    @RequestMapping("/save")
+    public R save(Pxclass pxclass){
+        logger.debug("进入 save 方法");
+        int list = pxclassMapper.save(pxclass);
+        if(list>0){
+            return R.ok(list);
+        }
+        return R.error("更新失败");
+    }
+
+
 }

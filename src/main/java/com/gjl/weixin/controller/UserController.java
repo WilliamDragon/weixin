@@ -4,6 +4,8 @@ import com.gjl.weixin.cache.GlobalCache;
 import com.gjl.weixin.entity.User;
 import com.gjl.weixin.mapper.UserMapper;
 import com.gjl.weixin.utils.R;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/adminUser")
 public class UserController {
 
     @Autowired
@@ -22,7 +24,7 @@ public class UserController {
     @Autowired
     private GlobalCache globalCache;
 
-
+    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
     @RequestMapping("/qwe")
     public String test1(){
         return "indexx";
@@ -38,9 +40,11 @@ public class UserController {
 
     @PostMapping("/login")
     public R login(String userName, String password, HttpSession httpSession){
+        logger.debug("进入 login 方法");
         List<User> list=userMapper.login(userName,password);
         if(list.size()>0){
-            httpSession.setAttribute("adminUserInfo",list.get(0));
+            globalCache.add("userInfo",list.get(0));
+            httpSession.setAttribute("userInfo",list.get(0));
             return R.ok(list);
         }
         return R.error("用户名或密码错误");

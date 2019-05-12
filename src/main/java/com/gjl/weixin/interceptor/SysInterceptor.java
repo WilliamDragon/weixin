@@ -1,6 +1,7 @@
 package com.gjl.weixin.interceptor;
 
 import com.gjl.weixin.cache.CodeCache;
+import com.gjl.weixin.cache.GlobalCache;
 import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +23,19 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
                              HttpServletResponse response, Object handler)throws Exception
     {
         //System.out.println("我是拦截器：我证明我进来了");
-        HttpSession session=request.getSession();
-        Student userInfo = (Student)session.getAttribute("userInfo");
-        User adminUserInfo = (User)session.getAttribute("adminUserInfo");
-        if(userInfo==null )
+       /* HttpSession session=request.getSession();
+       // Student userInfo = (Student)session.getAttribute("userInfo");
+        User userInfo = (User)session.getAttribute("userInfo");
+
+        if(userInfo == null )
         {
             System.out.println("我证明用户没有登录");
-            if(userInfo==null){
-                redirect(request,response);
+            if(userInfo == null){
+                adminRedirect(request,response);
             }
             return false;
         }
-        System.out.println("我证明用户已经登录");
+        System.out.println("我证明用户已经登录");*/
         return  true;
     }
     /**
