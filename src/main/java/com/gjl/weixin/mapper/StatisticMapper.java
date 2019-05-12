@@ -17,4 +17,7 @@ public interface StatisticMapper {
     List<Statistic> findStatisticByGroupPxclass(@Param("className") String className);
 
     int insertByBatch(List<Statistic> list);
+
+    @Select("select count(*) from statistic ")
+    int findTotalByClassName();
 }

@@ -28,6 +28,7 @@ public class StatisticController {
 
         List<Statistic> list = statisticService.findStatisticByGroupPxclass(className);
 
+        int total = statisticService.findTotalByClassName()/20;
         //二维数组顺序代表统计表格
         int[][] ints = new int[20][5];
 
@@ -41,7 +42,7 @@ public class StatisticController {
                     (questionOrder.equals(String.valueOf(x.getQuestionId()))&&"c".equals(x.getAnswer()))).count();
             ints[i][3]=(int)list.stream().filter(x->
                     (questionOrder.equals(String.valueOf(x.getQuestionId()))&&"d".equals(x.getAnswer()))).count();
-            ints[i][4]=(ints[i][0]*115+ints[i][1]*100+ints[i][3]*80);
+            ints[i][4]=(ints[i][0]*115+ints[i][1]*100+ints[i][3]*80)/total;
         }
         /*int question1a=list.stream().filter(x->
                 ("1".equals(String.valueOf(x.getQuestionId()))&&"a".equals(x.getAnswer()))).collect(Collectors.toList()).size();
@@ -53,7 +54,7 @@ public class StatisticController {
                 ("1".equals(String.valueOf(x.getQuestionId()))&&"d".equals(x.getAnswer()))).collect(Collectors.toList()).size();
 */
 
-        exportWord.export(request,response,ints);
+        exportWord.export(request,response,ints,className);
         System.out.println(ints);
          if(ints.length>0){
              return R.ok();

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ public class ExportWord {
     private ExportWordUtil exportWordUtil;
 
     @RequestMapping("export")
-    public void export(HttpServletRequest request, HttpServletResponse response,int[][] array){
+    public void export(HttpServletRequest request, HttpServletResponse response,int[][] array,String className){
         Map<String,Object> params = new HashMap<>();
 
         System.out.println(array.length+"sdfg"+array[3].length);
@@ -48,12 +50,29 @@ public class ExportWord {
                 }
             }
         }
-        params.put("title","这是标题");
+        int mass = 0;
+        int rear = 0;
+        for(int i=0;i< 20;i++){
+            if(i<17){
+                mass += array[i][4];
+            }
+            if(i>=17){
+                rear += array[i][4];
+            }
+        }
+
+        params.put("className",className);
+        params.put("mass",mass/17);
+        params.put("rear",rear/3);
+        params.put("general",mass*75/17/100+rear*15/3/100);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String countDate = simpleDateFormat.format(new Date());
+        params.put("countDate",countDate);
         //这里是我说的一行代码
        // exportWordUtil.exportWord("C:/Users/ODAACC/Desktop/guojinlong.docx","C:/Users/ODAACC/Desktop","aaa.docx",params,request,response);
 
 
-        exportWordUtil.exportWord("word/as.docx","C:/Users/ODAACC/Desktop","aaa.docx",params,request,response);
+        exportWordUtil.exportWord("word/培训反应评估数据统计表.docx","C:/Users/ODAACC/Desktop","bbb.docx",params,request,response);
 
         System.out.println("export成功");
 

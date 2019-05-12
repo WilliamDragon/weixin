@@ -18,4 +18,10 @@ public class StatisticServiceImpl implements StatisticService {
         List<Statistic> list=statisticMapper.findStatisticByGroupPxclass(className);
         return list;
     }
+
+    @Override
+    public int findTotalByClassName() {
+
+        return statisticMapper.findTotalByClassName();
+    }
 }
