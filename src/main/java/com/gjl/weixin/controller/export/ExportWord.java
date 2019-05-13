@@ -26,8 +26,6 @@ public class ExportWord {
     @RequestMapping("export")
     public void export(HttpServletRequest request, HttpServletResponse response,int[][] array,String className){
         Map<String,Object> params = new HashMap<>();
-
-        System.out.println(array.length+"sdfg"+array[3].length);
         for(int i=0;i< array.length;i++){
             for(int j=0;j<array[i].length;j++){
                 String str1="question"+String.valueOf(i+1)+"a";
