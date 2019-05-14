@@ -26,4 +26,6 @@ public interface SysParamMapper {
 
     @Select("select * from sysparam where id = #{id}")
     List<SysParam> findSysParamById(String id);
+    @Select("select * from sysParam where sysName = #{sysName}")
+    SysParam findSysParamByName(String sysName);
 }

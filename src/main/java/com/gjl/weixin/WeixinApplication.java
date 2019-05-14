@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 //@MapperScan("com.gjl.weixin.mapper")
-@EnableScheduling
 public class WeixinApplication {
 
     public static void main(String[] args) {

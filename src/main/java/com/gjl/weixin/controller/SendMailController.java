@@ -1,8 +1,18 @@
 package com.gjl.weixin.controller;
 
+import com.gjl.weixin.common.GlobalError;
+import com.gjl.weixin.entity.Complain;
+import com.gjl.weixin.entity.ScheduledTask;
+import com.gjl.weixin.mapper.ComplainMapper;
+import com.gjl.weixin.mapper.ScheduledTaskMapper;
+import com.gjl.weixin.mapper.SysParamMapper;
+import com.gjl.weixin.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -10,6 +20,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.xml.bind.SchemaOutputResolver;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -21,6 +33,39 @@ import java.util.Properties;
 public class SendMailController {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+
+    @Autowired
+    ComplainMapper complainMapper;
+    @Autowired
+    ScheduledTaskMapper scheduledTaskMapper;
+    @Autowired
+    SysParamMapper sysParamMapper;
+    public R taskSendMail() {
+       // ScheduledTask sendMailTask = scheduledTaskMapper.findTaskByKey("sendMail");
+        String sysName = "sendMail";
+        String mailVal = sysParamMapper.findSysParamByName(sysName).getSysvalue();
+        String mailEnable = sysParamMapper.findSysParamByName(sysName).getEnabled();
+        if("0".equals(mailVal) && "1".equals(mailEnable)){
+            logger.info("定时任务未开启");
+            return R.ok(GlobalError.ERROR_SCH_TASK);
+        }
+        List<Complain> list = complainMapper.findAll();
+        if(list.size()<=0){
+            return R.error(GlobalError.ERROR_COMPLAIN_DATA);
+        }
+        for(int i=0;i<list.size();i++){
+            System.out.println("发邮件进行中");
+            try{
+                sendSmp(list.get(i).getComplainSubject(),list.get(i).getComplainReason());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+
+        System.out.println("发邮件成功");
+        return R.ok();
+    }
 
     public void sendSmp(String subject,String text) throws Exception{
 
@@ -37,7 +82,9 @@ public class SendMailController {
             msg.setText(text);//邮件内容
             msg.setFrom(new InternetAddress("15546601534@163.com"));//发件人邮箱(我的163邮箱)
             msg.setRecipient(Message.RecipientType.TO,
-                    new InternetAddress("2645019356@qq.com")); //收件人邮箱(我的QQ邮箱)
+                    new InternetAddress("15546601534@163.com"));
+            msg.setRecipient(Message.RecipientType.CC,
+                new InternetAddress("2645019356@qq.com"));//收件人（抄送）邮箱(我的QQ邮箱)
             msg.saveChanges();
 
             Transport transport = session.getTransport();
