@@ -7,7 +7,7 @@ import java.util.Date;
 public class Complain {
     private Integer id;
 
-    private Integer userId;
+    private String userId;
 
     @JsonFormat(pattern="yyyy-MM-dd ",timezone = "GMT+8")
     private String complainTime;
@@ -26,11 +26,11 @@ public class Complain {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

@@ -1,13 +1,19 @@
 package com.gjl.weixin.controller;
 
 import com.gjl.weixin.entity.Complain;
+import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.mapper.ComplainMapper;
 import com.gjl.weixin.utils.R;
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +29,13 @@ public class ComplainController {
     @Autowired
     ComplainMapper complainMapper;
     @PostMapping("/insert")
-    public R insert(Complain complain){
+    public R insert(Complain complain, HttpServletRequest request){
+        HttpSession session=request.getSession();
+        //查询当前用户信息
+        Student userInfo = (Student)session.getAttribute("userInfo");
+        complain.setUserId(userInfo.getId().toString());
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        complain.setComplainTime(date);
         int i=complainMapper.insert(complain);
         if( i>0 ){
             return R.ok();

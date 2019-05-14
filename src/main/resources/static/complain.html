@@ -20,19 +20,20 @@
 
     <script>
         $(document).ready(function(){
-            $("#login").click(function(){
-                var userName=$('#complainText').val();
+            $("#send").click(function(){
+                var complainSubject=$('#complainSubject').val();
+                var complainReason=$('#complainReason').val();
                 $.ajax({
                     type:"POST",
-                    url:"http://127.0.0.1/student/login",
+                    url:"http://127.0.0.1/complain/insert",
                     dataType:"json",
                     data: {
-                        "userName": userName,
-                        "password":password
+                        "complainReason": complainReason,
+                        "complainSubject":complainSubject
                     },
                     success:function(data){
                         if(data.code==0){
-                            window.location.href="success.html";
+                            window.location.href="complainSucc.html";
                         }else{
                             alert("失败");
                         }
@@ -131,11 +132,11 @@
                 </div>
                 <div class="form-group">
                     <label>投诉内容</label>
-                    <textarea name="complainText" id="complainText" cols="40" rows="5">
+                    <textarea name="complainReason" id="complainReason" cols="40" rows="5">
                     </textarea>
                 </div>
 
-                <a href=#  id="login" class="btn btn-primary pull-right">发送</a>
+                <a href=#  id="send" class="btn btn-primary pull-right">发送</a>
                 <!--<label class="remember-me"><input type="checkbox"> Remember me</label>-->
                 <div class="clearfix"></div>
             </form>
