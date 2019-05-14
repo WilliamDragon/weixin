@@ -68,9 +68,10 @@ public class ExportWord {
         params.put("countDate",countDate);
         //这里是我说的一行代码
        // exportWordUtil.exportWord("C:/Users/ODAACC/Desktop/guojinlong.docx","C:/Users/ODAACC/Desktop","aaa.docx",params,request,response);
+        String pathName = className+".docx";
+        exportWordUtil.exportWord("word/培训反应评估数据统计表.docx","C:/Users/ODAACC/Desktop",pathName,params,request,response);
 
-
-        exportWordUtil.exportWord("word/培训反应评估数据统计表.docx","C:/Users/ODAACC/Desktop","bbb.docx",params,request,response);
+        //exportWordUtil.exportWord("word/培训反应评估数据统计表.docx","C:/Users/ODAACC/Desktop","bbb.docx",params,request,response);
 
         System.out.println("export成功");
 

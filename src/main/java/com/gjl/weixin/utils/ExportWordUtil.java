@@ -46,7 +46,8 @@ public class ExportWordUtil {
             if (userAgent.contains("msie") || userAgent.contains("like gecko")) {
                 fileName = URLEncoder.encode(fileName, "UTF-8");
             } else {
-                fileName = new String(fileName.getBytes("utf-8"), "ISO-8859-1");
+               // fileName = new String(fileName.getBytes("utf-8"), "ISO-8859-1");
+                fileName = new String(fileName.getBytes("utf-8"), "utf-8");
             }
             XWPFDocument doc = WordExportUtil.exportWord07(templatePath, params);
             String tmpPath = temDir + fileName;

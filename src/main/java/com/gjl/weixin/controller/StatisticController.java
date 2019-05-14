@@ -3,6 +3,7 @@ package com.gjl.weixin.controller;
 import com.gjl.weixin.controller.export.ExportWord;
 import com.gjl.weixin.entity.Statistic;
 import com.gjl.weixin.entity.Student;
+import com.gjl.weixin.mapper.PxclassMapper;
 import com.gjl.weixin.service.StatisticService;
 import com.gjl.weixin.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,16 @@ public class StatisticController {
 
     @Autowired
     private StatisticService statisticService;
+    @Autowired
+    private PxclassMapper pxclassMapper;
 
     @Autowired
     private ExportWord exportWord;
     //统计表格输出aaa.doxc
     @RequestMapping("/count")
-    public R count(String className, HttpServletRequest request, HttpServletResponse response){
+    public R count(String className,String id, HttpServletRequest request, HttpServletResponse response){
 
+        className = pxclassMapper.findPxclassById(id).get(0).getClassName();
         List<Statistic> list = statisticService.findStatisticByGroupPxclass(className);
 
         int total = statisticService.findTotalByClassName()/20;
