@@ -19,13 +19,15 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
 
     <script>
+        var address = 'http://mq67k8.natappfree.cc';
         $(document).ready(function(){
             $("#send").click(function(){
                 var complainSubject=$('#complainSubject').val();
                 var complainReason=$('#complainReason').val();
                 $.ajax({
                     type:"POST",
-                    url:"http://127.0.0.1/complain/insert",
+                    url: address + '/complain/insert',
+                    //url:"http://127.0.0.1/complain/insert",
                     dataType:"json",
                     data: {
                         "complainReason": complainReason,

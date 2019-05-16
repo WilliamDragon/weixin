@@ -4,6 +4,7 @@
     <title>Bootstrap Admin</title>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -20,7 +21,7 @@
 
 
     <script>
-
+        var address = 'http://mq67k8.natappfree.cc';
         function count(){
 
             var question1 = $("input[name='question1']:checked").val();
@@ -43,10 +44,11 @@
             var question18 = $("input[name='question18']:checked").val();
             var question19 = $("input[name='question19']:checked").val();
             var question20 = $("input[name='question20']:checked").val();
-
+            var address = 'http://mq67k8.natappfree.cc';
             $.ajax({
                 type:"GET",
-                url:"http://127.0.0.1/student/questionCount",
+                url: address + '/student/questionCount',
+               // url:"http://127.0.0.1/student/questionCount",
                 dataType:"json",
                 data: {
                     "question1": question1,
@@ -105,8 +107,12 @@
         $(document).ready(function(){
             $.ajax({
                 type:"GET",
-                url:"http://127.0.0.1/questionnaire/findAll",
+                url: address + '/questionnaire/findAll',
+                //url:"http://127.0.0.1/questionnaire/findAll",
                 dataType:"json",
+                xhrFields: {
+                    withCredentials: true
+                },
                 success:function(data){
                     var str="";
                     var data=data.data;

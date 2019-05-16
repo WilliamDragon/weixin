@@ -14,6 +14,11 @@ spring:
     password: 15145175601xiao!
 
     driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+
+
 
 
 ## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
@@ -28,8 +33,6 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-thymeleaf:
-  cache: false
 
 logging:
   config: classpath:logback/logback.xml

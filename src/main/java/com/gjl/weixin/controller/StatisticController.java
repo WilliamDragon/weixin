@@ -25,7 +25,7 @@ public class StatisticController {
 
     @Autowired
     private ExportWord exportWord;
-    //统计表格输出aaa.doxc
+    //统计表格输出班级名字.doxc
     @RequestMapping("/count")
     public R count(String className,String id, HttpServletRequest request, HttpServletResponse response){
 

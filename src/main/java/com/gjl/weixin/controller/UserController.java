@@ -7,16 +7,15 @@ import com.gjl.weixin.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
 @RequestMapping("/adminUser")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
 
     @Autowired
@@ -39,8 +38,11 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public R login(String userName, String password, HttpSession httpSession){
+    public R login(String userName, String password, HttpSession httpSession, HttpServletResponse response){
         logger.debug("进入 login 方法");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type");
         List<User> list=userMapper.login(userName,password);
         if(list.size()>0){
             globalCache.add("userInfo",list.get(0));
