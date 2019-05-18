@@ -70,14 +70,14 @@
                         str += "<tr>" +
                             "<td>"+(i+1)+"</td>"+
                             "<td>"+data[i].className+"</td>"+
-                            "<td>"+data[i].startTime+"</td>"+
+                            /*"<td>"+data[i].startTime+"</td>"+
                             "<td>"+data[i].endTime+"</td>"+
                             "<td>"+data[i].category+"</td>"+
-                            "<td>"+data[i].number+"</td>"+
+                            "<td>"+data[i].number+"</td>"+*/
                             "<td>"+data[i].professionPerson+"</td>"+
                             "<td>"+data[i].classPerson+"</td>"+
                             "<td>"+data[i].teachePerson+"</td>"+
-                            "<td>"+data[i].day+"</td>"+
+                            /*"<td>"+data[i].day+"</td>"+*/
                             "<td>"+
                             //"<a href=\"statisticsave.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>&nbsp&nbsp"+
                             "<a href=\"javascript:void(0);\"  onclick=\"portPxclass("+data[i].id+")\" ><i class=\"btn btn-default\">导出</i></a>" +
@@ -110,14 +110,14 @@
                                         str += "<tr>" +
                                             "<td>"+(i+1)+"</td>"+
                                             "<td>"+data[i].className+"</td>"+
-                                            "<td>"+data[i].startTime+"</td>"+
+                                            /*"<td>"+data[i].startTime+"</td>"+
                                             "<td>"+data[i].endTime+"</td>"+
                                             "<td>"+data[i].category+"</td>"+
-                                            "<td>"+data[i].number+"</td>"+
+                                            "<td>"+data[i].number+"</td>"+*/
                                             "<td>"+data[i].professionPerson+"</td>"+
                                             "<td>"+data[i].classPerson+"</td>"+
                                             "<td>"+data[i].teachePerson+"</td>"+
-                                            "<td>"+data[i].day+"</td>"+
+                                           /* "<td>"+data[i].day+"</td>"+*/
                                             "<td>"+
                                            // "<a href=\"statisticsave.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>"+
                                             "<a href=\"javascript:void(0);\"  onclick=\"portPxclass("+data[i].id+")\" ><i class=\"btn btn-default\">导出</i></a>" +
@@ -319,6 +319,9 @@
             <!--<a href="addPxclass.html" class="btn btn-primary" ><i class="fa fa-save"></i> 新增</a>
             <button class="btn btn-default">Import</button>
             <button class="btn btn-default">Export</button>-->
+            <span ><b>项目名称:</b></span>
+            <input type="text" id="userName3" style="width:100px;height:34px;float: none/*! margin-top:-14px; */">
+            <a href=#  id="login" class="btn btn-default">查询</a>
             <div class="btn-group">
             </div>
         </div>
@@ -327,14 +330,14 @@
             <tr>
                 <th>#</th>
                 <th>培训项目名称</th>
-                <th>培训开始时间</th>
+                <!--<th>培训开始时间</th>
                 <th>培训结束时间</th>
                 <th>类别</th>
-                <th>人数</th>
+                <th>人数</th>-->
                 <th>专业负责人</th>
                 <th>班主任</th>
                 <th>授课教师</th>
-                <th>天数</th>
+               <!-- <th>天数</th>-->
                 <th style="width: 3.5em;"></th>
             </tr>
             </thead>

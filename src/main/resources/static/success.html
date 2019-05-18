@@ -48,7 +48,7 @@
             $.ajax({
                 type:"GET",
                 url: address + '/student/questionCount',
-               // url:"http://127.0.0.1/student/questionCount",
+                //url:"http://127.0.0.1/student/questionCount",
                 dataType:"json",
                 data: {
                     "question1": question1,
@@ -107,8 +107,8 @@
         $(document).ready(function(){
             $.ajax({
                 type:"GET",
-                url: address + '/questionnaire/findAll',
-                //url:"http://127.0.0.1/questionnaire/findAll",
+               // url: address + '/questionnaire/findAll',
+                url:"http://127.0.0.1/questionnaire/findAll",
                 dataType:"json",
                 xhrFields: {
                     withCredentials: true
