@@ -26,6 +26,22 @@ public class SysParamController {
     private SysParamMapper sysParamMapper;
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+    @RequestMapping("/findAllSysParam")
+    public R findAllSysParam(String pageNum, String pageSize,SysParam sysParam){
+        if(pageNum ==null){
+            pageNum = "1";
+        }
+        if(pageSize == null){
+            pageSize = "3";
+        }
+        List<SysParam> list = sysParamMapper.findAllSysParam(sysParam);
+        PageInfo pageInfo = new PageInfo<SysParam>(list, 3);
+        List<SysParam> list1 = pageInfo.getList();
+        if(list1.size()>0){
+            return R.ok(pageInfo);
+        }
+        return R.error("查询错误");
+    }
 
     @RequestMapping("/findSysParam")
     public R findSysParam(String pageNum, String pageSize, Model model){

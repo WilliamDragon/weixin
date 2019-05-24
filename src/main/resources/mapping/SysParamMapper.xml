@@ -3,11 +3,11 @@
 <mapper namespace="com.gjl.weixin.mapper.SysParamMapper" >
   <resultMap id="BaseResultMap" type="com.gjl.weixin.entity.SysParam" >
     <result column="id" property="id" jdbcType="INTEGER" />
-    <result column="sysCode" property="syscode" jdbcType="VARCHAR" />
-    <result column="sysName" property="sysname" jdbcType="VARCHAR" />
-    <result column="sysValue" property="sysvalue" jdbcType="VARCHAR" />
+    <result column="syscode" property="syscode" jdbcType="VARCHAR" />
+    <result column="sysname" property="sysname" jdbcType="VARCHAR" />
+    <result column="sysvalue" property="sysvalue" jdbcType="VARCHAR" />
     <result column="enabled" property="enabled" jdbcType="VARCHAR" />
-    <result column="sysType" property="systype" jdbcType="VARCHAR" />
+    <result column="systype" property="systype" jdbcType="VARCHAR" />
     <result column="sysdetails" property="sysdetails" jdbcType="VARCHAR" />
   </resultMap>
   <insert id="insert" parameterType="com.gjl.weixin.entity.SysParam" >
@@ -82,4 +82,12 @@
     </trim>
     where id=#{id}
     </update>-->
+  <select id="findAllSysParam" resultMap="BaseResultMap">
+    select * from sysParam
+    <where>
+      <if test="sysname != null">
+        AND sysname like CONCAT('%',#{sysname},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

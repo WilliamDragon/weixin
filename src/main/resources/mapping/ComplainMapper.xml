@@ -9,8 +9,14 @@
     <result column="complain_reason" property="complainReason" jdbcType="VARCHAR" />
     <result column="complain_video" property="complainVideo" jdbcType="VARCHAR" />
   </resultMap>
+  <update id="updateComplainById">
+    update complain
+    set complain_video= "1"
+    where id=#{id}
+  </update>
+
   <select id="findAll" resultMap="BaseResultMap">
-    select * from complain
+    select * from complain where complain_video = '0'
   </select>
   <insert id="insert" parameterType="com.gjl.weixin.entity.Complain" >
     insert into complain ( userId, complain_time,

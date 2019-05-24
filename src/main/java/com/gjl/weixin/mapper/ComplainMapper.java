@@ -2,6 +2,7 @@ package com.gjl.weixin.mapper;
 
 import com.gjl.weixin.entity.Complain;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface ComplainMapper {
     int insertSelective(Complain record);
 
     List<Complain> findAll();
+
+    int updateComplainById(String id);
 }

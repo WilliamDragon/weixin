@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -34,12 +37,28 @@ public class SendMailController {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
 
+
+
+
+
     @Autowired
-    ComplainMapper complainMapper;
+    private ComplainMapper complainMapper;
     @Autowired
     ScheduledTaskMapper scheduledTaskMapper;
     @Autowired
     SysParamMapper sysParamMapper;
+
+     //test  start方法一会删除
+    /*@PostMapping("/findAllComplain")
+    public R findAllComplain(){
+
+        List<Complain> list = complainMapper.findAll();
+        String id = "3";
+        int i = complainMapper.updateComplainById(id);
+        return R.ok(list);
+    }*/
+    //test end 方法一会删除
+
     public R taskSendMail() {
        // ScheduledTask sendMailTask = scheduledTaskMapper.findTaskByKey("sendMail");
         String sysName = "sendMail";
@@ -57,6 +76,9 @@ public class SendMailController {
             System.out.println("发邮件进行中");
             try{
                 sendSmp(list.get(i).getComplainSubject(),list.get(i).getComplainReason());
+                String id = list.get(i).getId().toString();
+                //更改投诉表中是否发送邮件表识，1：也发送邮件，0 ：未发送邮件
+                complainMapper.updateComplainById(id);
             }catch (Exception e){
                 e.printStackTrace();
             }
