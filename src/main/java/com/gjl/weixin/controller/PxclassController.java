@@ -21,6 +21,24 @@ public class PxclassController {
     @Autowired
     private PxclassMapper pxclassMapper;
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+
+    @RequestMapping("/findAllClass")
+    public R findAllClass(String pageNum, String pageSize,Pxclass pxclass){
+        if(pageNum == null){
+            pageNum = "1";
+        }
+        if(pageSize == null){
+            pageSize = "3";
+        }
+        PageHelper.startPage( Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+        List<Pxclass> list = pxclassMapper.findAllClass(pxclass);
+        PageInfo pageInfo = new PageInfo<Pxclass>(list, 3);
+
+        if(list.size()>0){
+            return R.ok(pageInfo);
+        }
+        return R.error("没有培训班");
+    }
     @RequestMapping("/findAll")
     public R findAll(String pageNum, String pageSize){
         if(pageNum==null){

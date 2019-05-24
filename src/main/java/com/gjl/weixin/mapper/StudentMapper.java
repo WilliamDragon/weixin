@@ -30,4 +30,6 @@ public interface StudentMapper {
 
     @Select("select * from student where card_id = #{cardId}")
     List<Student> findByCardId(String cardId);
+
+    List<Student> findAllStudent(Student student);
 }

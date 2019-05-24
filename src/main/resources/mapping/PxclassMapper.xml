@@ -95,6 +95,23 @@
     select * from pxclass where id=#{id}
   </select>
 
+  <select id="findAllClass" resultMap="BaseResultMap">
+    select * from pxclass
+    <where>
+      <if test="className != null">
+        AND class_name like CONCAT('%',#{className},'%')
+      </if>
+      <if test="professionPerson != null">
+        AND profession_person like CONCAT('%',#{professionPerson},'%')
+      </if>
+      <if test="teachePerson != null">
+        AND teache_person like CONCAT('%',#{teachePerson},'%')
+      </if>
+      <if test="classPerson != null">
+        AND class_person like CONCAT('%',#{classPerson},'%')
+      </if>
+    </where>
+  </select>
   <select id="findAll" resultMap="BaseResultMap">
      select * from pxclass
   </select>

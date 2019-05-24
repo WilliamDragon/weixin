@@ -34,7 +34,13 @@
                     "id": obj
                 },
                 success:function(data){
-                    window.location.href="/exportStatistic.html";
+                    if(data.code = 0){
+                        alert("导出成功");
+                        window.location.href="/exportStatistic.html";
+                    }else{
+                        alert("导出失败");
+                    }
+
                 },
                 complete : function(xhr, status) {
                     //拦截器实现超时跳转到登录页面
@@ -51,6 +57,7 @@
                     }
                 },
                 error:function(jqXHR){
+                    alert("导出成功");
                     console.log("Error: "+jqXHR.status);
                 }
             })

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.soap.Addressing;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,6 +68,28 @@ public class StudentController {
         List<StudentDto> list=studentService.findAll();
         if(list.size()>0){
             return R.ok(list);
+        }
+        return R.error("用户名或密码错误");
+    }
+    //动态查询
+
+    @PostMapping("/findAllStudent")
+    public R findAllStudent(String pageNum, String pageSize, Model model,Student student){
+        if(pageNum==null){
+            pageNum="1";
+        }
+        if(pageSize==null){
+            pageSize="3";
+        }
+
+        PageHelper.startPage( Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+
+        List<Student> list=studentMapper.findAllStudent(student);
+        PageInfo pageInfo = new PageInfo<Student>(list, 3);
+
+        List<Student> list1 = pageInfo.getList();
+        if(list1.size()>0){
+            return R.ok(pageInfo);
         }
         return R.error("用户名或密码错误");
     }

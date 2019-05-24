@@ -24,4 +24,6 @@ public interface PxclassMapper {
     int deleteById(@Param("id") String id);
 
     int save(Pxclass pxclass);
+
+    List<Pxclass> findAllClass(Pxclass pxclass);
 }
