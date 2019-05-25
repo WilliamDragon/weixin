@@ -56,6 +56,104 @@
             })
         }
 
+        function findAllSysByCondition(){
+            var syscode=$("#syscode").val();
+            var sysname=$("#sysname").val();
+            $.ajax({
+                type:"GET",
+                url:"http://127.0.0.1/sysParam/findAllSysParam",
+                dataType:"json",
+                data: {
+                    "syscode": syscode,
+                    "sysname": sysname
+                },
+                success:function(res){
+                    var str="";
+                    var data=res.data.list;
+                    var pageSize=res.data.pages;
+                    for (var i=0;i<data.length;i++) {
+                        str += "<tr>" +
+                            "<td>"+(i+1)+"</td>"+
+                            "<td>"+data[i].syscode+"</td>"+
+                            "<td>"+data[i].sysname+"</td>"+
+                            "<td>"+data[i].sysvalue+"</td>"+
+                            "<td>"+data[i].enabled+"</td>"+
+                            "<td>"+data[i].systype+"</td>"+
+                            "<td>"+data[i].sysdetails+"</td>"+
+                            "<td>"+
+                            "<a href=\"systemsys.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>&nbsp&nbsp;"+
+                            "<a href=\"javascript:void(0);\"  onclick=\"deleteSys("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
+                            /* "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +*/
+                            "</td>"
+                        "</tr>";
+                    }
+                    document.getElementById("tbodydata").innerHTML=str;
+                    $('.M-box').pagination({
+                        pageCount:pageSize,   //总页码
+                        coping:true,                 //是否开启首页和末页
+                        homePage:'首页',
+                        endPage:'末页',
+                        prevContent:'上页',
+                        nextContent:'下页',
+                        current:1,                    //当前页码
+                        callback:function (api) {//这是一个回调函数
+                            $.ajax({
+                                type:"GET",
+                                url:"http://127.0.0.1/sysParam/findAllSysParam",
+                                dataType:"json",
+                                data:{
+                                    'pageNum': api.getCurrent()
+                                },
+                                success:function(res){
+                                    var str="";
+                                    var data=res.data.list;
+                                    var pageSize=res.data.pages;
+                                    for (var i=0;i<data.length;i++) {
+                                        str += "<tr>" +
+                                            "<td>"+(i+1)+"</td>"+
+                                            "<td>"+data[i].syscode+"</td>"+
+                                            "<td>"+data[i].sysname+"</td>"+
+                                            "<td>"+data[i].sysvalue+"</td>"+
+                                            "<td>"+data[i].enabled+"</td>"+
+                                            "<td>"+data[i].systype+"</td>"+
+                                            "<td>"+data[i].sysdetails+"</td>"+
+                                            "<td>"+
+                                            "<a href=\"systemsys.html?id="+data[i].id+"\"><i class=\"fa fa-pencil\"></i></a>&nbsp&nbsp;"+
+                                            "<a href=\"javascript:void(0);\"  onclick=\"deleteSys("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +
+                                            /* "<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"  onclick=\"deleteUser("+data[i].id+")\" ><i class=\"fa fa-trash-o\"></i></a>" +*/
+                                            "</td>"
+                                        "</tr>";
+                                    }
+                                    document.getElementById("tbodydata").innerHTML=str;
+
+                                }
+
+                            })
+
+                        }
+                    });
+
+                },
+                complete : function(xhr, status) {
+                    //拦截器实现超时跳转到登录页面
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        var win = window;
+                        while (win != win.top) {
+                            win = win.top;
+                        }
+                        //重新跳转到login.html
+                        win.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                error:function(jqXHR){
+                    console.log("Error: "+jqXHR.status);
+                }
+            });
+        }
+
         $(document).ready(function(){
             //initStudent();
             $.ajax({
@@ -316,10 +414,10 @@
            <!-- <button class="btn btn-default">Import</button>
             <button class="btn btn-default">Export</button>-->
             <span ><b>参数代码:</b></span>
-            <input type="text" id="userName3" style="width:100px;height:34px;float: none/*! margin-top:-14px; */">
+            <input type="text" id="syscode" style="width:100px;height:34px;float: none/*! margin-top:-14px; */">
             <span><b>参数名字:</b></span>
-            <input type="text" id="userName2" style="width:100px;height:34px;float: none">
-            <a href=#  id="login" class="btn btn-default">查询</a>
+            <input type="text" id="sysname" style="width:100px;height:34px;float: none">
+            <a href="javascript:void(0);"  onclick="findAllSysByCondition()" class="btn btn-default">查询</a>
             <div class="btn-group">
             </div>
         </div>

@@ -85,7 +85,10 @@
   <select id="findAllSysParam" resultMap="BaseResultMap">
     select * from sysParam
     <where>
-      <if test="sysname != null">
+      <if test="syscode != null and syscode!=''">
+        AND syscode like CONCAT('%',#{syscode},'%')
+      </if>
+      <if test="sysname != null and sysname!=''">
         AND sysname like CONCAT('%',#{sysname},'%')
       </if>
     </where>
