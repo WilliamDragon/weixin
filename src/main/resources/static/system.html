@@ -102,6 +102,8 @@
                                 url:"http://127.0.0.1/sysParam/findAllSysParam",
                                 dataType:"json",
                                 data:{
+                                    "syscode": syscode,
+                                    "sysname": sysname,
                                     'pageNum': api.getCurrent()
                                 },
                                 success:function(res){

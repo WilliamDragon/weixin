@@ -34,6 +34,7 @@ public class SysParamController {
         if(pageSize == null){
             pageSize = "3";
         }
+        PageHelper.startPage( Integer.valueOf(pageNum),3);
         List<SysParam> list = sysParamMapper.findAllSysParam(sysParam);
         PageInfo pageInfo = new PageInfo<SysParam>(list, 3);
         List<SysParam> list1 = pageInfo.getList();
