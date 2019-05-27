@@ -1,9 +1,15 @@
 package com.gjl.weixin.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gjl.weixin.cache.GlobalCache;
+import com.gjl.weixin.entity.Pxclass;
+import com.gjl.weixin.entity.ScheduledTask;
 import com.gjl.weixin.entity.User;
 import com.gjl.weixin.mapper.UserMapper;
+import com.gjl.weixin.utils.MD5Util;
 import com.gjl.weixin.utils.R;
+import com.gjl.weixin.utils.SendMailUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/adminUser")
@@ -36,7 +43,81 @@ public class UserController {
         //System.out.println(list);
     }
 
+    @RequestMapping("/save")
+    public R save(User user){
+        logger.debug("进入 save 方法");
+        int list = userMapper.save(user);
+        if(list>0){
+            return R.ok(list);
+        }
+        return R.error("更新失败");
+    }
 
+    @RequestMapping("/findUserById")
+    public R findUserById(String id){
+        logger.debug("进入 findUserById 方法");
+        List<User> all = userMapper.findAll();
+        List<User> collect = all.stream().filter(x -> (
+            String.valueOf(x.getId()).equals(id)
+        )).collect(Collectors.toList());
+        if(collect.size()>0){
+            return R.ok(collect);
+        }
+        return R.error("查询失败");
+    }
+    @RequestMapping("/delete")
+    public R delete(String id){
+        logger.debug("进入 delete 方法");
+        int list = userMapper.deleteById(id);
+        if(list>0){
+            return R.ok(list);
+        }
+        return R.error("删除失败");
+    }
+    @RequestMapping("findAllByCondition")
+    public R findAllByCondition(String pageNum, String pageSize,User user){
+        if(pageNum==null){
+            pageNum="1";
+        }
+        if(pageSize==null){
+            pageSize="3";
+        }
+        PageHelper.startPage( Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+        List<User> list = userMapper.findAllByCondition(user);
+        PageInfo pageInfo = new PageInfo<User>(list, 3);
+        if(list.size()>0){
+            return R.ok(pageInfo);
+        }
+        return R.error("用户不存在");
+    }
+    @RequestMapping("findAll")
+    public R findAll(String pageNum, String pageSize){
+        if(pageNum==null){
+            pageNum="1";
+        }
+        if(pageSize==null){
+            pageSize="3";
+        }
+        PageHelper.startPage( Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+        List<User> list = userMapper.findAll();
+        PageInfo pageInfo = new PageInfo<User>(list, 3);
+        if(list.size()>0){
+            return R.ok(pageInfo);
+        }
+        return R.error("用户不存在");
+    }
+
+    @RequestMapping("email")
+    public R email(User user) {
+        try{
+           // SendMailUtil.SendMail("2645019356@qq.com","测试zhuti","测试neirong");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        String str = MD5Util.getMD5Code("asfsdgfasde");
+        System.out.println(str);
+        return R.ok();
+    }
     @PostMapping("/login")
     public R login(String userName, String password, HttpSession httpSession, HttpServletResponse response){
         logger.debug("进入 login 方法");

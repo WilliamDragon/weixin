@@ -9,6 +9,10 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
   </resultMap>
+
+    <select id="findUserById" resultMap="BaseResultMap">
+        select * from user where id = #{id}
+    </select>
   <insert id="insert" parameterType="com.gjl.weixin.entity.User">
     insert into user (id, status, create_time, 
       login_name, password, phone
@@ -65,4 +69,27 @@
     select * from user where login_name = #{userName} and password = #{password}
   </select>
 
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from user
+  </select>
+
+  <select id="findAllByCondition" resultMap="BaseResultMap">
+    select * from user
+    <where>
+      <if test="loginName != null and loginName!=''">
+        AND login_name like CONCAT('%',#{loginName},'%')
+      </if>
+
+    </where>
+  </select>
+
+  <update id="save">
+    update user
+    <trim prefix="set" suffixOverrides=",">
+      <if test="status!=null">status=#{status},</if>
+      <if test="password!=null">password=#{password},</if>
+      <if test="phone!=null">phone=#{phone},</if>
+    </trim>
+    WHERE id=#{id}
+  </update>
 </mapper>
