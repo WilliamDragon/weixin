@@ -144,13 +144,13 @@ e_name,s.e_sex,s.phone,p.class_name from student s JOIN pxclass p on s.pxclass_i
   <select id="findAllStudent" resultMap="qwarfq">
     select * from Student
     <where>
-      <if test="eName != null">
-        AND e_ame like CONCAT('%',#{eName},'%')
+      <if test="eName != null and eName!=''">
+        AND e_name like CONCAT('%',#{eName},'%')
       </if>
-      <if test="cardId != null">
+      <if test="cardId != null and cardId!=''">
         AND card_id like CONCAT('%',#{cardId},'%')
       </if>
-      <if test="employeeId != null">
+      <if test="employeeId != null and employeeId!=''">
         AND employee_id like CONCAT('%',#{employeeId},'%')
       </if>
     </where>
