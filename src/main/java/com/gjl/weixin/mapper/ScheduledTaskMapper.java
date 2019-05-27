@@ -15,4 +15,5 @@ public interface ScheduledTaskMapper {
 
     ScheduledTask findTaskByKey(String taskName);
 
+    List<ScheduledTask> findAllByCondition(ScheduledTask scheduledTask);
 }

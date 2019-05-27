@@ -13,6 +13,14 @@
   <select id="findTaskByKey" resultMap="BaseResultMap">
     select * from scheduledtask where task_key = #{taskName}
   </select>
+  <select id="findAllByCondition" resultMap="BaseResultMap">
+    select * from scheduledtask
+    <where>
+      <if test="taskKey != null and taskKey!=''">
+        AND task_key like CONCAT('%',#{taskKey},'%')
+      </if>
+    </where>
+  </select>
   <select id="findAll" resultMap="BaseResultMap">
     select * from scheduledtask
   </select>
