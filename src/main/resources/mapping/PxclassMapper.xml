@@ -98,16 +98,16 @@
   <select id="findAllClass" resultMap="BaseResultMap">
     select * from pxclass
     <where>
-      <if test="className != null">
+      <if test="className != null and className!=''">
         AND class_name like CONCAT('%',#{className},'%')
       </if>
-      <if test="professionPerson != null">
+      <if test="professionPerson != null and professionPerson!=''">
         AND profession_person like CONCAT('%',#{professionPerson},'%')
       </if>
-      <if test="teachePerson != null">
+      <if test="teachePerson != null and teachePerson!=''">
         AND teache_person like CONCAT('%',#{teachePerson},'%')
       </if>
-      <if test="classPerson != null">
+      <if test="classPerson != null and classPerson!=''">
         AND class_person like CONCAT('%',#{classPerson},'%')
       </if>
     </where>
