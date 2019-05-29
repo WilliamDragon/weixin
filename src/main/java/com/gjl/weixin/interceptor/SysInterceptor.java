@@ -22,11 +22,17 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler)throws Exception
     {
-        //System.out.println("我是拦截器：我证明我进来了");
-       /* HttpSession session=request.getSession();
-       // Student userInfo = (Student)session.getAttribute("userInfo");
+        System.out.println("我是拦截器：我证明我进来了");
+       HttpSession session=request.getSession();
+        //Student userInfo = (Student)session.getAttribute("userInfo");
         User userInfo = (User)session.getAttribute("userInfo");
-
+        if(request.getRequestURI().contains("weChatConnect")||
+                request.getRequestURI().contains("menuAdd")||
+                request.getRequestURI().contains("getAccessToken")||
+                request.getRequestURI().contains("weChatConnect")||
+                request.getRequestURI().contains("weChatConnect")){
+            return true;
+        }
         if(userInfo == null )
         {
             System.out.println("我证明用户没有登录");
@@ -35,7 +41,7 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
             }
             return false;
         }
-        System.out.println("我证明用户已经登录");*/
+        System.out.println("我证明用户已经登录");
         return  true;
     }
     /**

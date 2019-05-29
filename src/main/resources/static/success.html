@@ -21,7 +21,7 @@
 
 
     <script>
-        var address = 'http://mq67k8.natappfree.cc';
+        var address = 'http://jeewa5.natappfree.cc';
         function count(){
 
             var question1 = $("input[name='question1']:checked").val();
@@ -44,11 +44,11 @@
             var question18 = $("input[name='question18']:checked").val();
             var question19 = $("input[name='question19']:checked").val();
             var question20 = $("input[name='question20']:checked").val();
-            var address = 'http://mq67k8.natappfree.cc';
+           // var address = 'http://mq67k8.natappfree.cc';
             $.ajax({
                 type:"GET",
-                //url: address + '/student/questionCount',
-                url:"http://127.0.0.1/student/questionCount",
+                url: address + '/student/questionCount',
+                //url:"http://127.0.0.1/student/questionCount",
                 dataType:"json",
                 data: {
                     "question1": question1,
@@ -107,8 +107,8 @@
         $(document).ready(function(){
             $.ajax({
                 type:"GET",
-               // url: address + '/questionnaire/findAll',
-                url:"http://127.0.0.1/questionnaire/findAll",
+                url: address + '/questionnaire/findAll',
+               // url:"http://127.0.0.1/questionnaire/findAll",
                 dataType:"json",
                 xhrFields: {
                     withCredentials: true
@@ -162,7 +162,7 @@
 </div>
     <!-- 文本域 textarea -->
      &nbsp&nbsp&nbsp&nbsp&nbsp意见和建议：<br>
-     &nbsp&nbsp&nbsp&nbsp&nbsp<textarea name="question21" id="" cols="50" rows="5">
+     &nbsp&nbsp&nbsp&nbsp&nbsp<textarea name="question21" id="" cols="40" rows="5">
     </textarea>
     <br>
     <br>

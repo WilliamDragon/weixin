@@ -24,11 +24,11 @@
             $("#login").click(function(){
                 var userName=$('#userName').val();
                 var password=$('#password').val();
-                var address = 'http://mq67k8.natappfree.cc';
+                var address = 'http://jeewa5.natappfree.cc';
                 $.ajax({
                     type:"POST",
-                    //url: address + '/student/login',
-                    url:"http://127.0.0.1/student/login",
+                    url: address + '/student/login',
+                    //url:"http://127.0.0.1/student/login",
                     dataType:"json",
                     data: {
                         "userName": userName,

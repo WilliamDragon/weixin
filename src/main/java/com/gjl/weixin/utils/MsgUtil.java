@@ -12,9 +12,9 @@ public class MsgUtil {
         Menu menu = new Menu();
         ViewButton button11 = new ViewButton();
         //注意按钮名字不要太长，不然会报40018错误
-        button11.setName("搜索");
+        button11.setName("登陆");
         button11.setType("view");
-        button11.setUrl("https://www.baidu.com");
+        button11.setUrl("http://bfw56t.natappfree.cc/indexlogin.html");
         //button11.setUrl("http://hw8tp4.natappfree.cc/index.html");
         //注意链接不要少了https://  否则会报错40055
 
@@ -28,20 +28,23 @@ public class MsgUtil {
         button32.setType("location_select");
         button32.setKey("local");
 
-        ClickButton button31 = new ClickButton();
+       /* ClickButton button31 = new ClickButton();
         button31.setName("点赞");
         button31.setType("click");
-        button31.setKey("strtest");//事件key
-
+        button31.setKey("strtest");//事件key*/
+        ClickButton button31 = new ClickButton();
+        button31.setName("调查问卷");
+        button31.setType("view");
+        button31.setKey("http://bfw56t.natappfree.cc/indexlogin.html");
         ViewButton button33 = new ViewButton();
         //注意按钮名字不要太长，不然会报40018错误
-        button33.setName("登录");
+        button33.setName("投诉");
         button33.setType("view");
-        button33.setUrl("http://xcffsq.natappfree.cc/index.html");
+        button33.setUrl("http://bfw56t.natappfree.cc/complain.html");
 
 
         Button button = new Button();
-        button.setName("click2");
+        button.setName("功能列表");
         button.setSub_button(new Button[]{button31,button32,button33});
         //button.setSub_button(new Button[]{button31,button32});
 

@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
 
     <script>
-        var address = 'http://mq67k8.natappfree.cc';
+        var address = 'http://bfw56t.natappfree.cc';
         $(document).ready(function(){
             $("#send").click(function(){
                 var complainSubject=$('#complainSubject').val();
@@ -37,7 +37,7 @@
                         if(data.code==0){
                             window.location.href="complainSucc.html";
                         }else{
-                            alert("失败");
+                            alert(data.msg);
                         }
                     },
                     error:function(jqXHR){
@@ -129,12 +129,12 @@
 
                 <div class="form-group">
                     <label>投诉主题</label>
-                    <textarea name="complainSubject" id="complainSubject" cols="40" rows="1">
+                    <textarea  id="complainSubject" cols="32" rows="1">
                     </textarea>
                 </div>
                 <div class="form-group">
                     <label>投诉内容</label>
-                    <textarea name="complainReason" id="complainReason" cols="40" rows="5">
+                    <textarea  id="complainReason" cols="32" rows="5">
                     </textarea>
                 </div>
 

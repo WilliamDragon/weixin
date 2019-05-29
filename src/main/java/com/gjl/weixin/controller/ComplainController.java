@@ -33,6 +33,9 @@ public class ComplainController {
         HttpSession session=request.getSession();
         //查询当前用户信息
         Student userInfo = (Student)session.getAttribute("userInfo");
+        if(userInfo == null){
+            return R.error("用户未登录");
+        }
         complain.setUserId(userInfo.getId().toString());
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         complain.setComplainTime(date);
