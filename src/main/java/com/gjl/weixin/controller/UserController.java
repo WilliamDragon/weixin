@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -108,22 +107,16 @@ public class UserController {
         return R.error("用户不存在");
     }
 
-    @RequestMapping("insert")
-    public R insert(User user) {
+    @RequestMapping("email")
+    public R email(User user) {
         try{
            // SendMailUtil.SendMail("2645019356@qq.com","测试zhuti","测试neirong");
         }catch (Exception e){
             e.printStackTrace();
         }
-        String str = MD5Util.getMD5Code(user.getPassword()+"guojinlong");
-        user.setPassword(str);
-        user.setCreateTime(new Date());
-        user.setStatus("0");
-        int i = userMapper.insertSelective(user);
-        if(i>0){
-            return R.ok();
-        }
-        return R.error("新增失败");
+        String str = MD5Util.getMD5Code("asfsdgfasde");
+        System.out.println(str);
+        return R.ok();
     }
     @PostMapping("/login")
     public R login(String userName, String password, HttpSession httpSession, HttpServletResponse response){

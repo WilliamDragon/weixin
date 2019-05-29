@@ -24,6 +24,9 @@
   <insert id="insertSelective" parameterType="com.gjl.weixin.entity.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="status != null">
         status,
       </if>
@@ -41,6 +44,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
