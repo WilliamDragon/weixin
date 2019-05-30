@@ -9,6 +9,13 @@
     <result column="complain_reason" property="complainReason" jdbcType="VARCHAR" />
     <result column="complain_video" property="complainVideo" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="ResultMap" type="com.gjl.weixin.dto.ComplainDto" >
+    <result column="e_name" property="userName" jdbcType="VARCHAR" />
+    <result column="complain_time" property="complainTime" jdbcType="DATE" />
+    <result column="complain_subject" property="complainSubject" jdbcType="VARCHAR" />
+    <result column="complain_reason" property="complainReason" jdbcType="VARCHAR" />
+    <result column="complain_video" property="complainVideo" jdbcType="VARCHAR" />
+  </resultMap>
   <update id="updateComplainById">
     update complain
     set complain_video= "1"
@@ -18,6 +25,20 @@
   <select id="findAll" resultMap="BaseResultMap">
     select * from complain where complain_video = '0'
   </select>
+
+  <select id="findAllByAdmin" resultMap="ResultMap">
+    select C.*,S.e_name
+    from complain C,student S
+    where C.userId=S.id
+      <if test="userName != null and userName!=''">
+        AND S.e_name like CONCAT('%',#{userName},'%')
+      </if>
+      <if test="complainSubject != null and complainSubject!=''">
+        AND C.complain_subject like CONCAT('%',#{complainSubject},'%')
+      </if>
+
+  </select>
+
   <insert id="insert" parameterType="com.gjl.weixin.entity.Complain" >
     insert into complain ( userId, complain_time,
       complain_subject, complain_reason, complain_video

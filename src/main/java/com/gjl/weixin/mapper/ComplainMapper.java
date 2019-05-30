@@ -1,5 +1,6 @@
 package com.gjl.weixin.mapper;
 
+import com.gjl.weixin.dto.ComplainDto;
 import com.gjl.weixin.entity.Complain;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
@@ -15,4 +16,6 @@ public interface ComplainMapper {
     List<Complain> findAll();
 
     int updateComplainById(String id);
+
+    List<ComplainDto> findAllByAdmin(ComplainDto complainDto);
 }
