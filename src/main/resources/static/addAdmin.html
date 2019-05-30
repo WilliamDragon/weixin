@@ -25,31 +25,21 @@
 
 <script type="text/javascript">
 
-    function insertUser(){
-        var eName=$("#eName").val();
-        var eSex=$("#eSex").val();
-        var cardId=$("#cardId").val();
-        var department=$("#department").val();
-        var education=$("#education").val();
+    function insertAdmin(){
+        var loginName=$("#loginName").val();
+        var password=$("#password").val();
         var phone=$("#phone").val();
-        var employeeId=$("#employeeId").val();
-        var pxclassName=$("#pxclassName").val();
         $.ajax({
             type:"GET",
-            url:"http://127.0.0.1/student/insert",
+            url:"http://127.0.0.1/adminUser/insert",
             dataType:"json",
             data: {
-                "eName": eName,
-                "eSex": eSex,
-                "cardId": cardId,
-                "department": department,
-                "education": education,
-                "phone": phone,
-                "employeeId": employeeId,
-                "pxclassName": pxclassName,
+                "loginName": loginName,
+                "password": password,
+                "phone": phone
             },
             success:function(data){
-                window.location.href="/users.html";
+                window.location.href="/admin.html";
             },
             complete : function(xhr, status) {
                 //拦截器实现超时跳转到登录页面
@@ -139,7 +129,7 @@
         <ul id="main-menu" class="nav navbar-nav navbar-right">
             <li class="dropdown hidden-xs">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span >欢迎来到电力评价系统！</span>
+                    <span class="glyphicon glyphicon-user padding-right-small" style="position:relative;top: 3px;"></span> Jack Smith
                     <i class="fa fa-caret-down"></i>
                 </a>
 
@@ -165,27 +155,57 @@
     <ul>
         <li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-fw fa-dashboard"></i> Dashboard<i class="fa fa-collapse"></i></a></li>
         <li><ul class="dashboard-menu nav nav-list collapse in">
-            <li><a href="index.html"><span class="fa fa-caret-right"></span> 系统说明</a></li>
-            <li ><a href="users.html"><span class="fa fa-caret-right"></span> 学生管理</a></li>
-            <li ><a href="statistic.html"><span class="fa fa-caret-right"></span> 班级管理</a></li>
-            <li ><a href="exportStatistic.html"><span class="fa fa-caret-right"></span> 分析导出报表</a></li>
-            <li ><a href="complain.html"><span class="fa fa-caret-right"></span> 投诉管理</a></li>
-            <li ><a href="task.html"><span class="fa fa-caret-right"></span> 定时任务</a></li>
-            <li ><a href="system.html"><span class="fa fa-caret-right"></span> 系统管理</a></li>
-        </ul></li>
-        <li><ul class="accounts-menu nav nav-list collapse">
-            <li ><a href="admin.html"><span class="fa fa-caret-right"></span> 管理人员</a></li>
+            <li><a href="index.html"><span class="fa fa-caret-right"></span> Main</a></li>
+            <li ><a href="users.html"><span class="fa fa-caret-right"></span> User List</a></li>
+            <li class="active"><a href="user.html"><span class="fa fa-caret-right"></span> User Profile</a></li>
+            <li ><a href="media.html"><span class="fa fa-caret-right"></span> Media</a></li>
+            <li ><a href="calendar.html"><span class="fa fa-caret-right"></span> Calendar</a></li>
         </ul></li>
 
+        <li data-popover="true" data-content="Items in this group require a <strong><a href='http://portnine.com/bootstrap-themes/aircraft' target='blank'>premium license</a><strong>." rel="popover" data-placement="right"><a href="#" data-target=".premium-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-fighter-jet"></i> Premium Features<i class="fa fa-collapse"></i></a></li>
+        <li><ul class="premium-menu nav nav-list collapse">
+            <li class="visible-xs visible-sm"><a href="#">- Premium features require a license -</a></span>
+            <li ><a href="premium-profile.html"><span class="fa fa-caret-right"></span> Enhanced Profile</a></li>
+            <li ><a href="premium-blog.html"><span class="fa fa-caret-right"></span> Blog</a></li>
+            <li ><a href="premium-blog-item.html"><span class="fa fa-caret-right"></span> Blog Page</a></li>
+            <li ><a href="premium-pricing-tables.html"><span class="fa fa-caret-right"></span> Pricing Tables</a></li>
+            <li ><a href="premium-upgrade-account.html"><span class="fa fa-caret-right"></span> Upgrade Account</a></li>
+            <li ><a href="premium-widgets.html"><span class="fa fa-caret-right"></span> Widgets</a></li>
+            <li ><a href="premium-timeline.html"><span class="fa fa-caret-right"></span> Activity Timeline</a></li>
+            <li ><a href="premium-users.html"><span class="fa fa-caret-right"></span> Enhanced Users List</a></li>
+            <li ><a href="premium-media.html"><span class="fa fa-caret-right"></span> Enhanced Media</a></li>
+            <li ><a href="premium-invoice.html"><span class="fa fa-caret-right"></span> Invoice</a></li>
+            <li ><a href="premium-build.html"><span class="fa fa-caret-right"></span> Advanced Tools</a></li>
+            <li ><a href="premium-colors.html"><span class="fa fa-caret-right"></span> Additional Color Themes</a></li>
+        </ul></li>
+
+        <li><a href="#" data-target=".accounts-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-briefcase"></i> Account <span class="label label-info">+3</span></a></li>
+        <li><ul class="accounts-menu nav nav-list collapse">
+            <li ><a href="sign-in.html"><span class="fa fa-caret-right"></span> Sign In</a></li>
+            <li ><a href="sign-up.html"><span class="fa fa-caret-right"></span> Sign Up</a></li>
+            <li ><a href="reset-password.html"><span class="fa fa-caret-right"></span> Reset Password</a></li>
+        </ul></li>
+
+        <li><a href="#" data-target=".legal-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-legal"></i> Legal<i class="fa fa-collapse"></i></a></li>
+        <li><ul class="legal-menu nav nav-list collapse">
+            <li ><a href="privacy-policy.html"><span class="fa fa-caret-right"></span> Privacy Policy</a></li>
+            <li ><a href="terms-and-conditions.html"><span class="fa fa-caret-right"></span> Terms and Conditions</a></li>
+        </ul></li>
+
+        <li><a href="help.html" class="nav-header"><i class="fa fa-fw fa-question-circle"></i> Help</a></li>
+        <li><a href="faq.html" class="nav-header"><i class="fa fa-fw fa-comment"></i> Faq</a></li>
+        <li><a href="http://portnine.com/bootstrap-themes/aircraft" class="nav-header" target="blank"><i class="fa fa-fw fa-heart"></i> Get Premium</a></li>
+    </ul>
 </div>
 
 <div class="content">
     <div class="header">
 
-        <h1 class="page-title">编辑用户</h1>
+        <h1 class="page-title">编辑管理员</h1>
         <ul class="breadcrumb">
             <li><a href="index.html">Home</a> </li>
-            <li><a href="users.html">用户</a> </li>
+            <li><a href="#">管理员</a> </li>
+
         </ul>
 
     </div>
@@ -193,7 +213,6 @@
 
         <ul class="nav nav-tabs">
             <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
-
         </ul>
 
         <div class="row">
@@ -203,41 +222,17 @@
                     <div class="tab-pane active in" id="home">
                         <form id="tab">
                             <div class="form-group">
-                                <label>姓名</label>
-                                <input type="text" id='eName' class="form-control">
+                                <label>用户名</label>
+                                <input type="text" id='loginName' class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>性别</label>
-                                <input type="text" id='eSex' class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>身份证号</label>
-                                <input type="text" id='cardId' class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>工作单位</label>
-                                <input type="text" id='department' class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>学历</label>
-                                <input type="text" id='education' class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>电话</label>
+                                <label>电话号码</label>
                                 <input type="text" id='phone' class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>员工号</label>
-                                <input type="text" id="employeeId" class="form-control">
+                                <label>密码</label>
+                                <input type="text" id='password' class="form-control">
                             </div>
-                            <div class="form-group">
-                                <label>培训项目名称</label>
-                                <input type="text" id='pxclassName' class="form-control">
-                            </div>
-
-
-
-
                         </form>
                     </div>
 
@@ -256,7 +251,8 @@
                 </div>
 
                 <div class="btn-toolbar list-toolbar">
-                    <a href="#" class="btn btn-primary" onclick="insertUser()" ><i class="fa fa-save"></i> Save</a>
+                    <a href="#" class="btn btn-primary" onclick="insertAdmin()" ><i class="fa fa-save"></i> Save</a>
+
                 </div>
             </div>
         </div>
@@ -284,6 +280,8 @@
         <footer>
             <hr>
 
+            <!-- Purchase a site license to remove this link from the footer: http://www.portnine.com/bootstrap-themes -->
+            <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free Bootstrap Theme</a> by <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
 
         </footer>
     </div>

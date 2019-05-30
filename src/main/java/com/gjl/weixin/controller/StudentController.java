@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.Addressing;
 import java.text.SimpleDateFormat;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/student")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class StudentController {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
@@ -46,7 +48,13 @@ public class StudentController {
 
     //根据学生userName和card_id登录
     @PostMapping("/login")
-    public R login(String userName, String password, HttpSession httpSession){
+    public R login(String userName, String password, HttpSession httpSession, HttpServletResponse res){
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+        res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+        res.setHeader("X-Powered-By","3.2.1");
+        res.setHeader("Content-Type", "application/json;charset=utf-8");
+
         List<Student> list=studentService.login(userName,password);
         if(list.size()>0){
             httpSession.setAttribute("userInfo",list.get(0));
