@@ -159,12 +159,16 @@ public class weChatController {
         req.setCharacterEncoding("UTF-8");
         String respMessage = weiXinService.processRequest(req);
         resp.setCharacterEncoding("UTF-8");
+        if(respMessage==null){
+            respMessage = "";
+        }
         resp.getWriter().write(respMessage);
     }
 
     @RequestMapping(value = "/push",method = RequestMethod.POST)
     @ResponseBody
-    public R push() {
+    public R push(String pushNew) {
+        System.out.println(pushNew);
         String token=AccessTokenThread.accessToken.getAccess_token();
         List<String> list = weChatController.getUser(null);
         // 获取分组ID
@@ -172,11 +176,11 @@ public class weChatController {
         String gid = group.getGroups().get(3).getId();
 
         //将所有用户放到All 组里面
-        UserAPI.groupsMembersBatchUpdate(token,list,"gid");
+        UserAPI.groupsMembersBatchUpdate(token,list,gid);
         //文本群发
-        MassTextMessage textMessage = new MassTextMessage("分组群发文dsdgsfghj本消息");
+        MassTextMessage textMessage = new MassTextMessage(pushNew);
         //设置分组
-        textMessage.setFilter(new Filter(false,"gid"));
+        textMessage.setFilter(new Filter(false,gid));
         MessageAPI.messageMassSendall(token, textMessage);
         return R.ok();
     }
@@ -213,6 +217,10 @@ public class weChatController {
         HttpUriRequest httpUriRequest = RequestBuilder.post().setHeader(jsonHeader).setUri("https://api.weixin.qq.com/cgi-bin/message/custom/send").addParameter("access_token", access_token).setEntity(new StringEntity(messageJson, Charset.forName("utf-8"))).build();
         return (MessageSendResult) LocalHttpClient.executeJsonResult(httpUriRequest, MessageSendResult.class);
     }
+
+
+
+
 
     public static String getkfnews(String openid) {
 //先实例化图文内容
