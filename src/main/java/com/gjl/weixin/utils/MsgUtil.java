@@ -12,9 +12,9 @@ public class MsgUtil {
         Menu menu = new Menu();
         ViewButton button11 = new ViewButton();
         //注意按钮名字不要太长，不然会报40018错误
-        button11.setName("登陆");
+        button11.setName("齐市电网");
         button11.setType("view");
-        button11.setUrl("http://9nmrfp.natappfree.cc/indexlogin.html");
+        button11.setUrl("http://www.hl.sgcc.com.cn/html/qqhr/col901/column_901_1.html");
         //button11.setUrl("http://hw8tp4.natappfree.cc/index.html");
         //注意链接不要少了https://  否则会报错40055
 

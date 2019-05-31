@@ -7,7 +7,6 @@ package com.gjl.weixin.entity;
  * @Return:
  * @Create Date:
  * @Version: V1.00
- * @author: 来日可期
  */
 public class Article {
     //图文消息名称

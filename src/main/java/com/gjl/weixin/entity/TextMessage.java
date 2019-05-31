@@ -7,7 +7,7 @@ package com.gjl.weixin.entity;
  * @Return:
  * @Create Date:
  * @Version: V1.00
- * @author: 来日可期
+
  */
 public class TextMessage extends BaseMessage{
     //回复的消息内容

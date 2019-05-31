@@ -91,19 +91,19 @@ public class WeixinServiceImpl implements WeiXinService {
                    switch (content){
                        case "1":{
                            StringBuffer buffer = new StringBuffer();
-                           buffer.append("您好，我是小8，请回复数字选择服务：").append("\n\n");
-                           buffer.append("11 可查看测试单图文").append("\n");
-                           buffer.append("12  可测试多图文发送").append("\n");
-                           buffer.append("13  可测试网址").append("\n");
-                           buffer.append("或者您可以尝试发送表情").append("\n\n");
+                           buffer.append("您好，我是小宝，请回复数字选择服务：").append("\n\n");
+                           buffer.append("11  问卷调查步骤").append("\n");
+                           buffer.append("22  投诉步骤").append("\n");
+                           buffer.append("33  百度访问链接").append("\n");
+                           buffer.append("还可发送表情试试哦！").append("\n");
                            buffer.append("回复“1”显示此帮助菜单").append("\n");
                            respContent = String.valueOf(buffer);
                            textMessage.setContent(respContent);
                            respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
                            break;
                        }
-                       case "11":{
-                           Article article = new Article();
+                       case "22":{
+                           /*Article article = new Article();
                            article.setTitle("微信公众帐号开发教程Java版");
                            article.setDescription("这是测试有没有换行\n\n如果有空行就代表换行成功\n\n点击图文可以跳转到百度首页");
                            // 将图片置为空
@@ -113,38 +113,32 @@ public class WeixinServiceImpl implements WeiXinService {
                            newsMessage.setArticleCount(articleList.size());
                            newsMessage.setArticles(articleList);
                            respMessage = WeixinMessageUtil.newsMessageToXml(newsMessage);
+                           break;*/
+                           StringBuffer buffer = new StringBuffer();
+                           buffer.append("投诉").append("\n\n");
+                           buffer.append("1. 点击功能列表菜单").append("\n");
+                           buffer.append("2. 点击菜单里面“投诉”按钮").append("\n");
+                           buffer.append("3. 根据提示登录后即可进行投诉").append("\n");
+                           buffer.append("4. 用户名，密码均有您所在企业提供，如不清楚请联系自己的老师").append("\n");
+                           buffer.append("回复“1”显示此帮助菜单").append("\n");
+                           respContent = String.valueOf(buffer);
+                           textMessage.setContent(respContent);
+                           respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
+                       }
+                       case "11":{
+                           StringBuffer buffer = new StringBuffer();
+                           buffer.append("问卷调查").append("\n\n");
+                           buffer.append("1. 点击功能列表菜单").append("\n");
+                           buffer.append("2. 点击菜单里面“调查问卷”按钮").append("\n");
+                           buffer.append("3. 根据提示登录后即可参与问卷评价").append("\n");
+                           buffer.append("4. 用户名，密码均有您所在企业提供，如不清楚请联系自己的老师").append("\n");
+                           buffer.append("回复“1”显示此帮助菜单").append("\n");
+                           respContent = String.valueOf(buffer);
+                           textMessage.setContent(respContent);
+                           respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
                            break;
                        }
-                       case "12":{
-                           //多图文发送
-                           /*Article article1 = new Article();
-                           article1.setTitle("紧急通知，不要捡这种钱！湛江都已经传疯了！\n");
-                           article1.setDescription("");
-                           article1.setPicUrl("http://www.sinaimg.cn/dy/slidenews/31_img/2016_38/28380_733695_698372.jpg");
-                           article1.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5Njc2OTI4NQ==&mid=2650924309&idx=1&sn=8bb6ae54d6396c1faa9182a96f30b225&chksm=bd117e7f8a66f769dc886d38ca2d4e4e675c55e6a5e01e768b383f5859e09384e485da7bed98&scene=4#wechat_redirect");
-                           */
-                           Article article2 = new Article();
-                           article2.setTitle("dfzrtsfgjr");
-                           article2.setDescription("");
-                           article2.setPicUrl("http://www.sinaimg.cn/dy/slidenews/31_img/2016_38/28380_733695_698372.jpg");
-                           article2.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5Njc2OTI4NQ==&mid=2650924309&idx=2&sn=d7ffc840c7e6d91b0a1c886b16797ee9&chksm=bd117e7f8a66f7698d094c2771a1114853b97dab9c172897c3f9f982eacb6619fba5e6675ea3&scene=4#wechat_redirect");
-                           Article article3 = new Article();
-                           article3.setTitle("湛江谁有这种女儿，请给我来一打！");
-                           article3.setDescription("");
-                           article3.setPicUrl("http://www.sinaimg.cn/dy/slidenews/31_img/2016_38/28380_733695_698372.jpg");
-                           article3.setUrl("http://baidu.com");
-
-                           //articleList.add(article1);
-                           //articleList.add(article2);
-                           articleList.add(article3);
-                           int a=articleList.size();
-                           newsMessage.setArticleCount(articleList.size());
-                           newsMessage.setArticles(articleList);
-                           System.out.println(newsMessage);
-                           respMessage = WeixinMessageUtil.newsMessageToXml(newsMessage);
-                           break;
-                       }
-                       case "13": {
+                       case "33": {
                            //测试网址回复
                            respContent = "<a href=\"http://www.baidu.com\">百度主页</a>";
                            textMessage.setContent(respContent);
@@ -152,7 +146,7 @@ public class WeixinServiceImpl implements WeiXinService {
                            respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
                            break;
                        } default: {
-                           respContent = "（这是里面的）很抱歉，现在小8暂时无法提供此功能给您使用。\n\n回复“1”显示帮助信息";
+                           respContent = "非常抱歉，现在“小宝”暂时无法为您解答。\n\n回复“1”显示帮助信息";
                            textMessage.setContent(respContent);
                            // 将文本消息对象转换成xml字符串
                            respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
@@ -160,27 +154,33 @@ public class WeixinServiceImpl implements WeiXinService {
                    }
                }
            }else if (msgType.equals(WeixinMessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
-               respContent = "您发送的是图片消息！";
+               respContent = "您发送图片消息真是美极啦！";
                textMessage.setContent(respContent);
                // 将文本消息对象转换成xml字符串
                respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
            }
            // 地理位置消息
             else if (msgType.equals(WeixinMessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
-                respContent = "您发送的是地理位置消息！";
+                respContent = "您发送地理位置真是宝地呀！";
                 textMessage.setContent(respContent);
                 // 将文本消息对象转换成xml字符串
                 respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
             }
            // 链接消息
            else if (msgType.equals(WeixinMessageUtil.REQ_MESSAGE_TYPE_LINK)) {
-               respContent = "您发送的是链接消息！";textMessage.setContent(respContent);
+               respContent = "您发送的是链接消息，小宝会留意的！";textMessage.setContent(respContent);
                // 将文本消息对象转换成xml字符串
                respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
            }
            // 音频消息
            else if (msgType.equals(WeixinMessageUtil.REQ_MESSAGE_TYPE_VOICE)) {
-               respContent = "您发送的是音频消息！";
+               respContent = "您的音频消息！小宝听见啦，您的声音真好听！";
+               textMessage.setContent(respContent);
+               // 将文本消息对象转换成xml字符串
+               respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
+           }
+           else if (msgType.equals(WeixinMessageUtil.REQ_MESSAGE_TYPE_VIDEO)) {
+               respContent = "您的视频消息！小宝看见啦，里面的故事真好看！";
                textMessage.setContent(respContent);
                // 将文本消息对象转换成xml字符串
                respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
@@ -191,15 +191,45 @@ public class WeixinServiceImpl implements WeiXinService {
         return respMessage;
     }
 
-    public static boolean isQqFace(String content){
-        boolean result = false;
-        // 判断QQ表情的正则表达式
-        String qqfaceRegex = "/::\\)|/::~|/::B|/::\\||/:8-\\)|/::<|/::$|/::X|/::Z|/::'\\(|/::-\\||/::@|/::P|/::D|/::O|/::\\(|/::\\+|/:--b|/::Q|/::T|/:,@P|/:,@-D|/::d|/:,@o|/::g|/:\\|-\\)|/::!|/::L|/::>|/::,@|/:,@f|/::-S|/:\\?|/:,@x|/:,@@|/::8|/:,@!|/:!!!|/:xx|/:bye|/:wipe|/:dig|/:handclap|/:&-\\(|/:B-\\)|/:<@|/:@>|/::-O|/:>-\\||/:P-\\(|/::'\\||/:X-\\)|/::\\*|/:@x|/:8\\*|/:pd|/:<W>|/:beer|/:basketb|/:oo|/:coffee|/:eat|/:pig|/:rose|/:fade|/:showlove|/:heart|/:break|/:cake|/:li|/:bome|/:kn|/:footb|/:ladybug|/:shit|/:moon|/:sun|/:gift|/:hug|/:strong|/:weak|/:share|/:v|/:@\\)|/:jj|/:@@|/:bad|/:lvu|/:no|/:ok|/:love|/:<L>|/:jump|/:shake|/:<O>|/:circle|/:kotow|/:turn|/:skip|/:oY|/:#-0|/:hiphot|/:kiss|/:<&|/:&>";
-        Pattern p = Pattern.compile(qqfaceRegex);
-        Matcher m = p.matcher(content);
-        if (m.matches()) {
-            result = true;
+    public static boolean isQqFace(String source){
+        if(source.contains("::")){
+            return true;
         }
-        return result;
+        int len = source.length();
+        boolean isEmoji = false;
+        for (int i = 0; i < len; i++) {
+            char hs = source.charAt(i);
+            if (0xd800 <= hs && hs <= 0xdbff) {
+                if (source.length() > 1) {
+                    char ls = source.charAt(i + 1);
+                    int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
+                    if (0x1d000 <= uc && uc <= 0x1f77f) {
+                        return true;
+                    }
+                }
+            } else {
+                // non surrogate
+                if (0x2100 <= hs && hs <= 0x27ff && hs != 0x263b) {
+                    return true;
+                } else if (0x2B05 <= hs && hs <= 0x2b07) {
+                    return true;
+                } else if (0x2934 <= hs && hs <= 0x2935) {
+                    return true;
+                } else if (0x3297 <= hs && hs <= 0x3299) {
+                    return true;
+                } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d
+                        || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c
+                        || hs == 0x2b1b || hs == 0x2b50 || hs == 0x231a) {
+                    return true;
+                }
+                if (!isEmoji && source.length() > 1 && i < source.length() - 1) {
+                    char ls = source.charAt(i + 1);
+                    if (ls == 0x20e3) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return isEmoji;
     }
 }

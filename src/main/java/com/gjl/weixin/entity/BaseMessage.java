@@ -7,7 +7,7 @@ package com.gjl.weixin.entity;
  * @Return:
  * @Create Date:
  * @Version: V1.00
- * @author: 来日可期
+ * @author: WilliamJL
  */
 public class BaseMessage {
     //接收方账号(收到的OpenID)

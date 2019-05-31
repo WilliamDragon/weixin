@@ -25,11 +25,10 @@ import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 /**
- * <p>Company: B505信息技术研究所 </p>
+ *
  * @Description: 封装微信消息类型，有一个解析xml格式的工具
  * @Create Date:
  * @Version: V1.00
- * @Author: 来日可期
  */
 @Component
 public class WeixinMessageUtil {
@@ -52,7 +51,7 @@ public class WeixinMessageUtil {
     /**
      * 请求消息类型：视频
      */
-    public final String REQ_MESSAGE_TYPE_VIDEO="video";
+    public static final String REQ_MESSAGE_TYPE_VIDEO="video";
 
     /**
      * 请求消息类型：链接
