@@ -70,6 +70,9 @@
                     "employeeId": employeeId
                 },
                 success:function(res){
+                    if(res.code == 1){
+                        alert(res.msg);
+                    }
                     var str="";
                     var data=res.data.list;
                     var pageSize=res.data.pages;
@@ -121,6 +124,9 @@
                                     'pageNum': api.getCurrent()
                                 },
                                 success:function(res){
+                                    if(res.code == 1){
+                                        alert(res.msg);
+                                    }
                                     var str="";
                                     var data=res.data.list;
                                     var pageSize=res.data.pages;
@@ -189,6 +195,9 @@
                 url:"http://127.0.0.1/student/findAll2",
                 dataType:"json",
                 success:function(res){
+                    if(res.code == 1){
+                        alert(res.msg);
+                    }
                     var str="";
                     var data=res.data.list;
                     var pageSize=res.data.pages;
@@ -237,6 +246,9 @@
                                     'pageNum': api.getCurrent()
                                 },
                                 success:function(res){
+                                    if(res.code == 1){
+                                        alert(res.msg);
+                                    }
                                     var str="";
                                     var data=res.data.list;
                                     var pageSize=res.data.pages;
@@ -354,14 +366,6 @@
 <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 
 
-<!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
-<!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
-<!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
-<!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-
-<!--<![endif]-->
-
 <div class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -379,17 +383,6 @@
                     <span>欢迎来到电力评价系统！</span>
                     <i class="fa fa-caret-down"></i>
                 </a>
-
-                <ul class="dropdown-menu">
-                    <li><a href="./">My Account</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Admin Panel</li>
-                    <li><a href="./">Users</a></li>
-                    <li><a href="./">Security</a></li>
-                    <li><a tabindex="-1" href="./">Payments</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" href="sign-in.html">Logout</a></li>
-                </ul>
             </li>
         </ul>
 

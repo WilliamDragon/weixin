@@ -49,6 +49,9 @@
                 "pxclassName": pxclassName,
             },
             success:function(data){
+                if(data.code == 1){
+                    alert(data.msg);
+                }
                 window.location.href="/users.html";
             },
             complete : function(xhr, status) {
@@ -133,7 +136,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="" href="index.html"><span class="navbar-brand"><span class="fa fa-paper-plane"></span> Aircraft</span></a></div>
+        <a class="" href="index.html"><span class="navbar-brand"><span class="fa fa-paper-plane"></span> 电力评价系统</span></a></div>
 
     <div class="navbar-collapse collapse" style="height: 1px;">
         <ul id="main-menu" class="nav navbar-nav navbar-right">

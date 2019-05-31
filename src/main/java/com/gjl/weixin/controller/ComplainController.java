@@ -41,6 +41,7 @@ public class ComplainController {
             return R.error("用户未登录");
         }
         complain.setUserId(userInfo.getId().toString());
+        complain.setComplainVideo("0");
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         complain.setComplainTime(date);
         int i=complainMapper.insert(complain);

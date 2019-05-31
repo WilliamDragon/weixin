@@ -35,12 +35,12 @@ public class MsgUtil {
         ViewButton button31 = new ViewButton();
         button31.setName("调查问卷");
         button31.setType("view");
-        button31.setUrl("http://9nmrfp.natappfree.cc/indexlogin.html");
+        button31.setUrl("http://zer2wr.natappfree.cc/indexlogin.html");
         ViewButton button33 = new ViewButton();
         //注意按钮名字不要太长，不然会报40018错误
         button33.setName("投诉");
         button33.setType("view");
-        button33.setUrl("http://9nmrfp.natappfree.cc/complain.html");
+        button33.setUrl("http://zer2wr.natappfree.cc/complain.html");
 
 
         Button button = new Button();

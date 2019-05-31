@@ -96,7 +96,7 @@ public class StudentController {
         if(list1.size()>0){
             return R.ok(pageInfo);
         }
-        return R.error("用户名或密码错误");
+        return R.error("没有找到您的关键字");
     }
 
     //查询所以用户
@@ -119,7 +119,7 @@ public class StudentController {
         if(list1.size()>0){
             return R.ok(pageInfo);
         }
-        return R.error("用户名或密码错误");
+        return R.error("没有找到您的关键字");
     }
     @GetMapping("/findStudentById")
     public R findStudentById(String id){
@@ -128,7 +128,7 @@ public class StudentController {
         if(collect.size()>0){
             return R.ok(collect);
         }
-        return R.error("用户名或密码错误");
+        return R.error("没有找到您的关键字");
     }
 
 
@@ -136,6 +136,9 @@ public class StudentController {
     @GetMapping("/save")
     public R save(Student student, String className){
         List<Pxclass> list = pxclassMapper.findPxclassByName(className);
+        if(list.size()==0){
+            return R.error("您所添培训项目名称不存在");
+        }
         Long id=list.get(0).getId();
         student.setPxclassId(id);
         System.out.println(student);

@@ -34,6 +34,9 @@
                     "id": obj
                 },
                 success:function(data){
+                    if(data.code == 1){
+                        alert(res.msg);
+                    }
                     window.location.href="/statistic.html";
                 },
                 complete : function(xhr, status) {
@@ -72,6 +75,9 @@
                     "teachePerson": teachePerson
                 },
                 success:function(res){
+                    if(res.code == 1){
+                        alert(res.msg);
+                    }
                     var str="";
                     var data=res.data.list;
                     var pageSize=res.data.pages;
@@ -116,6 +122,9 @@
                                     'pageNum': api.getCurrent()
                                 },
                                 success:function(res){
+                                    if(res.code == 1){
+                                        alert(res.msg);
+                                    }
                                     var str="";
                                     var data=res.data.list;
                                     var pageSize=res.data.pages;
@@ -174,6 +183,9 @@
                 url:"http://127.0.0.1/pxclass/findAll",
                 dataType:"json",
                 success:function(res){
+                    if(res.code == 1){
+                        alert(res.msg);
+                    }
                     var str="";
                     var data=res.data.list;
                     var pageSize=res.data.pages;
@@ -214,6 +226,9 @@
                                     'pageNum': api.getCurrent()
                                 },
                                 success:function(res){
+                                    if(res.code == 1){
+                                        alert(res.msg);
+                                    }
                                     var str="";
                                     var data=res.data.list;
                                     var pageSize=res.data.pages;

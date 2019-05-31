@@ -59,6 +59,9 @@
                     "pxclassId": pxclassId
                 },
                 success:function(data){
+                    if(data.code == 1){
+                        alert(data.msg);
+                    }
                     window.location.href="/users.html";
                 },
                 complete : function(xhr, status) {
