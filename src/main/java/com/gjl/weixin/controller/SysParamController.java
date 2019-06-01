@@ -110,4 +110,14 @@ public class SysParamController {
         }
         return R.error(GlobalError.ERROR_SYS_PARAM);
     }
+
+    @RequestMapping("/findSysParamByCode")
+    public R findSysParamByCode(String sysCode){
+        logger.debug("进入 findSysParamById 方法");
+        List<SysParam> list = sysParamMapper.findSysParamByCode(sysCode);
+        if(list.size()>0){
+            return R.ok(list);
+        }
+        return R.error(GlobalError.ERROR_EVALUATE_DATA);
+    }
 }

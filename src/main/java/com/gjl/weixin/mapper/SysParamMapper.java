@@ -30,4 +30,6 @@ public interface SysParamMapper {
     SysParam findSysParamByName(String sysName);
 
     List<SysParam> findAllSysParam(SysParam sysParam);
+    @Select("select * from sysParam where sysCode = #{sysCode} and sysValue = 1 and enabled = 1")
+    List<SysParam> findSysParamByCode(String sysCode);
 }

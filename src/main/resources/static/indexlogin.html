@@ -25,7 +25,7 @@
             $("#login").click(function(){
                 var userName=$('#userName').val();
                 var password=$('#password').val();
-                var address = 'http://zer2wr.natappfree.cc';
+                var address = 'http://xyt5iw.natappfree.cc';
                 $.ajax({
                     type:"POST",
                     url: address + '/student/login',
@@ -40,13 +40,14 @@
                     },
                     success:function(data){
                         if(data.code==0){
-                            window.location.href="success.html";
+                            alert("登录成功请返回主界面进行其他操作！");
+                            /*window.location.href="success.html";*/
                         }else{
                             alert("用户名或密码错误");
                         }
                     },
                     error:function(jqXHR){
-                        alert("走的error接口");
+                        alert("服务器异常请耐心等待");
                         console.log("Error1: "+jqXHR.status);
                     }
                 });

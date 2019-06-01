@@ -124,6 +124,7 @@ public class WeixinServiceImpl implements WeiXinService {
                            respContent = String.valueOf(buffer);
                            textMessage.setContent(respContent);
                            respMessage = WeixinMessageUtil.textMessageToXml(textMessage);
+                           break;
                        }
                        case "11":{
                            StringBuffer buffer = new StringBuffer();

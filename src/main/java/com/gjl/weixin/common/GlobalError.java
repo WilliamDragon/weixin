@@ -14,5 +14,7 @@ public class GlobalError {
     public static final String ERROR_SCH_TASK = "定时任务未开启";
     /** 投诉表中无数据*/
     public static final String ERROR_COMPLAIN_DATA = "投诉表中无数据";
+    /** 评价时间未开启*/
+    public static final String ERROR_EVALUATE_DATA = "评价时间未开启";
 
 }

@@ -185,12 +185,21 @@ public class StudentController {
     //批量插入用户调查问卷
     @Autowired
     private StatisticMapper statisticMapper;
+    @Autowired
+    private SysParamController sysParamController;
     @GetMapping("/questionCount")
     public R questionCount(QuestionnaireDto questionnaireDto, HttpServletRequest request){
 
+        R s = sysParamController.findSysParamByCode(GlobalContext.SYS_SEND_QUESTION);
+        if(s.getCode() == 1){
+            return s;
+        }
         HttpSession session=request.getSession();
         //查询当前用户信息
         Student userInfo = (Student)session.getAttribute("userInfo");
+        if(userInfo == null){
+            return R.error("用户未登录");
+        }
         if(globalCache.get(userInfo.geteName()) == globalContext.CACHE_EXIST){
             return R.error(globalContext.SUBMIT_MORE_OFF);
         }
