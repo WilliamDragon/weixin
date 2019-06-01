@@ -1,7 +1,6 @@
 package com.gjl.weixin.controller;
 
 import com.gjl.weixin.entity.AccessToken;
-import com.gjl.weixin.service.impl.WeixinServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,7 @@ public class AccessTokenThread {
     @Scheduled(fixedDelay = 2*3600*1000)
     public void getToken(){
 
-        String getToken=weChatController.getAccessToken();
+        String getToken= WeChatController.getAccessToken();
         if(null!= accessToken){
             accessToken.setAccess_token(getToken);
             System.out.println("执行完毕");

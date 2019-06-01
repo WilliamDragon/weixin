@@ -2,12 +2,9 @@ package com.gjl.weixin.controller;
 
 import com.gjl.weixin.entity.AccessToken;
 import com.gjl.weixin.entity.Article;
-import com.gjl.weixin.entity.User;
-import com.gjl.weixin.entity.WeixinUser;
 import com.gjl.weixin.entity.news.BaseNews;
 import com.gjl.weixin.entity.news.Gkfnews;
 import com.gjl.weixin.service.WeiXinService;
-import com.gjl.weixin.service.impl.WeixinServiceImpl;
 import com.gjl.weixin.utils.HttpUtil;
 import com.gjl.weixin.utils.R;
 import net.sf.json.JSONException;
@@ -20,39 +17,30 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import weixin.popular.api.*;
-import weixin.popular.bean.media.Media;
-import weixin.popular.bean.media.MediaType;
-import weixin.popular.bean.menu.Button;
-import weixin.popular.bean.menu.MenuButtons;
 import weixin.popular.bean.message.MessageSendResult;
 import weixin.popular.bean.message.massmessage.Filter;
-import weixin.popular.bean.message.massmessage.MassImageMessage;
 import weixin.popular.bean.message.massmessage.MassTextMessage;
-import weixin.popular.bean.message.message.Message;
 import weixin.popular.bean.user.FollowResult;
 import weixin.popular.bean.user.Group;
 import weixin.popular.client.LocalHttpClient;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Controller
-public class weChatController {
+public class WeChatController {
 
-    private static Logger logger = Logger.getLogger(weChatController.class);
+    private static Logger logger = Logger.getLogger(WeChatController.class);
     @Autowired
     private WeiXinService weiXinService;
     /**
@@ -170,7 +158,7 @@ public class weChatController {
     public R push(String pushNew) {
         System.out.println(pushNew);
         String token=AccessTokenThread.accessToken.getAccess_token();
-        List<String> list = weChatController.getUser(null);
+        List<String> list = WeChatController.getUser(null);
         // 获取分组ID
         Group group = UserAPI.groupsGet(token);
         String gid = group.getGroups().get(3).getId();
@@ -204,7 +192,7 @@ public class weChatController {
 //        imageMessage.setTouser(new HashSet<String>());
 //        imageMessage.getTouser().add("oH1rG05E7jSojVGkgKHEoIWmgCZA");
 //        MessageAPI.messageMassSend(token,imageMessage);
-        List<String> list = weChatController.getUser(null);
+        List<String> list = WeChatController.getUser(null);
         String getkfnews = getkfnews(list.get(0));
         System.out.println(getkfnews);
         String getkfnews1 = getkfnews(getkfnews);

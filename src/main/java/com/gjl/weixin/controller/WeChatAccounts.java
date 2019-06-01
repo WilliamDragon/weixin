@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 @Controller
-public class weChatAccounts {
+public class WeChatAccounts {
 
     private final String TOKEN = "guojinlong";
     @RequestMapping(value = "/weChatConnect",method = RequestMethod.GET)

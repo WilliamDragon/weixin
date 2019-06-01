@@ -50,7 +50,7 @@
             &lt;!&ndash;<columnRenamingRule searchString="^D_"
                                 replaceString=""/>&ndash;&gt;
         </table>-->
-        <table tableName="scheduledtask" domainObjectName="ScheduledTask"
+        <table tableName="notice" domainObjectName="Notice"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
