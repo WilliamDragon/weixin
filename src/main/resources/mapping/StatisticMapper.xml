@@ -62,8 +62,16 @@
   </insert>
 
   <select id="findStatisticByGroupPxclass" resultMap="BaseResultMap">
-    select question_id,answer from statistic s join pxclass p on  s.pxclass_id=p.id and p.class_name=#{className}
+    select question_id,answer from statistic s join pxclass p on  s.pxclass_id=p.id
+    and p.class_name=#{className}
   </select>
+
+  <select id="findStatisticByGroupPxclassTime" resultMap="BaseResultMap">
+    select question_id,answer from statistic s join pxclass p on  s.pxclass_id=p.id
+    and p.class_name=#{className}
+    and create_time BETWEEN #{createTime} and #{endTime};
+  </select>
+
 
   <insert id="insertByBatch" parameterType="java.util.List">
     insert into statistic (create_time,student_id,pxclass_id,question_id,answer) values

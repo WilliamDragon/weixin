@@ -24,4 +24,10 @@ public class StatisticServiceImpl implements StatisticService {
 
         return statisticMapper.findTotalByClassName();
     }
+
+    @Override
+    public List<Statistic> findStatisticByGroupPxclassTime(String className, String createTime, String endTime) {
+        List<Statistic> list=statisticMapper.findStatisticByGroupPxclassTime(className,createTime,endTime);
+        return list;
+    }
 }

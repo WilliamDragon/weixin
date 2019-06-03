@@ -26,19 +26,23 @@
     <script>
 
         function portPxclass(obj){
+            var createTime=$("#createTime").val();
+            var endTime=$("#endTime").val();
             $.ajax({
                 type:"POST",
                 url:"http://127.0.0.1/count",
                 dataType:"json",
                 data: {
-                    "id": obj
+                    "id": obj,
+                    "createTime": createTime,
+                    "endTime": endTime
                 },
                 success:function(data){
                     if(data.code = 0){
                         alert("导出成功");
                         window.location.href="/exportStatistic.html";
                     }else{
-                        alert("导出失败");
+                        alert(data.msg);
                     }
 
                 },
@@ -402,6 +406,10 @@
             <span ><b>项目名称:</b></span>
             <input type="text" id="className" style="width:100px;height:34px;float: none/*! margin-top:-14px; */">
             <a href="javascript:void(0);"  onclick="findAllPxclassByCondition()" class="btn btn-default">查询</a>
+            <span ><b>统计开始时间:</b></span>
+            <input type="text" id="createTime"  style="width:100px;height:34px;float: none/*! margin-top:-14px; */" placeholder="2019-02-01">
+            <span ><b>统计结束时间:</b></span>
+            <input type="text" id="endTime" style="width:100px;height:34px;float: none/*! margin-top:-14px; */" placeholder="2019-03-01">
             <div class="btn-group">
             </div>
         </div>

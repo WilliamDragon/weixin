@@ -51,8 +51,10 @@
             success:function(data){
                 if(data.code == 1){
                     alert(data.msg);
+                }else{
+                    window.location.href="/users.html";
                 }
-                window.location.href="/users.html";
+
             },
             complete : function(xhr, status) {
                 //拦截器实现超时跳转到登录页面

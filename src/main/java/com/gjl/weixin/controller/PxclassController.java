@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.gjl.weixin.entity.Pxclass;
 import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.mapper.PxclassMapper;
+import com.gjl.weixin.utils.DataUtil;
 import com.gjl.weixin.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +69,23 @@ public class PxclassController {
     }
     @RequestMapping("/insert")
     public R insert(Pxclass pxclass){
+        if(pxclass.getClassName()== null || pxclass.getCategory()==null|| pxclass.getDay()==null
+                || pxclass.getNumber()==null
+                || pxclass.getProfessionPerson()==null
+                || pxclass.getClassPerson()==null){
+            return R.error("有没有添加的内容，请重新填写");
+        }
+        if(pxclass.getStartTime() !=null&& pxclass.getEndTime() != null){
+            Boolean isValidCreateTime = DataUtil.isValidDate(pxclass.getStartTime());
+            Boolean isValidEndTime = DataUtil.isValidDate(pxclass.getEndTime());
+            if(!isValidCreateTime||!isValidEndTime){
+                return R.error("日期格式不对");
+            }
+            if(!DataUtil.isBefore(pxclass.getStartTime(),pxclass.getEndTime())){
+                return R.error("开始时间在结束时间之前");
+            }
+        }
+
         //Pxclass pxclass = new Pxclass();
         int i= pxclassMapper.insertSelective(pxclass);
         if(i>0){
@@ -87,6 +105,16 @@ public class PxclassController {
 
     @RequestMapping("/save")
     public R save(Pxclass pxclass){
+        if(pxclass.getStartTime() !=null&& pxclass.getEndTime() != null){
+            Boolean isValidCreateTime = DataUtil.isValidDate(pxclass.getStartTime());
+            Boolean isValidEndTime = DataUtil.isValidDate(pxclass.getEndTime());
+            if(!isValidCreateTime||!isValidEndTime){
+                return R.error("日期格式不对");
+            }
+            if(!DataUtil.isBefore(pxclass.getStartTime(),pxclass.getEndTime())){
+                return R.error("开始时间在结束时间之前");
+            }
+        }
         logger.debug("进入 save 方法");
         int list = pxclassMapper.save(pxclass);
         if(list>0){

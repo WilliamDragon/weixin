@@ -16,6 +16,8 @@ public interface StatisticMapper {
     //@Select("select question_id,answer from statistic s join pxclass p on  s.pxclass_id=p.id and p.class_name=#{className}")
     List<Statistic> findStatisticByGroupPxclass(@Param("className") String className);
 
+    List<Statistic> findStatisticByGroupPxclassTime(@Param("className") String className,@Param("createTime") String createTime,@Param("endTime") String endTime);
+
     int insertByBatch(List<Statistic> list);
 
     @Select("select count(*) from statistic ")

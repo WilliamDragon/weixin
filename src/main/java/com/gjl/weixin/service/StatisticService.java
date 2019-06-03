@@ -10,4 +10,6 @@ public interface StatisticService {
     public List<Statistic> findStatisticByGroupPxclass(String className);
 
     int  findTotalByClassName();
+
+    List<Statistic> findStatisticByGroupPxclassTime(String className, String createTime, String endTime);
 }
