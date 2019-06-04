@@ -169,8 +169,13 @@ public class WeChatController {
         MassTextMessage textMessage = new MassTextMessage(pushNew);
         //设置分组
         textMessage.setFilter(new Filter(false,gid));
-        MessageAPI.messageMassSendall(token, textMessage);
-        return R.ok();
+        //MessageAPI.messageMassSendall(token, textMessage);
+
+        MessageSendResult messageSendResult = MessageAPI.messageMassSendall(token, textMessage);
+        if(messageSendResult.getErrcode().equals("0")){
+            return R.ok();
+        }
+        return R.error("发送未成功，请联系管理员");
     }
 
     @RequestMapping(value = "/pushNews",method = RequestMethod.POST)

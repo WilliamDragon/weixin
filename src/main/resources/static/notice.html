@@ -35,10 +35,10 @@
                     "noticeSpare": noticeSpare
                 },
                 success:function(data){
-                    if(data.code == 1){
-                        alert("发送失败");
-                    }else{
+                    if(data.code == 0){
                         alert("发送成功");
+                    }else{
+                        alert(data.msg);
                     }
                 },
                 complete : function(xhr, status) {

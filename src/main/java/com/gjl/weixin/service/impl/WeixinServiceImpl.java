@@ -40,11 +40,11 @@ public class WeixinServiceImpl implements WeiXinService {
         JSONObject result = HttpUtil.doPoststr(url,menu);
         if("ok".equals(result.getString("errmsg"))){
             //logger.info("添加菜单结果：{}", result);
-            System.out.println("true添加菜单结果：{}"+result);
+            System.out.println("true add menu result：{}"+result);
             return true;
         }
         //logger.info("添加菜单结果：{}", result);
-        System.out.println("false添加菜单结果：{}"+result);
+        System.out.println("falseadd menu result：{}"+result);
         return false;
     }
 
