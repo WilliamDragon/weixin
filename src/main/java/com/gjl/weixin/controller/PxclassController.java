@@ -7,6 +7,7 @@ import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.mapper.PxclassMapper;
 import com.gjl.weixin.utils.DataUtil;
 import com.gjl.weixin.utils.R;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,10 +70,18 @@ public class PxclassController {
     }
     @RequestMapping("/insert")
     public R insert(Pxclass pxclass){
-        if(pxclass.getClassName()== null || pxclass.getCategory()==null|| pxclass.getDay()==null
-                || pxclass.getNumber()==null
-                || pxclass.getProfessionPerson()==null
-                || pxclass.getClassPerson()==null){
+        if(pxclass.getClassName().trim()== null
+                || pxclass.getCategory().trim()==null
+                || pxclass.getDay().trim()==null
+                || pxclass.getNumber().trim()==null
+                || pxclass.getProfessionPerson().trim()==null
+                || pxclass.getClassPerson().trim()==null
+                ||pxclass.getClassName().trim() == ""
+                || pxclass.getCategory().trim()==""
+                || pxclass.getDay().trim()==""
+                || pxclass.getNumber().trim()==""
+                || pxclass.getProfessionPerson().trim()==""
+                || pxclass.getClassPerson().trim()==""){
             return R.error("有没有添加的内容，请重新填写");
         }
         if(pxclass.getStartTime() !=null&& pxclass.getEndTime() != null){
@@ -83,6 +92,9 @@ public class PxclassController {
             }
             if(!DataUtil.isBefore(pxclass.getStartTime(),pxclass.getEndTime())){
                 return R.error("开始时间在结束时间之前");
+            }
+            if(!pxclass.getDay() .equals(DataUtil.Cdate(pxclass.getEndTime(),pxclass.getStartTime()))){
+                return R.error("日期天数计算错误");
             }
         }
 
@@ -105,6 +117,20 @@ public class PxclassController {
 
     @RequestMapping("/save")
     public R save(Pxclass pxclass){
+        if(pxclass.getClassName().trim()== null
+                || pxclass.getCategory().trim()==null
+                || pxclass.getDay().trim()==null
+                || pxclass.getNumber().trim()==null
+                || pxclass.getProfessionPerson().trim()==null
+                || pxclass.getClassPerson().trim()==null
+                ||pxclass.getClassName().trim() == ""
+                || pxclass.getCategory().trim()==""
+                || pxclass.getDay().trim()==""
+                || pxclass.getNumber().trim()==""
+                || pxclass.getProfessionPerson().trim()==""
+                || pxclass.getClassPerson().trim()==""){
+            return R.error("有没有添加的内容，请重新填写");
+        }
         if(pxclass.getStartTime() !=null&& pxclass.getEndTime() != null){
             Boolean isValidCreateTime = DataUtil.isValidDate(pxclass.getStartTime());
             Boolean isValidEndTime = DataUtil.isValidDate(pxclass.getEndTime());
@@ -113,6 +139,9 @@ public class PxclassController {
             }
             if(!DataUtil.isBefore(pxclass.getStartTime(),pxclass.getEndTime())){
                 return R.error("开始时间在结束时间之前");
+            }
+            if(!pxclass.getDay() .equals(DataUtil.Cdate(pxclass.getEndTime(),pxclass.getStartTime()))){
+                return R.error("日期天数计算错误");
             }
         }
         logger.debug("进入 save 方法");

@@ -62,7 +62,7 @@ public class NoticeController {
             }
             String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
             notice.setNoticeDate(date);
-            notice.setNoticeContent(notice.getNoticeContent());
+            notice.setNoticeContent(notice.getNoticeSpare());
             int i=noticeMapper.insert(notice);
             if( i>0 ){
                 return R.ok();

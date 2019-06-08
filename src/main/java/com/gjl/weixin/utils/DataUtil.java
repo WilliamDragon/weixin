@@ -36,4 +36,17 @@ public class DataUtil {
         }
         return convertSuccess;
     }
+
+    public static String  Cdate(String time1, String time2){
+        int days = 0;
+        try {
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+            Date date1 = format.parse(time1);
+            Date date2 = format.parse(time2);
+            days=(int)(date2.getTime()-date1.getTime())/(1000*3600*24);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return String.valueOf(Math.abs(days));
+    }
 }

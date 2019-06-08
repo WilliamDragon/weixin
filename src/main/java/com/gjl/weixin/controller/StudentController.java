@@ -168,6 +168,9 @@ public class StudentController {
         if(findByCardId(student.getCardId())){
             return R.error("用户已存在");
         }
+        if(!(student.geteSex().equals("男")||student.geteSex().equals("女"))){
+            return R.error("用户性别不规范");
+        }
        List<Pxclass> list = pxclassMapper.findPxclassByName(pxclassName);
         if(list.size()==0){
             return R.error("培训班不存在");

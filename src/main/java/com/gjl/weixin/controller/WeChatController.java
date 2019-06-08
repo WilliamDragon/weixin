@@ -63,6 +63,7 @@ public class WeChatController {
         String appid="wxd1a25bf4be87e6cb";
         String appsecret="98c66119ec6799fb89b0893b72c6271c";
         String requestUrl = ACCESS_TOKEN_URL.replace("APPID", appid).replace("APPSECRET", appsecret);
+        //String requestUrl = ACCESS_TOKEN_URL.replace("APPID", appidreal).replace("APPSECRET", appsecretreal);
         JSONObject jsonObject = HttpUtil.doGetstr(requestUrl);
         if (null != jsonObject) {
             try {
@@ -87,6 +88,7 @@ public class WeChatController {
      */
     @Scheduled(fixedDelay = 10*60*1000)
     @RequestMapping(value="/menuAdd",method= RequestMethod.POST)
+    @ResponseBody
     public String menuAdd(){
         boolean b = weiXinService.menuAdd();
         if (b) {
