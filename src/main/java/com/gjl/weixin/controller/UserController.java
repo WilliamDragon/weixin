@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -45,8 +46,22 @@ public class UserController {
     }
 
     @RequestMapping("/save")
-    public R save(User user){
+    public R save(User user, HttpServletRequest request){
         logger.debug("进入 save 方法");
+        HttpSession session=request.getSession();
+        List<User> all = userMapper.findAll();
+        List<User> collect = all.stream().filter(x -> (
+                String.valueOf(x.getId()).equals(user.getId().toString())
+        )).collect(Collectors.toList());
+        if(!user.getStatus().equals(collect.get(0).getStatus())){
+            User userInfo =(User) session.getAttribute("userInfo");
+            if(!userInfo.getLoginName().equals("111")){
+                return R.error("您没有权限修改状态，请联系超级管理员");
+            }
+        }
+
+        String str = MD5Util.getMD5Code(user.getPassword()+"guojinlong");
+        user.setPassword(str);
         int list = userMapper.save(user);
         if(list>0){
             return R.ok(list);
@@ -131,7 +146,8 @@ public class UserController {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type");
-        List<User> list=userMapper.login(userName,password);
+        String str = MD5Util.getMD5Code(password+"guojinlong");
+        List<User> list=userMapper.login(userName,str);
         if(list.size()>0){
             globalCache.add("userInfo",list.get(0));
             httpSession.setAttribute("userInfo",list.get(0));

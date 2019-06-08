@@ -44,7 +44,13 @@
                     "password": password,
                 },
                 success:function(data){
-                    window.location.href="/admin.html";
+                    if(data.code == 1){
+                        alert(data.msg);
+
+                    }else{
+                        window.location.href="/admin.html";
+                    }
+
                 },
                 complete : function(xhr, status) {
                     //拦截器实现超时跳转到登录页面
