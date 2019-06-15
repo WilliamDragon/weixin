@@ -61,15 +61,16 @@ public class SendMailController {
 
     public R taskSendMail() {
        // ScheduledTask sendMailTask = scheduledTaskMapper.findTaskByKey("sendMail");
-        String sysName = "sendMail";
+        String sysName = "sendMail开关";
         String mailVal = sysParamMapper.findSysParamByName(sysName).getSysvalue();
         String mailEnable = sysParamMapper.findSysParamByName(sysName).getEnabled();
-        if("0".equals(mailVal) && "1".equals(mailEnable)){
+        if("0".equals(mailVal) || "0".equals(mailEnable)){
             logger.info("定时任务未开启");
             return R.ok(GlobalError.ERROR_SCH_TASK);
         }
         List<Complain> list = complainMapper.findAll();
         if(list.size()<=0){
+            System.out.println("数据库中无数据");
             return R.error(GlobalError.ERROR_COMPLAIN_DATA);
         }
         for(int i=0;i<list.size();i++){

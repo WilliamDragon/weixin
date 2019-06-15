@@ -63,7 +63,7 @@ public class StatisticController {
             ints[i][3]=(int)list.stream().filter(x->
                     (questionOrder.equals(String.valueOf(x.getQuestionId()))&&"d".equals(x.getAnswer()))).count();
             total = ints[i][0]+ints[i][1]+ints[i][2]+ints[i][3];
-            ints[i][4]=(ints[i][0]*115+ints[i][1]*100+ints[i][3]*80)/total;
+            ints[i][4]=(ints[i][0]*115+ints[i][1]*100+ints[i][2]*80)/total;
 
         }
         /*int question1a=list.stream().filter(x->

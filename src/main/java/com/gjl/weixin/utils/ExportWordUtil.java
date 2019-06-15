@@ -63,7 +63,7 @@ public class ExportWordUtil {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            //delAllFile(temDir);//这一步看具体需求，要不要删
+
         }
 
     }
