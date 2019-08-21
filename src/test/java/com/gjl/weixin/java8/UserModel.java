@@ -10,6 +10,7 @@ public class UserModel {
     private String number;
     private int sex;
     private int ss;
+    private String sss;
 
     public UserModel(int id, String name, Date date, String number, int sex) {
         this.id = id;

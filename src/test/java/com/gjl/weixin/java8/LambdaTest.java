@@ -44,7 +44,7 @@ public class LambdaTest {
         List<UserModel> UserModelAsd = list1.stream().filter(x -> "小明".equals(x.getUserModel().getName()))
                 .map(UserTrade::getUserModel)
                 .sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList());
-
+        System.out.println(sdf);
         System.out.println(sdf);
 
     }
