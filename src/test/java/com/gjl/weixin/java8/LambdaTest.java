@@ -45,6 +45,8 @@ public class LambdaTest {
                 .map(UserTrade::getUserModel)
                 .sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList());
 
+        System.out.println(sdf);
+
     }
 
 }
