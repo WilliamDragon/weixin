@@ -166,6 +166,9 @@ public class UserController {
     }
 
     public static void main(String[] args) {
+
+        String str = MD5Util.getMD5Code("111"+"guojinlong");
+        System.out.println(str);
         /*List<String> a=new ArrayList<String>();
         a.add("q");a.add("w");a.add("e");
         List<String> b=new ArrayList<String>();
