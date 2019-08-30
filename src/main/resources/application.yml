@@ -8,12 +8,11 @@ plate:
   num: gjl
 spring:
   datasource:
-    name: test
-    url: jdbc:mysql://rm-bp113q6ld2y8fv60uqo.mysql.rds.aliyuncs.com:3306/qqgjl?characterEncoding=utf8&useSSL=false
+    name: gjl
+    url: jdbc:mysql://127.0.0.1:3306/weixingjl?characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: 15145175601xiao!
-
-    driver-class-name: com.mysql.jdbc.Driver
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     cache: false
     mode: LEGACYHTML5

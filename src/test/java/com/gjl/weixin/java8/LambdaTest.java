@@ -2,10 +2,12 @@ package com.gjl.weixin.java8;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LambdaTest {
     public static void main(String[] args) {
         List<UserModel> list = new ArrayList<>();
+        ArrayList<UserModel> list11 = new ArrayList<>();
         List<UserTrade> list1 = new ArrayList<>();
         UserModel userModel=new UserModel(1,"张三",new Date(System.currentTimeMillis()),"1110",5);
         UserModel userModel1=new UserModel(2,"张三",new Date(System.currentTimeMillis()),"1111",6);
@@ -19,6 +21,10 @@ public class LambdaTest {
         list.add(userModel1);
         list.add(userModel2);
         list.add(userModel3);
+        list11.add(userModel);
+        list11.add(userModel1);
+        list11.add(userModel2);
+        list11.add(userModel3);
         list1.add(userTrade);
         list1.add(userTrade1);
         list1.add(userTrade2);
@@ -37,15 +43,23 @@ public class LambdaTest {
         /*Optional<Integer> reduce = list.stream().map(x -> 1).reduce(Integer::sum);
         System.out.println(reduce.get());*/
         //姓名是张三的并按年龄排序   默认升序
-        List<UserModel> sdf = list.stream().filter(x -> "张三".equals(x.getName()))
+       /* List<UserModel> sdf = list.stream().filter(x -> "张三".equals(x.getName()))
                 .sorted((e1, e2) -> Integer.compare(e1.getSex(), e2.getSex()))
                 .collect(Collectors.toList());
         System.out.println(sdf);
+        //复杂排序
         List<UserModel> UserModelAsd = list1.stream().filter(x -> "小明".equals(x.getUserModel().getName()))
                 .map(UserTrade::getUserModel)
-                .sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList());
-        System.out.println(sdf);
-        System.out.println(sdf);
+                .sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList());*/
+
+        /*List<UserModel> collect = list1.stream().filter(x -> "小明".equals(x.getUserModel().getName()) || "夏利".equals(x.getUserModel().getName()))
+                .map(UserTrade::getUserModel)
+                .sorted(Comparator.comparing(UserModel::getName).reversed()).collect(Collectors.toList());*/
+        //合并list集合
+        List<UserModel> collect1 = Stream.of(list, list11).flatMap(x -> x.stream()).collect(Collectors.toList());
+        System.out.println(collect1.size());
+
+        Arrays.asList(2,9,43,7,3,0).stream().distinct().sorted().forEach(System.out::println);
 
     }
 

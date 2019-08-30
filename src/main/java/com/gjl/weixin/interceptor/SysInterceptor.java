@@ -22,7 +22,7 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler)throws Exception
     {
-        //System.out.println("我是拦截器：我证明我进来了");
+      /*  //System.out.println("我是拦截器：我证明我进来了");
        HttpSession session=request.getSession();
         //Student userInfo = (Student)session.getAttribute("userInfo");
         Object userInfo = session.getAttribute("userInfo");
@@ -46,7 +46,7 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
             }
             return false;
         }
-        System.out.println("我证明用户已经登录");
+        System.out.println("我证明用户已经登录");*/
         return  true;
     }
     /**
