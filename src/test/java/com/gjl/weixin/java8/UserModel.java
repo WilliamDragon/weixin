@@ -9,6 +9,7 @@ public class UserModel {
     private Date date;
     private String number;
     private int sex;
+    private int ss;
     private String sss;
 
     public UserModel(int id, String name, Date date, String number, int sex) {
