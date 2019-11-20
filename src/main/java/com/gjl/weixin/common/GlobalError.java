@@ -18,5 +18,7 @@ public class GlobalError {
     public static final String ERROR_EVALUATE_DATA = "评价时间未开启";
     /** 此用户未授权*/
     public static final String ERROR_USER_OAU = "此用户未授权";
+    /** 此用户未授权*/
+    public static final String ERROR_USER_OAU3 = "此用户未授权";
 
 }
