@@ -3,26 +3,33 @@ package com.gjl.weixin.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gjl.weixin.cache.GlobalCache;
-import com.gjl.weixin.entity.Pxclass;
-import com.gjl.weixin.entity.ScheduledTask;
-import com.gjl.weixin.entity.User;
+import com.gjl.weixin.entity.*;
+import com.gjl.weixin.mapper.PermissionMapper;
+import com.gjl.weixin.mapper.RoleMapper;
 import com.gjl.weixin.mapper.UserMapper;
 import com.gjl.weixin.utils.MD5Util;
 import com.gjl.weixin.utils.R;
 import com.gjl.weixin.utils.SendMailUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
+@Controller
 @RequestMapping("/adminUser")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
@@ -31,8 +38,17 @@ public class UserController {
     private UserMapper userMapper;
     @Autowired
     private GlobalCache globalCache;
+    @Autowired
+    private RoleMapper roleMapper;
+    @Autowired
+    private PermissionMapper permissionMapper;
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+
+    @RequestMapping("/loginindex")
+    public String loginindex(){
+        return "adminlogin";
+    }
     @RequestMapping("/qwe")
     public String test1(){
         return "indexx";
@@ -45,7 +61,7 @@ public class UserController {
         //System.out.println(list);
     }
 
-    @RequestMapping("/save")
+    @GetMapping("/save")
     public R save(User user, HttpServletRequest request){
         logger.debug("进入 save 方法");
         HttpSession session=request.getSession();
@@ -69,7 +85,7 @@ public class UserController {
         return R.error("更新失败");
     }
 
-    @RequestMapping("/findUserById")
+    @GetMapping("/findUserById")
     public R findUserById(String id){
         logger.debug("进入 findUserById 方法");
         List<User> all = userMapper.findAll();
@@ -81,7 +97,7 @@ public class UserController {
         }
         return R.error("查询失败");
     }
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     public R delete(String id){
         logger.debug("进入 delete 方法");
         int list = userMapper.deleteById(id);
@@ -90,7 +106,7 @@ public class UserController {
         }
         return R.error("删除失败");
     }
-    @RequestMapping("findAllByCondition")
+    @GetMapping("findAllByCondition")
     public R findAllByCondition(String pageNum, String pageSize,User user){
         if(pageNum==null){
             pageNum="1";
@@ -106,7 +122,7 @@ public class UserController {
         }
         return R.error("用户不存在");
     }
-    @RequestMapping("findAll")
+    @GetMapping("findAll")
     public R findAll(String pageNum, String pageSize){
         if(pageNum==null){
             pageNum="1";
@@ -123,7 +139,7 @@ public class UserController {
         return R.error("用户不存在");
     }
 
-    @RequestMapping("insert")
+    @GetMapping("insert")
     public R insert(User user) {
         try{
            // SendMailUtil.SendMail("2645019356@qq.com","测试zhuti","测试neirong");
@@ -141,11 +157,9 @@ public class UserController {
         return R.error("新增失败");
     }
     @PostMapping("/login")
+    @ResponseBody
     public R login(String userName, String password, HttpSession httpSession, HttpServletResponse response){
-        logger.debug("进入 login 方法");
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type");
+        /*logger.debug("进入 login 方法");
         String str = MD5Util.getMD5Code(password+"guojinlong");
         List<User> list=userMapper.login(userName,str);
         if(list.size()>0){
@@ -153,10 +167,41 @@ public class UserController {
             httpSession.setAttribute("userInfo",list.get(0));
             return R.ok(list);
         }
-        return R.error("用户名或密码错误");
+        return R.error("用户名或密码错误");*/
+        String pass = MD5Util.getMD5Code(password+"guojinlong");
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, pass);
+        try{
+            Subject subject = SecurityUtils.getSubject();
+            if(subject != null){
+                subject.logout();
+            }
+            subject.login(token);
+            User user0 = (User)SecurityUtils.getSubject().getPrincipal();
+
+            List<Permission> permissions = new ArrayList<Permission>();
+            List<Permission> userPermlist = permissionMapper.findUserPerm(user0.getLoginName());
+            for(Permission p : userPermlist){
+                permissions.add(p);
+            }
+
+            List<Role> roles = new ArrayList<Role>();
+            List<Role> userRolelist = roleMapper.findUserRole(user0.getLoginName());
+
+            for(Role r :userRolelist){
+                roles.add(r);
+            }
+            user0.setRole(roles);
+            user0.setPermission(permissions);
+            return R.ok(user0);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return R.error();
     }
 
     @GetMapping("/testGlobalCache")
+    @ResponseBody
     public R testGlobalCache(){
         System.out.println(globalCache.get("gjl"));
         globalCache.add("gjl","gjl");
@@ -164,11 +209,23 @@ public class UserController {
 
         return R.ok();
     }
+    @PostMapping("/testUserRole")
+    @ResponseBody
+    public R testUserRole(String username){
+        List<Permission> userPerm = permissionMapper.findUserPerm(username);
+        if(userPerm != null){
+            return R.ok(userPerm);
+        }
+        return R.ok("用户没有设定角色");
+    }
 
     public static void main(String[] args) {
 
         String str = MD5Util.getMD5Code("111"+"guojinlong");
         System.out.println(str);
+        DecimalFormat df = new DecimalFormat("#.00");
+        String resultFinalRate = df.format(52.03);
+        System.out.println(resultFinalRate);
         /*List<String> a=new ArrayList<String>();
         a.add("q");a.add("w");a.add("e");
         List<String> b=new ArrayList<String>();

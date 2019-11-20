@@ -13,6 +13,7 @@ import com.gjl.weixin.mapper.PxclassMapper;
 import com.gjl.weixin.mapper.StatisticMapper;
 import com.gjl.weixin.mapper.StudentMapper;
 import com.gjl.weixin.service.StudentService;
+import com.gjl.weixin.utils.MD5Util;
 import com.gjl.weixin.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +55,7 @@ public class StudentController {
         res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
         res.setHeader("X-Powered-By","3.2.1");
         res.setHeader("Content-Type", "application/json;charset=utf-8");
-
+        //String str = MD5Util.getMD5Code(password+"guojinlong");
         List<Student> list=studentService.login(userName,password);
         if(list.size()>0){
             httpSession.setAttribute("userInfo",list.get(0));

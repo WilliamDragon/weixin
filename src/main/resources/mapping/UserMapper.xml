@@ -8,7 +8,20 @@
     <result column="login_name" jdbcType="VARCHAR" property="loginName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <!--<collection property="listDetails" ofType="com.gjl.weixin.entity.Role">
+      <result column="lineNo" property="lineNo"/>
+      <result column="itemSkuCode" property="itemSkuCode"/>
+      <result column="itemName" property="itemName"/>
+      <result column="skuId" property="skuId"/>
+      <result column="packageCount" property="packageCount"/>
+      <result column="unitName" property="unitName"/>
+    </collection>-->
   </resultMap>
+
+
+  <select id="findByUserName" resultMap="BaseResultMap">
+        select * from user where login_name = #{username}
+    </select>
 
     <select id="findUserById" resultMap="BaseResultMap">
         select * from user where id = #{id}

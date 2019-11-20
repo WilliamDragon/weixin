@@ -5,6 +5,7 @@ import com.gjl.weixin.entity.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface UserMapper {
     int save(User user);
 
     int findUserById(String id);
+    //@Select("select * from user where login_name = #{username}")
+    User findByUserName(String username);
 }

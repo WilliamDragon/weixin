@@ -56,6 +56,10 @@ public class LambdaTest {
                 .map(UserTrade::getUserModel)
                 .sorted(Comparator.comparing(UserModel::getName).reversed()).collect(Collectors.toList());*/
         //合并list集合
+        List<UserModel> collect = list1.stream().filter(x -> "小明".equals(x.getUserModel().getName()))
+                .map(UserTrade::getUserModel)
+                .sorted(Comparator.comparing(UserModel::getName))
+                .collect(Collectors.toList());
         List<UserModel> collect1 = Stream.of(list, list11).flatMap(x -> x.stream()).collect(Collectors.toList());
         System.out.println(collect1.size());
 

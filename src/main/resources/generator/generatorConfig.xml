@@ -50,7 +50,7 @@
             &lt;!&ndash;<columnRenamingRule searchString="^D_"
                                 replaceString=""/>&ndash;&gt;
         </table>-->
-        <table tableName="notice" domainObjectName="Notice"
+        <table tableName="gjl_url" domainObjectName="GjlUrl"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

@@ -1,6 +1,8 @@
 package com.gjl.weixin.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Long id;
@@ -14,6 +16,26 @@ public class User {
     private String password;
 
     private String phone;
+
+    private List<Role> role;
+
+    private List<Permission> permission;
+
+    public List<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(List<Role> role) {
+        this.role = role;
+    }
+
+    public List<Permission> getPermission() {
+        return permission;
+    }
+
+    public void setPermission(List<Permission> permission) {
+        this.permission = permission;
+    }
 
     public Long getId() {
         return id;
