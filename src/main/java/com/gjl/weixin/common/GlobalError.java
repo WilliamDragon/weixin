@@ -19,7 +19,12 @@ public class GlobalError {
     /** 此用户未授权*/
     public static final String ERROR_USER_OAU = "此用户未授权";
     /** 此用户未授权*/
-    public static final String ERROR_USER_OAU5 = "此用户未授权";
+    public static final String ERROR_USER_OAU3 = "此用户未授权";
+    /** 此用户未授权*/
+    public static final String ERROR_USER_OAU1 = "此用户未授权";
+
+    public static final String ERROR_USER_OAU2 = "此用户未授权";
+
 
 
 }
