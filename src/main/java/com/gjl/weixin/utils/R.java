@@ -81,4 +81,6 @@ public class R<T> {
         this.data = data;
     }
 
+    private int sdv =60;
+
 }

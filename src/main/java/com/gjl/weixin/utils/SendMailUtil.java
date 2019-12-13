@@ -49,4 +49,6 @@ public class SendMailUtil {
         logger.debug("发邮件完成");
 
     }
+
+    private int sadv = 55;
 }
