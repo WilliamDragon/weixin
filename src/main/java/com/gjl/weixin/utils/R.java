@@ -81,6 +81,9 @@ public class R<T> {
         this.data = data;
     }
 
+
+    private String add = "sef";
+
     private int sdv =60;
 
 }
