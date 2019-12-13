@@ -334,4 +334,14 @@ public class StudentController {
 
     }
 
+
+    @PostMapping("/insertStudnet")
+    public R insertStudent(Student student){
+        int i = studentService.insertStudent(student);
+        if(i>0){
+            return R.ok(student);
+        }
+        return R.error();
+    }
+
 }

@@ -138,6 +138,8 @@ public class RedisUtil {
         }
         return result;
     }*/
+
+    private String sdf = "sdf";
 }
 
 

@@ -6,7 +6,9 @@ import com.gjl.weixin.mapper.StudentMapper;
 import com.gjl.weixin.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -34,5 +36,18 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int deleteById(String id) {
         return studentMapper.delete(id);
+    }
+
+    @Transactional
+    public int insertStudent(Student student){
+        int result = studentMapper.insert(student);
+        //throw new IOException();
+       /* try{
+            throw new  RuntimeException("发生异常");
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+
+        return result;
     }
 }
