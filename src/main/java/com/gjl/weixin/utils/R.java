@@ -86,4 +86,6 @@ public class R<T> {
 
     private int sdv =60;
 
+    private int guojilong = 110;
+
 }
