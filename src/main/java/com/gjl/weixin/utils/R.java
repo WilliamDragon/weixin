@@ -84,4 +84,6 @@ public class R<T> {
 
     private String add = "sef";
 
+    private int sdv =60;
+
 }
