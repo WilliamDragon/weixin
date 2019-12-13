@@ -85,5 +85,7 @@ public class R<T> {
     private String add = "sef";
 
     private int sdv =600;
+    private int guojinlong =11;
+
 
 }
