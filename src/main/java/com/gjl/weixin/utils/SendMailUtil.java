@@ -52,5 +52,6 @@ public class SendMailUtil {
 
     private int sadv = 55;
 
-    private int guojinlong =600;
+    private int guojinlong =6000;
+
 }
