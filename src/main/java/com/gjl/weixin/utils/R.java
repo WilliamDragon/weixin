@@ -82,12 +82,6 @@ public class R<T> {
     }
 
 
-    private String add = "sef";
-
-    private int sdv =600;
-    private int guojinlong =11;
-
-
-    private int guojilong = 110;
+    private String hyufl = "53";
 
 }
