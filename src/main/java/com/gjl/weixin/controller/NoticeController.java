@@ -7,6 +7,7 @@ import com.gjl.weixin.entity.Complain;
 import com.gjl.weixin.entity.Notice;
 import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.mapper.NoticeMapper;
+import com.gjl.weixin.service.NoticeService;
 import com.gjl.weixin.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,8 @@ public class NoticeController {
     private NoticeMapper noticeMapper;
     @Autowired
     private WeChatController weChatController;
+    @Autowired
+    private NoticeService noticeService;
 
     @RequestMapping("/findAllNotice")
     public R findAllNotice(String pageNum, String pageSize, Notice notice){
@@ -69,6 +72,14 @@ public class NoticeController {
             }
         }
             return R.error("插入失败");
+    }
+    @PostMapping("/noticeTransactionTest")
+    public R noticeTransactionTest(Notice notice){
+        int result = noticeService.insertNotice(notice);
+        if(result >=1){
+            return R.ok();
+        }
+        return R.build(R.CODE_FAIL,"插入Notice表失败");
     }
 
 }

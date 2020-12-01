@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
 
+
     @Autowired
     private StudentMapper studentMapper;
     @Override
@@ -42,6 +43,7 @@ public class StudentServiceImpl implements StudentService {
     public int insertStudent(Student student){
         int result = studentMapper.insert(student);
         //throw new IOException();
+        int i = 1/0;
        /* try{
             throw new  RuntimeException("发生异常");
         }catch (Exception e){
@@ -49,5 +51,14 @@ public class StudentServiceImpl implements StudentService {
         }*/
 
         return result;
+    }
+
+    public static void main(String[] args) {
+        StringBuffer sb = new StringBuffer();
+
+        if(sb!=null){
+            System.out.println("sb不为空");
+        }
+        System.out.println("resultout");
     }
 }

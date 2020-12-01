@@ -7,7 +7,9 @@ import com.gjl.weixin.entity.Complain;
 import com.gjl.weixin.entity.ScheduledTask;
 import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.mapper.ComplainMapper;
+import com.gjl.weixin.service.ComplainService;
 import com.gjl.weixin.utils.R;
+import com.gjl.weixin.utils.listUtil;
 import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,6 +35,8 @@ public class ComplainController {
 
     @Autowired
     ComplainMapper complainMapper;
+    @Autowired
+    private ComplainService complainService;
     @PostMapping("/insert")
     public R insert(Complain complain, HttpServletRequest request){
         HttpSession session=request.getSession();
@@ -73,6 +78,42 @@ public class ComplainController {
             return R.ok(pageInfo);
         }
         return R.error("没有投诉信息");
+    }
+    @PostMapping("/complainTranctionTest")
+    public R ComplainTranctionTest(Complain complain){
+
+        int result = complainService.insertComplain(complain);
+
+        if(result >= 1){
+            return R.ok();
+        }
+        return R.build(R.CODE_FAIL,"插入Complain表失败");
+
+    }
+    @PostMapping("/findAllComplain")
+    public R findAllComplain(Complain complain){
+        HashMap<String,Object> queryParam = new HashMap<>();
+        String complainVideo = complain.getComplainVideo();
+        queryParam.put("complainVideo",complainVideo);
+
+        List<ComplainDto> allComplain = complainService.findAllComplain(queryParam);
+        //使用多线程stream流来代替for循环的操作，可以提升效率
+        allComplain.parallelStream().forEach(po->{
+            try{
+                handlerDealComlain(po);
+            }catch (IndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
+        });
+        Boolean isdata = listUtil.isData(allComplain);
+        if(isdata){
+            return R.ok(allComplain);
+        }
+        return R.build(R.CODE_FAIL,"查询Complain表失败");
+    }
+
+    public void handlerDealComlain(ComplainDto complainDto){
+        //todo 可更新，必须是主键和索引，才可以按行锁更新，和隔离级别有关系（oracle）
     }
 
 }

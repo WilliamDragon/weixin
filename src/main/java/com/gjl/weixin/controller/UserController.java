@@ -159,7 +159,7 @@ public class UserController {
     @PostMapping("/login")
     @ResponseBody
     public R login(String userName, String password, HttpSession httpSession, HttpServletResponse response){
-        /*logger.debug("进入 login 方法");
+        logger.debug("进入 login 方法");
         String str = MD5Util.getMD5Code(password+"guojinlong");
         List<User> list=userMapper.login(userName,str);
         if(list.size()>0){
@@ -167,8 +167,8 @@ public class UserController {
             httpSession.setAttribute("userInfo",list.get(0));
             return R.ok(list);
         }
-        return R.error("用户名或密码错误");*/
-        String pass = MD5Util.getMD5Code(password+"guojinlong");
+        return R.error("用户名或密码错误");
+       /* String pass = MD5Util.getMD5Code(password+"guojinlong");
         UsernamePasswordToken token = new UsernamePasswordToken(userName, pass);
         try{
             Subject subject = SecurityUtils.getSubject();
@@ -196,8 +196,8 @@ public class UserController {
 
         }catch(Exception e){
             e.printStackTrace();
-        }
-        return R.error();
+        }*/
+       // return R.error();
     }
 
     @GetMapping("/testGlobalCache")
