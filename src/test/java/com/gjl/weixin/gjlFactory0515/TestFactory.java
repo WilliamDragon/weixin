@@ -1,5 +1,7 @@
 package com.gjl.weixin.gjlFactory0515;
 
+import java.util.UUID;
+
 /**
  * @Author: WilliamJL
  * @Date: 2019/5/15 16:32

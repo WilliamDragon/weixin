@@ -23,4 +23,6 @@ public interface ComplainMapper {
     List<ComplainDto> findAllByAdmin(ComplainDto complainDto);
 
     List<ComplainDto> findAllSelect(Map map);
+
+    int updateComplain(Complain record);
 }

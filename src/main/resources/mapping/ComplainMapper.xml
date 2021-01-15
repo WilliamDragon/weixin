@@ -43,6 +43,14 @@
     select * from complain where complain_video = #{complainVideo}
   </select>
 
+  <update id="updateComplain">
+    update complain
+    <trim prefix="set" suffixOverrides=",">
+      <if test="complain_reason!=null">complain_reason=#{complainReason},</if>
+    </trim>
+    WHERE id=#{id}
+  </update>
+
   <insert id="insert" parameterType="com.gjl.weixin.entity.Complain" >
     insert into complain ( userId, complain_time,
       complain_subject, complain_reason, complain_video

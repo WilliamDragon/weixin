@@ -29,6 +29,7 @@ public class LambdaTest {
         list1.add(userTrade1);
         list1.add(userTrade2);
         list1.add(userTrade3);
+
         //获取UserModel中以id作为list的集合
         /*List<Integer> idList = list.stream().map(UserModel::getId).collect(Collectors.toList());
         //获取UserModel 中以姓名集合

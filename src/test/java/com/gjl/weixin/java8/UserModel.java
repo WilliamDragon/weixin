@@ -60,6 +60,22 @@ public class UserModel {
         this.sex = sex;
     }
 
+    public int getSs() {
+        return ss;
+    }
+
+    public void setSs(int ss) {
+        this.ss = ss;
+    }
+
+    public String getSss() {
+        return sss;
+    }
+
+    public void setSss(String sss) {
+        this.sss = sss;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +

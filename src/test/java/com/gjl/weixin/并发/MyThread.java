@@ -17,7 +17,7 @@ public class MyThread extends Thread {
     public static void main(String[] args) {
 
        // System.out.println("0%2="+0%2);
-        Thread myThread = new MyThread();
+       /* Thread myThread = new MyThread();
         Thread t1 = new Thread(myThread, "t1");
         Thread t2 = new Thread(myThread, "t2");
         Thread t3 = new Thread(myThread, "t3");
@@ -27,7 +27,11 @@ public class MyThread extends Thread {
         t2.start();
         t3.start();
         t4.start();
-        t5.start();
+        t5.start();*/
+
+        String str =  "afa";
+        String asa = str.toUpperCase();
+        System.out.println(asa);
 
     }
 }

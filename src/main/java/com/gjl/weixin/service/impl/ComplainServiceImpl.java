@@ -60,7 +60,9 @@ public class ComplainServiceImpl implements ComplainService {
 
     @Override
     public int updateComplain(Complain complain) {
-        return 0;
+        //toto
+        //return complainmapper.updateComplainById();
+        return 1;
     }
 
     public List<ComplainDto> findAllComplain(Map map){

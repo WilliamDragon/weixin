@@ -16,9 +16,16 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public int insertNotice(Notice notice) {
-        int result = noticeMapper.insertSelective(notice);
+
+        System.out.println(notice.getNoticeSpare());
+        notice.setNoticeSpare("sef");
+        System.out.println(notice.getNoticeSpare());
+
+
+       /* int result = noticeMapper.insertSelective(notice);
         int i =1/0;
-        return result;
+        return result;*/
+        return 1;
     }
 
     @Override
