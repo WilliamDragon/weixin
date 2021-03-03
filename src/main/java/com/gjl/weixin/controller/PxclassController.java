@@ -3,11 +3,9 @@ package com.gjl.weixin.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gjl.weixin.entity.Pxclass;
-import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.mapper.PxclassMapper;
-import com.gjl.weixin.utils.DataUtil;
+import com.gjl.weixin.utils.DateUtil;
 import com.gjl.weixin.utils.R;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,15 +83,15 @@ public class PxclassController {
             return R.error("有没有添加的内容，请重新填写");
         }
         if(pxclass.getStartTime() !=null&& pxclass.getEndTime() != null){
-            Boolean isValidCreateTime = DataUtil.isValidDate(pxclass.getStartTime());
-            Boolean isValidEndTime = DataUtil.isValidDate(pxclass.getEndTime());
+            Boolean isValidCreateTime = DateUtil.isValidDate(pxclass.getStartTime());
+            Boolean isValidEndTime = DateUtil.isValidDate(pxclass.getEndTime());
             if(!isValidCreateTime||!isValidEndTime){
                 return R.error("日期格式不对");
             }
-            if(!DataUtil.isBefore(pxclass.getStartTime(),pxclass.getEndTime())){
+            if(!DateUtil.isBefore(pxclass.getStartTime(),pxclass.getEndTime())){
                 return R.error("开始时间在结束时间之前");
             }
-            if(!pxclass.getDay() .equals(DataUtil.Cdate(pxclass.getEndTime(),pxclass.getStartTime()))){
+            if(!pxclass.getDay() .equals(DateUtil.Cdate(pxclass.getEndTime(),pxclass.getStartTime()))){
                 return R.error("日期天数计算错误");
             }
         }
@@ -132,15 +130,15 @@ public class PxclassController {
             return R.error("有没有添加的内容，请重新填写");
         }
         if(pxclass.getStartTime() !=null&& pxclass.getEndTime() != null){
-            Boolean isValidCreateTime = DataUtil.isValidDate(pxclass.getStartTime());
-            Boolean isValidEndTime = DataUtil.isValidDate(pxclass.getEndTime());
+            Boolean isValidCreateTime = DateUtil.isValidDate(pxclass.getStartTime());
+            Boolean isValidEndTime = DateUtil.isValidDate(pxclass.getEndTime());
             if(!isValidCreateTime||!isValidEndTime){
                 return R.error("日期格式不对");
             }
-            if(!DataUtil.isBefore(pxclass.getStartTime(),pxclass.getEndTime())){
+            if(!DateUtil.isBefore(pxclass.getStartTime(),pxclass.getEndTime())){
                 return R.error("开始时间在结束时间之前");
             }
-            if(!pxclass.getDay() .equals(DataUtil.Cdate(pxclass.getEndTime(),pxclass.getStartTime()))){
+            if(!pxclass.getDay() .equals(DateUtil.Cdate(pxclass.getEndTime(),pxclass.getStartTime()))){
                 return R.error("日期天数计算错误");
             }
         }

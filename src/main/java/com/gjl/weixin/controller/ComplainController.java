@@ -12,6 +12,7 @@ import com.gjl.weixin.utils.R;
 import com.gjl.weixin.utils.listUtil;
 import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: WilliamJL
@@ -79,15 +81,20 @@ public class ComplainController {
         }
         return R.error("没有投诉信息");
     }
+    int num = 0;
+    static int num2 =0;
     @PostMapping("/complainTranctionTest")
     public R ComplainTranctionTest(Complain complain){
 
         int result = complainService.insertComplain(complain);
-
         if(result >= 1){
             return R.ok();
         }
+
         return R.build(R.CODE_FAIL,"插入Complain表失败");
+        //int result = complainService.updateComplain(complain);
+        //return R.ok();
+
 
     }
     @PostMapping("/findAllComplain")
@@ -114,6 +121,12 @@ public class ComplainController {
 
     public void handlerDealComlain(ComplainDto complainDto){
         //todo 可更新，必须是主键和索引，才可以按行锁更新，和隔离级别有关系（oracle）
+    }
+    @PostMapping("/testGlobal")
+    public void testGlobal(HttpServletRequest request){
+
+        Map<String,Object> mapb = (Map<String,Object>)request.getAttribute("context");
+        System.out.println("controller"+mapb.get("checkup_date")+"              "+mapb.get("age"));
     }
 
 }

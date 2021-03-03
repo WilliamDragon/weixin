@@ -20,7 +20,7 @@ public class McisInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler)throws Exception
     {
-        System.out.println("================================== preHandle1 ===========================================");
+       /* System.out.println("================================== preHandle1 ===========================================");
 
         request.setCharacterEncoding("UTF-8");//设置字符格式
         response.setCharacterEncoding("UTF-8");
@@ -48,7 +48,7 @@ public class McisInterceptor extends HandlerInterceptorAdapter {
         System.out.println(mapb.get("checkup_date")+"              "+mapb.get("age"));
 
         request.setAttribute("context", mapb);
-        request.setAttribute("yu", "we");
+        request.setAttribute("yu", "we");*/
         return true;
 
     }

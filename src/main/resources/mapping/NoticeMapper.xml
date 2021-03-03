@@ -17,6 +17,20 @@
     order by notice_date desc
   </select>
 
+  <update id="updateNotice">
+    update notice
+    <trim prefix="set" suffixOverrides=",">
+      <if test="notice_content!=null">notice_content=#{noticeContent},</if>
+    </trim>
+    <trim prefix="set" suffixOverrides=",">
+      <if test="notice_spare!=null">notice_spare=#{noticeSpare},</if>
+    </trim>
+    <trim prefix="set" suffixOverrides=",">
+      <if test="notice_date!=null">notice_date=#{noticeDate},</if>
+    </trim>
+    WHERE id=#{id}
+  </update>
+
   <insert id="insert" parameterType="com.gjl.weixin.entity.Notice" >
     insert into notice (id, notice_date, notice_content, 
       notice_spare)
@@ -54,4 +68,14 @@
       </if>
     </trim>
   </insert>
+
+  <!--批量插入 方法必须有注解 @Param  -->
+  <insert id="batchInsert" parameterType="java.util.List">
+      insert into notice (notice_date, notice_content,notice_spare) values
+      <foreach collection="noticeList" item="noticeList" index="index" separator=",">
+        (#{noticeList.noticeDate}, #{noticeList.noticeContent}, #{noticeList.noticeSpare})
+      </foreach>
+   </insert>
+
+
 </mapper>

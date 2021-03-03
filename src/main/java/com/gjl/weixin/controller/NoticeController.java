@@ -82,4 +82,17 @@ public class NoticeController {
         return R.build(R.CODE_FAIL,"插入Notice表失败");
     }
 
+
+    private static int num = 0;
+
+    @RequestMapping("/testScope")
+    public void testScope() {
+        System.out.println(++num);
+    }
+
+    @RequestMapping("/testScope2")
+    public void testScope2() {
+        System.out.println(++num);
+    }
+
 }

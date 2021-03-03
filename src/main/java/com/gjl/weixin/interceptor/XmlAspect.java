@@ -16,7 +16,7 @@ import java.util.Map;
 @Component
 public class XmlAspect {
     private static final Logger LOG = LoggerFactory.getLogger(XmlAspect.class);
-    @Around("execution(* com.gjl.weixin.controller.*.*(..))")
+    /*@Around("execution(* com.gjl.weixin.controller.*.*(..))")
     public Object handleControllerMethod(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
         LOG.info("切片开始。。。");
         long startTime = System.currentTimeMillis();
@@ -33,5 +33,5 @@ public class XmlAspect {
         LOG.info("请求:{}, 耗时{}ms", proceedingJoinPoint.getSignature(), (endTime - startTime));
         LOG.info("切片结束。。。");
         return null;
-    }
+    }*/
 }

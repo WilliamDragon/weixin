@@ -7,6 +7,7 @@ import com.gjl.weixin.mapper.ComplainMapper;
 import com.gjl.weixin.service.ComplainService;
 import com.gjl.weixin.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,39 +23,56 @@ public class ComplainServiceImpl implements ComplainService {
     private ComplainMapper complainmapper;
     @Autowired
     private NoticeService noticeService;
+    int num = 0;
+    static int num2 =0;
     @Override
     //@Transactional(rollbackFor = Exception.class)
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public int insertComplain(Complain complain) {
 
-       // int result2 = complainmapper.insertSelective(complain);
-        try{
+        //int result2 = complainmapper.insertSelective(complain);
+
             /*Notice notice = new Notice();
-            notice.setNoticeDate("20201119");
-            notice.setNoticeContent("测试事务通知2");
-            notice.setNoticeSpare("测试事务通知2");
+            notice.setNoticeDate("20210204");
+            notice.setNoticeContent("测试事务通知20");
+            notice.setNoticeSpare("测试事务通知20");
 
             noticeService.insertNotice(notice);*/
+        //insertComplain2(complain);
+       /* try{
+           *//* Notice notice = new Notice();
+            notice.setNoticeDate("20210204");
+            notice.setNoticeContent("测试事务通知20");
+            notice.setNoticeSpare("测试事务通知20");
+
+            noticeService.insertNotice(notice);*//*
             insertComplain2(complain);
 
         }
         catch (Exception e){
             e.printStackTrace();
-        }
-        complain.setComplainVideo("insertComplain1");
+        }*/
+       /* complain.setComplainVideo("insertComplain112");
         System.out.println("ComplainVide:" + complain.getComplainVideo());
 
-        int result = complainmapper.insertSelective(complain);
-        return result;
+        int result = complainmapper.insertSelective(complain);*/
+        int number = 0;
+        number++;
+        num++;
+        num2++;
+        //System.out.println("==========number:"+ number+"=====num"+num+"=========num2"+num2);
+        return 1;
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public int insertComplain2(Complain complain) {
         if(complain!=null){
-            complain.setComplainVideo("insertComplain2");
+            complain.setComplainVideo("insertComplain22222222222");
         }
         int result = complainmapper.insertSelective2(complain);
-        throw new RuntimeException("hit");
+        //throw new RuntimeException("hit");
+
+        return 1;
 
     }
 

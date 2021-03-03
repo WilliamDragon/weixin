@@ -2,7 +2,7 @@ package com.gjl.weixin.singleton;
 
 public class DoubleCheck {
 
-    private static DoubleCheck instance;
+    private static volatile DoubleCheck instance;
     public DoubleCheck(){};
     public static DoubleCheck getInstance(){
         if(instance == null){

@@ -2,10 +2,9 @@ package com.gjl.weixin.controller;
 
 import com.gjl.weixin.controller.export.ExportWord;
 import com.gjl.weixin.entity.Statistic;
-import com.gjl.weixin.entity.Student;
 import com.gjl.weixin.mapper.PxclassMapper;
 import com.gjl.weixin.service.StatisticService;
-import com.gjl.weixin.utils.DataUtil;
+import com.gjl.weixin.utils.DateUtil;
 import com.gjl.weixin.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class StatisticController {
@@ -36,12 +33,12 @@ public class StatisticController {
         if(createTime == null || endTime == null){
             return R.error("请输入日期");
         }
-        Boolean isValidCreateTime = DataUtil.isValidDate(createTime);
-        Boolean isValidEndTime = DataUtil.isValidDate(endTime);
+        Boolean isValidCreateTime = DateUtil.isValidDate(createTime);
+        Boolean isValidEndTime = DateUtil.isValidDate(endTime);
         if(!isValidCreateTime||!isValidEndTime){
             return R.error("日期格式不对");
         }
-        if(!DataUtil.isBefore(createTime,endTime)){
+        if(!DateUtil.isBefore(createTime,endTime)){
             return R.error("开始时间在结束时间之前");
         }
 
