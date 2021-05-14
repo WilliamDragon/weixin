@@ -44,11 +44,14 @@ public class LambdaTest {
         /*Optional<Integer> reduce = list.stream().map(x -> 1).reduce(Integer::sum);
         System.out.println(reduce.get());*/
         //姓名是张三的并按年龄排序   默认升序
-       /* List<UserModel> sdf = list.stream().filter(x -> "张三".equals(x.getName()))
+       /* List<UsereModel> sdf = list.stram().filter(x -> "张三".equals(x.getName()))
                 .sorted((e1, e2) -> Integer.compare(e1.getSex(), e2.getSex()))
                 .collect(Collectors.toList());
         System.out.println(sdf);
         //复杂排序
+        多字段排序  先按姓名升序，姓名相同则按年龄升序
+        list.sorted(Comparator.comparing(Student::getName).thenComparing(Student::getAge));
+
         List<UserModel> UserModelAsd = list1.stream().filter(x -> "小明".equals(x.getUserModel().getName()))
                 .map(UserTrade::getUserModel)
                 .sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList());*/

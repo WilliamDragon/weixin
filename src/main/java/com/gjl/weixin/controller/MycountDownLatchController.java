@@ -1,6 +1,7 @@
 package com.gjl.weixin.controller;
 
 import com.gjl.weixin.service.MycountDownLatchService;
+import com.gjl.weixin.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,9 @@ public class MycountDownLatchController {
     @Autowired
     private MycountDownLatchService mycountDownLatchService;
     @GetMapping("/testCountDownLatch")
-    public void testCountDownLatch(String tableName){
+    public R testCountDownLatch(String tableName){
+
         mycountDownLatchService.testMycountDownLatchService(tableName);
+        return R.ok();
     }
 }

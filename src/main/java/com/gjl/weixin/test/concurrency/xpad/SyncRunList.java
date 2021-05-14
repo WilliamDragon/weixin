@@ -1,5 +1,6 @@
 package com.gjl.weixin.test.concurrency.xpad;
 
+import com.gjl.weixin.test.concurrency.TestModel;
 import com.sun.webkit.LoadListenerClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,6 +65,25 @@ public abstract class SyncRunList<E> {
                 afterRun(this);
             }
         }
+    }
+
+    /*protected class SyncRunnbSingleton implements Runnable{
+
+        private TestModel testModel;
+
+        public SyncRunnbSingleton(TestModel testModel){
+            this.testModel = testModel;
+        }
+        @Override
+        public void run() {
+            E item = (E)testModel;
+            runItem(item);
+        }
+    }*/
+
+    public void executorTasks2(TaskExecutor taskExecutor,TestModel testModel){
+           taskExecutor.execute(new SyncRunnbSingleton(testModel));
+
     }
 
     public void executorTasks(TaskExecutor taskExecutor, int taskCount){

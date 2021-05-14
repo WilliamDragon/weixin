@@ -3,6 +3,7 @@ package com.gjl.weixin.并发;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class MyCountDownLatch {
 
@@ -35,6 +36,8 @@ public class MyCountDownLatch {
 
         CountDownLatch start = new CountDownLatch(1);//开始计数器
         CountDownLatch end = new CountDownLatch(10);//结束计数器
+
+       // LinkedBlockingDeque<Runnable> runnables = new LinkedBlockingDeque<>(10);
 
         final ExecutorService executorService = Executors.newFixedThreadPool(10);
 

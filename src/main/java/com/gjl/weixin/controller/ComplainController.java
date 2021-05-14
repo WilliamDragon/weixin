@@ -24,6 +24,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: WilliamJL
@@ -86,6 +90,7 @@ public class ComplainController {
     @PostMapping("/complainTranctionTest")
     public R ComplainTranctionTest(Complain complain){
 
+        complain.setComplainReason("qqqqqqq");
         int result = complainService.insertComplain(complain);
         if(result >= 1){
             return R.ok();
@@ -94,9 +99,9 @@ public class ComplainController {
         return R.build(R.CODE_FAIL,"插入Complain表失败");
         //int result = complainService.updateComplain(complain);
         //return R.ok();
-
-
     }
+
+
     @PostMapping("/findAllComplain")
     public R findAllComplain(Complain complain){
         HashMap<String,Object> queryParam = new HashMap<>();
@@ -127,6 +132,71 @@ public class ComplainController {
 
         Map<String,Object> mapb = (Map<String,Object>)request.getAttribute("context");
         System.out.println("controller"+mapb.get("checkup_date")+"              "+mapb.get("age"));
+    }
+
+
+    public static class LogThread implements Runnable {
+        private int msg;
+        CountDownLatch latch;
+        public LogThread(int msg,CountDownLatch latch){
+            this.msg = msg;
+            this.latch = latch;
+        }
+
+        public void run() {
+        try {
+            Thread.sleep(5000);
+            System.out.println(Thread.currentThread().getName()+"======="+msg);
+            latch.countDown();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        }
+    }
+
+    public static class LogThread2 implements Runnable {
+        private int msg;
+        public LogThread2(int msg){
+            this.msg = msg;
+        }
+        public void run() {
+            try {
+                Thread.sleep(5000);
+                System.out.println(Thread.currentThread().getName()+"======="+msg);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        /*long s = System.currentTimeMillis();
+        System.out.println("[开始:" + System.currentTimeMillis()+ "ms]");
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        ExecutorService executorService2 = Executors.newFixedThreadPool(100);
+        ExecutorService executorService3 = Executors.newSingleThreadExecutor();
+        for(int i=0;i<8000;i++){
+            executorService.execute(new LogThread2(i));
+        }
+        executorService.shutdown();
+        try{
+            executorService.awaitTermination(1, TimeUnit.DAYS);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("[耗时:" + (System.currentTimeMillis() - s)+ "ms]");*/
+
+
+       CountDownLatch latch=new CountDownLatch(8000);
+        long s = System.currentTimeMillis();
+        System.out.println("[开始:" + System.currentTimeMillis()+ "ms]");
+        for(int i=0;i<8000;i++){
+            Thread thread = new Thread(new LogThread(i,latch));
+            thread.start();
+        }
+        latch.await();//等待
+        System.out.println("[耗时:" + (System.currentTimeMillis() - s)+ "ms]");
     }
 
 }

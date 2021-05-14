@@ -50,6 +50,8 @@ public class TaskExecutor2 {
         //以上testModelList 用来模拟从数据库查询到得结果
         //把testModelList 分成4份，或者有某个字段区别
         CountDownLatch threadSignal = new CountDownLatch(2);
+        //这里没有ModelShell 没有用锁竞争只因为 处理的是不同的list集合，每个list集合都顺序执行
+        //而TaskExecutor1和SyncRunList 用了竞争锁， 是因为处理同一个list, 并且每个元素都单独执行
         new Thread(new ModelShell(testModelList,threadSignal)).start();
         new Thread(new ModelShell(testModelList2,threadSignal)).start();
         //new Thread(new ModelShell(testModelList,threadSignal)).start();

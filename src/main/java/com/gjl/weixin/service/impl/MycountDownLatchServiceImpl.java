@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.*;
 
 /**
  * @Author WilliamDragon
@@ -30,8 +30,8 @@ public class MycountDownLatchServiceImpl implements MycountDownLatchService {
         Date cifdate = new Date();
         CountDownLatch threadSignal = new CountDownLatch(2); //开启5读个线程，分别CUID、CUSM、CUSVAA、CUSTSYN、CUMI
 
-        new Thread(new BanchCifData(filelist, tableName, cifdate, threadSignal)).start();
-        new Thread(new BanchCifData(filelist, tableName, cifdate, threadSignal)).start();
+        new Thread(new BanchCifData(filelist, "notice1", cifdate, threadSignal)).start();
+        new Thread(new BanchCifData(filelist, "notice2", cifdate, threadSignal)).start();
         try {
             // 等待子线程完成
             threadSignal.await();
@@ -40,6 +40,7 @@ public class MycountDownLatchServiceImpl implements MycountDownLatchService {
             e.printStackTrace();
         }
     }
+
     @Autowired
     private SynchronizeCifinfo synchronizeCifinfo;
 
@@ -79,6 +80,5 @@ public class MycountDownLatchServiceImpl implements MycountDownLatchService {
 
         }
     }
-
 
 }

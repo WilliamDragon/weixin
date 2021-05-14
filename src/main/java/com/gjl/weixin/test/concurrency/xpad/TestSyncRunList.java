@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @Author WilliamDragon
@@ -47,6 +49,16 @@ public class TestSyncRunList {
         }catch (Exception e){
             logger.info("发送销售平台订单信息批量处理主线程等待发生异常：" + e.getMessage());
         }
+    }
+
+    public void sendOrderBatch2(TestModel ipdpOrders){
+
+        SyncRunnbSingleton syncRunnbSingleton = new SyncRunnbSingleton(ipdpOrders);
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        //taskExecutor.execute(syncRunnbSingleton);
+        executorService.execute(syncRunnbSingleton);
+
     }
 
     public void doTransaction(TestModel model){

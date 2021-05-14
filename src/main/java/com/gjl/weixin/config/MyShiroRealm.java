@@ -41,12 +41,12 @@ public class MyShiroRealm extends AuthorizingRealm {
         List<Role> list = roleMapper.findUserRole(user.getLoginName());
         Set<String> set = new HashSet<>();
         for(Role r : list){
-            set.add(r.getRoleName());
+            //set.add(r.getRoleName());
         }
         Set<String> pers = new HashSet<>();
         List<Permission> userPermlist = permissionMapper.findUserPerm(user.getLoginName());
         for(Permission P : userPermlist){
-            pers.add(P.getPermissUrl());
+           // pers.add(P.getPermissUrl());
         }
         //添加角色
         info.setRoles(set);

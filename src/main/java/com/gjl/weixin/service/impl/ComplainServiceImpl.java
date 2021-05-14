@@ -4,6 +4,7 @@ import com.gjl.weixin.dto.ComplainDto;
 import com.gjl.weixin.entity.Complain;
 import com.gjl.weixin.entity.Notice;
 import com.gjl.weixin.mapper.ComplainMapper;
+import com.gjl.weixin.mapper.NoticeMapper;
 import com.gjl.weixin.service.ComplainService;
 import com.gjl.weixin.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,21 +24,30 @@ public class ComplainServiceImpl implements ComplainService {
     private ComplainMapper complainmapper;
     @Autowired
     private NoticeService noticeService;
+    @Autowired
+    private NoticeMapper noticeMapper;
     int num = 0;
     static int num2 =0;
     @Override
     //@Transactional(rollbackFor = Exception.class)
-    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class)
     public int insertComplain(Complain complain) {
 
-        //int result2 = complainmapper.insertSelective(complain);
 
-            /*Notice notice = new Notice();
+        Notice notice = new Notice();
+        notice.setNoticeContent("456");
+        notice.setNoticeSpare("456");
+        List<Notice> list=noticeMapper.findAllNotice(notice);
+        /*int result2 = complainmapper.insertSelective(complain);
+
+            Notice notice = new Notice();
             notice.setNoticeDate("20210204");
             notice.setNoticeContent("测试事务通知20");
             notice.setNoticeSpare("测试事务通知20");
 
-            noticeService.insertNotice(notice);*/
+            noticeService.insertNotice(notice);
+            int i = 1/0;*/
+            return 1;
         //insertComplain2(complain);
        /* try{
            *//* Notice notice = new Notice();
@@ -56,12 +66,8 @@ public class ComplainServiceImpl implements ComplainService {
         System.out.println("ComplainVide:" + complain.getComplainVideo());
 
         int result = complainmapper.insertSelective(complain);*/
-        int number = 0;
-        number++;
-        num++;
-        num2++;
         //System.out.println("==========number:"+ number+"=====num"+num+"=========num2"+num2);
-        return 1;
+
     }
 
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)

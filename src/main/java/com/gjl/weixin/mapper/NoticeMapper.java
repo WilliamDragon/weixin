@@ -16,4 +16,6 @@ public interface NoticeMapper {
     int updateNotice(Notice record);
 
     int batchInsert(@Param("noticeList")List<Notice> noticeList);
+
+    Notice findNotice(Notice notice);
 }

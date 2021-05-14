@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @Author WilliamDragon
@@ -41,12 +44,19 @@ public class TestModelController {
                 testModelTemp2.setCoreSize(Integer.toString(i));
                 testModelList2.add(testModelTemp2);
             }
-            testSyncRunList.sendOrderBatch(testModelList2);
+           // testSyncRunList.sendOrderBatch(testModelList2);
+
+            testModelList2.parallelStream().forEach(x->doTran(x));
 
         }catch (Exception e){
             e.printStackTrace();
         }
 
         return R.ok();
+    }
+
+    public void doTran(TestModel testModel){
+
+        testSyncRunList.sendOrderBatch2(testModel);
     }
 }

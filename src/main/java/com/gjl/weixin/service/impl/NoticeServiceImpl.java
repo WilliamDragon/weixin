@@ -1,5 +1,6 @@
 package com.gjl.weixin.service.impl;
 
+import com.gjl.weixin.entity.Complain;
 import com.gjl.weixin.entity.Notice;
 import com.gjl.weixin.mapper.NoticeMapper;
 import com.gjl.weixin.service.NoticeService;
@@ -15,19 +16,31 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private ComplainServiceImpl complainService;
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public int insertNotice(Notice notice) {
 
         /*System.out.println(notice.getNoticeSpare());
         notice.setNoticeSpare("12345678");
+        notice.setNoticeContent("12345");
         System.out.println(notice.getNoticeSpare());
+        Notice notice1 = noticeMapper.findNotice(notice);
+        Integer noticeContent1 = Integer.valueOf(notice1.getNoticeContent())-1;
+        if(noticeContent1<0){
+            return 0;
+        }
+        notice.setNoticeContent(noticeContent1.toString());
+        int result = noticeMapper.updateNotice(notice);*/
+         int result = noticeMapper.insertSelective(notice);
 
-
-        int result = noticeMapper.insertSelective(notice);
-        int i =1/0;
-        return result;*/
-        List<Notice> noticeList = new ArrayList<Notice>();
+        List<Notice> list=noticeMapper.findAllNotice(notice);
+        Complain complain = new Complain();
+        complainService.insertComplain(complain);
+        //int i =1/0;
+        return result;
+       /* List<Notice> noticeList = new ArrayList<Notice>();
         Notice notice1 = new Notice();
         Notice notice2 = new Notice();
         Notice notice3 = new Notice();
@@ -46,7 +59,7 @@ public class NoticeServiceImpl implements NoticeService {
         noticeList.add(notice2);
         noticeList.add(notice3);
         int result = noticeMapper.batchInsert(noticeList);
-        return result;
+        return result;*/
        // return 1;
     }
 

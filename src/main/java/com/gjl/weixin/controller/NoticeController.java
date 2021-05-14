@@ -75,6 +75,7 @@ public class NoticeController {
     }
     @PostMapping("/noticeTransactionTest")
     public R noticeTransactionTest(Notice notice){
+
         int result = noticeService.insertNotice(notice);
         if(result >=1){
             return R.ok();

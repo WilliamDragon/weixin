@@ -28,6 +28,9 @@ public class SynchronizeCifinfoImpl implements SynchronizeCifinfo {
      */
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public void updateCifInfo(String tableName, Date cifDate){
+        if("notice1".equals(tableName)){
+            int i =1/0;
+        }
         Notice notice = new Notice();
         notice.setNoticeContent(tableName);
         System.out.println("====================="+DateUtil.DateToString(cifDate,"yyyy-MM-dd"));
